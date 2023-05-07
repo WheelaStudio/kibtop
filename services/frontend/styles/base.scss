@@ -1,0 +1,51 @@
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin flex-center-vert {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@mixin flex-contain {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+@mixin font($size, $weight, $lheight: normal, $color: #414042) {
+    color: $color;
+    font-size: $size;
+    font-weight: $weight;
+    line-height: $lheight;
+}
+
+@mixin sfpro($size, $lheight: normal, $color: #414042) {
+    font-family: 'SF Pro Text';
+    color: $color;
+    font-size: $size;
+    line-height: $lheight;
+}
+
+@mixin box($width, $height: $width) {
+    width: $width;
+    height: $height;
+}
+
+@mixin cover-background {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+
+$black: #414042;
+$white: #ffffff;
+$opacity-black: rgba(65, 64, 66, .6);
+$grey: rgba(65, 64, 66, 0.4);
+$blue: #7AB1FF;
+$yellow: #FFC11E;
+$green: #35D073;

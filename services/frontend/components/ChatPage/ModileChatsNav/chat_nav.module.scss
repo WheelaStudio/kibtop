@@ -1,0 +1,67 @@
+.navBody {
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+
+    position: fixed;
+    left: 0;
+    top: 0;
+
+    // overflow: hidden;
+
+    & * {
+        box-sizing: border-box;
+    }
+
+    & img {
+        object-fit: cover;
+        object-position: center;
+    }
+
+    display: grid;
+    grid-template: max-content max-content max-content 1fr / 1fr;
+
+    grid-gap: 15px;
+
+}
+
+.navMain {
+    height: 100%;
+    display: grid;
+    grid-template: max-content 1fr / 1fr;
+
+    
+}
+
+.navWrapper {
+    height: 100%;
+    overflow: hidden;
+    overflow-y: auto;
+
+    display: flex;
+    align-items: flex-start;
+}
+
+.chats {
+    overflow: hidden;
+    overflow-y: auto;
+
+    width: 100%;
+    height: 100%;
+
+    ::-webkit-scrollbar {
+        display: none;
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+        background-color: transparent;
+    
+    }
+}
+
+.chatsLent {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    padding-top: 10px;
+}

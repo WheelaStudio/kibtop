@@ -1,0 +1,197 @@
+
+@import "../../../../..//styles/base.scss";
+
+.wrapper {
+    @include box(100%, max-content);
+
+    display: grid;
+    grid-template: 'icon1 icon2 icon3 icon4 icon5' 1fr / 1fr 1fr 1fr 1fr 140px;
+    grid-gap: 20px;
+
+    
+}
+
+@media (max-width: 1350px) {
+    .wrapper {
+        grid-template: 'icon1 icon1 icon1 icon2 icon2 icon2' 1fr 
+                       'icon3 icon3 icon4 icon4 icon5 icon5' 1fr 
+                        / 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-gap: 8px;
+    }
+}
+
+@media (max-width: 600px) {
+    .wrapper {
+        margin-top: 12px;
+    }
+}
+
+
+.subIcon {
+    background: #EADDFF;
+    border-radius: 14px;
+    padding-top: 21px;
+    padding-left: 21px;
+
+    box-sizing: border-box;
+    @include box(100%, 92px);
+
+    @include font(22px, 600, 21px);
+
+    position: relative;
+    overflow: hidden;
+
+    & p {
+        position: relative;
+
+        z-index: 2;
+    }
+}
+
+@media (max-width: 980px) {
+    .subIcon {
+        padding-top: 11px;
+        padding-left: 11px;
+
+        @include font(18px, 600, 20px);
+    }
+}
+
+@media (max-width: 600px) {
+    .subIcon {
+        @include font(13px, 600, 13px);
+    }
+}
+
+.iconImg {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+
+    @include box(auto, 100%);
+
+    z-index: 1;
+}
+
+.types {
+    box-sizing: border-box;
+    $width: calc(100% - 20px);
+    @include box($width, 90px);
+
+    background-color: transparent;
+
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+
+    justify-self: end;
+
+    &::after {
+        content: '';
+        $width: calc(100% - 6px * 2);
+        @include box($width, 75px);
+        
+        position: absolute;
+        top: 11px;
+
+        z-index: 1;
+        background: #ECECEC;
+        border-radius: 11px;
+    }
+    
+    &::before {
+        content: '';
+        $width: calc(100% - 8px * 2);
+        @include box($width, 71px);
+        
+        position: absolute;
+        top: 19px;
+
+        background: #E7E7E7;
+        border-radius: 11px;
+    }   
+}
+
+.typesBtn {
+    display: block;
+    box-sizing: border-box;
+    @include box(100%, 81px);
+
+    @include font(22px, 600, 22px);
+    text-align: center;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+    z-index: 2;
+    background-color: #F6F6F6;
+    border-radius: 11px;
+}
+
+@media (max-width: 600px) {
+    .typesBtn {
+        @include font(13px, 600, 13px);
+        padding: 0 20px;
+    }
+}
+
+@media (max-width: 980px) {
+    .subIcon {
+        height: 50px;
+    }
+
+    .types {
+        height: 54px;
+        width: 100%;
+
+        &::after {
+            height: 45px;
+            width: calc(100% - 4px);
+
+            top: 7px;
+        }
+
+        &::before {
+            height: 43px;
+            width: calc(100% - 6px);
+
+            top: 11px;
+        }
+    }
+
+    .typesBtn {
+        height: 50px;
+    }
+}
+
+.filter {
+    width: 100%;
+}
+
+@media (max-width: 600px) {
+    .filter {
+        margin-top: 13px;
+    }
+}
+
+.filterRow {
+    display: grid;
+    grid-template: 1fr / 240px 160px;
+
+    grid-gap: 20px;
+
+    & > div {
+        margin: 0 !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .filterRow {
+        grid-template: 1fr 1fr / 1fr;
+
+        grid-gap: 12px;
+    }
+}

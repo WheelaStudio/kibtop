@@ -1,0 +1,94 @@
+@value filter from "../../Header/HeaderService/Filter/filter.module.scss";
+@value btns from "../../Header/HeaderService/Filter/filter.module.scss";
+
+
+.Catfilter {
+    composes: filter;
+
+    box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.1);
+
+    position: static;
+}
+
+.filterRow {
+    width: 100%;
+
+    display: flex;
+}
+
+.homeFilter {
+    box-sizing: border-box;
+    padding-right: 20px;
+    border-right: 2px solid #EDEDED;
+
+    height: 93px;
+
+    display: flex;
+    align-items: flex-start;
+    min-width: 240px;
+    width: fit-content;
+
+    & div {
+        margin: 0 !important;
+    }
+}
+
+.routeFilterWrapper {
+    flex-grow: 1;
+}
+
+@media (max-width: 1300px) {
+    .routeFilterWrapper {
+        & > div {
+            margin: 0;
+            padding-left: 18px;
+        }
+    }
+}
+
+@media (max-width: 1000px) {
+    .filterRow {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .homeFilter {
+        border-right: none;
+        padding-right: 0;
+
+        height: max-content;
+        width: fit-content;
+        margin-bottom: 12px;
+    }
+
+    .routeFilterWrapper {
+        & > div {
+            padding-left: 0;
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .homeFilter {
+        width: 100%;
+    }
+
+    .Catfilter {
+        margin-top: 13px;
+        padding: 0 12px;
+
+        box-shadow: none;
+    }
+}
+
+.realtyFilterWrapper {
+    composes: routeFilterWrapper;
+}
+
+@media (max-width: 1300px) {
+    .realtyFilterWrapper {
+        & > div {
+            grid-template: 1fr / 1fr 160px;
+        }
+    }
+}

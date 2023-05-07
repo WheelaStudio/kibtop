@@ -1,0 +1,103 @@
+@import "../../../../styles/base.scss";
+
+@value selectOptions, selectTitle, selectDimmer, option from "../../../Header/HeaderService/Filter/filter.module.scss";
+
+.sortingOptions {
+    composes: selectOptions;
+}
+
+.select {
+    @include font(16px, 600, 16px, rgba(65, 64, 66, 0.4));
+
+    display: flex;
+    align-items: center;
+
+    & svg {
+        width: 16px;
+        height: 8px;
+
+        margin-right: 10px;
+    }
+
+    background-color: #fff;
+
+    position: relative;
+
+    cursor: pointer;
+}
+
+@media (max-width: 600px) {
+    .select {
+        font-size: 10px;
+        font-weight: 400;
+        line-height: 1.1em;
+
+       
+        & svg {
+            width: 12px;
+            height: 6px;
+
+            margin-right: 4px;
+
+            
+        }
+
+        & span {
+            display: inline-block;
+            width: max-content;
+        }
+    }
+}
+
+@media (max-width: 380px) {
+    .rusSelect {
+        width: 100%;
+        display: grid;
+        grid-template: 'svg title' max-content 'val val' max-content / 16px 1fr;
+        place-items: center start ;
+
+    }
+}
+
+@media (min-width: 600px) {
+    .sortingOptions {
+        display: block;
+
+        background-color: #fff;
+        box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.3);
+        z-index: 5;
+
+        width: 200px;
+        padding: 20px;
+
+        left: 50%;
+        top: calc(100% + 15px);
+        transform: translateX(-50%);
+
+        border: none;
+        border-radius: 16px;
+
+        &::before {
+            display: none;
+        }
+    }
+
+    .sort {
+        composes: option;
+    
+        padding: 0;
+        
+        font-weight: 700;
+    
+    
+        & svg {
+            margin: 0;
+    
+            width: 20px;
+            height: 20px;
+        }
+    }
+    
+
+}
+

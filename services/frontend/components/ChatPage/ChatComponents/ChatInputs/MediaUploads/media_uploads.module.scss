@@ -1,0 +1,76 @@
+@import "../../../../../styles/base.scss";
+
+.media {
+    $width: 90px;
+
+    position: absolute;
+    top: -$width;
+    left: 0;
+
+    box-sizing: border-box;
+    @include box(100%, $width);
+
+    padding: 5px 0;
+    padding-left: 30px;
+
+
+    display: flex;
+    grid-gap: 15px;
+}
+
+@media (max-width: 800px) {
+    .media {
+        padding-left: 20px;
+    }
+}
+
+.upload {
+    @include box(130px, 100%);
+    border-radius: 12px;
+
+    background-color: #fff;
+    box-shadow: 0px 0px 7px 5px rgba(0, 0, 0, 0.2);
+
+    position: relative;
+}
+
+.uploadClose {
+    $width: 21px;
+    @include box($width);
+    box-sizing: border-box;
+    border-radius: 50%;
+
+    position: absolute;
+    top: - $width / 4;
+    right: - $width / 4;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #7AB1FF;
+
+    z-index: 2;
+}
+
+.uploadClose svg {
+    @include box(13px);
+    fill: #fff;
+}
+
+.uploadFile {
+    height: 100%;
+    width: 100%;
+
+    border-radius: 12px;
+
+    object-fit: cover;
+    object-position: center;
+
+    & * {
+        object-fit: cover;
+        object-position: center;
+    }
+
+}
+

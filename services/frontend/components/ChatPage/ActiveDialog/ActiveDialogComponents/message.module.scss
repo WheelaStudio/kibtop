@@ -1,0 +1,27 @@
+.dialog {
+    height: 100%;
+    box-sizing: border-box;
+    padding: 0 20px;
+
+    overflow: hidden;
+    overflow-y: auto;
+
+    position: relative;
+
+    &::-webkit-scrollbar {
+        display: none;
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+        background-color: transparent;
+    
+    }
+}
+
+.messages {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+
+    padding-top: 130px;
+    grid-gap: 15px;
+}

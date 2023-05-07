@@ -1,0 +1,32 @@
+@import '../../../../../../styles/base.scss';
+
+.categoryIcon {
+    @include box(15px);
+    fill: $grey
+}
+
+.emptyIcon {
+    @include box(60px);
+    margin-bottom: 10px;
+}
+
+.emptyText {
+    @include font(16px, 600);
+}
+
+@media (max-width: 600px) {
+    .emptyIcon {
+        @include box(100px);
+        margin-bottom: 20px;
+    }
+
+    .emptyText {
+        @include font(21px, 600);
+    }
+}
+
+.center {
+    @include flex-center-vert;
+    padding-top: 20px;
+}
+

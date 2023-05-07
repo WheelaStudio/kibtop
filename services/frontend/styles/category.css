@@ -1,0 +1,147 @@
+.category-label {
+    display: flex;
+    align-items: center;
+}
+
+.category-label__img {
+    width: 60px;
+    height: 60px;
+
+    margin-right: 19px;
+}
+
+.nav-category {
+    margin: 30px 0;
+    box-sizing: border-box;
+
+    align-items: center;
+}
+
+@media (max-width: 600px) {
+    .nav-category {
+        margin: 0;
+        padding: 5px 12px 15px;
+
+        box-shadow: 0px 3.28205px 3.28205px rgba(65, 64, 66, 0.05);
+        border-radius: 0px 0px 16.4103px 16.4103px;
+    }
+
+    .category-label .title {
+        font-weight: 700;
+    }
+
+    .category-label__img {
+        width: 40px;
+        height: 40px;
+
+        margin-right: 8px;
+    }
+
+    .category-settings .location {
+        display: none;
+    }
+}
+
+@media (min-width: 600px) {
+    .nav-category .location {
+        display: none;
+    }
+}
+
+.container--end {
+    justify-content: flex-end;
+}
+
+.category-settings {
+    margin-top: 35px;
+    margin-bottom: 20px;
+
+    grid-gap: 14px;
+}
+
+@media (max-width: 600px) {
+    .category-settings {
+        margin-top: 20px;
+        margin-bottom: 0;
+    }
+}
+
+
+.realty-similar--full {
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+}
+
+.category-back {
+    margin-right: 12px;
+}
+
+@media (min-width: 600px) {
+    .category-back {
+        display: none;
+    }
+}
+
+.goods .adverts-table {
+    padding-bottom: 0;
+}
+
+.page-nav {
+    display: flex;
+
+    margin-bottom: 50px;
+}
+
+
+
+.page-link {
+    box-sizing: border-box;
+    width: 40px;
+    height: 40px;
+
+    border-radius: 50%;
+    margin-left: 20px;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 18px;
+    line-height: 18px;
+    font-weight: 700;
+
+    background-color: #fff;
+    -webkit-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.2);
+}
+
+.page-link:first-child {
+    margin-left: 0;
+}
+
+.next-page {
+    margin-left: 30px;
+}
+
+@media (min-width: 400px) {
+    .next-page {
+        display: flex;
+    }
+}
+
+.next-page svg {
+    margin-left: 5px;
+
+    height: 20px;
+    width: 20px;
+}
+
+.page-link--selcted {
+    font-weight: 600;
+    background-color: var(--color-blue);
+    color: #fff;
+    box-shadow: none;
+}

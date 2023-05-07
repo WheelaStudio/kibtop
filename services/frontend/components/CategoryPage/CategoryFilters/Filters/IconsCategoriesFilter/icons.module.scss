@@ -1,0 +1,101 @@
+.short {
+    & p {
+        max-width: 150px;
+    }
+}
+
+.tea {
+    & p {
+        max-width: 150px;
+    }
+}
+
+@media (min-width: 1350px) {
+    .computer {
+        & img {
+            height: 85%;
+            right: -5px;
+            bottom: 0px;
+        }
+        
+    }
+}
+
+
+@media (max-width: 600px) {
+    .hammer {
+        & img {
+            height: 80%;
+            
+            bottom: -8px;
+        }
+    }
+
+    .brush {
+        & img {
+            height: 75%;
+
+            right: -10px;
+            bottom: -5px;
+        }
+    }
+
+    .stroller {
+        & img {
+            height: 75%;
+            bottom: -6px;
+        }
+    }
+
+    .pot {
+        & img {
+            height: 75%;
+
+        }
+    }
+
+    .camera {
+        & img {
+            height: 80%;
+        }
+    }
+
+    .headphones {
+        & img {
+            height: 80%;
+
+            right: -9px;
+        }
+    }
+
+    .short {
+        & img {
+            right: -9px;
+        }
+
+        & p {
+            max-width: 90px;
+        }
+    }
+
+    .grass {
+        & img {
+            bottom: -17px;
+        }
+    }
+
+    .lamp {
+        & img {
+            height: 90%;
+
+            right: -17px;
+            bottom: -8px;
+        }
+    }
+
+    .tea {
+        & img {
+            height: 90%;
+        }
+    }
+}
