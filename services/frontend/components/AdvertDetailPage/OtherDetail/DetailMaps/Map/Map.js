@@ -2,7 +2,6 @@ import { GoogleMap, Marker } from "@react-google-maps/api";
 import { useRef } from "react";
 import { useCallback } from "react";
 import { defaultTheme } from "./MapTheme";
-import icon from "../Map/img/mapicon.png";
 
 const containerStyle = {
   width: "100%",
@@ -48,9 +47,7 @@ const Map = ({ center }) => {
         <>
           <Marker
             position={center}
-            icon={{
-              url: { icon },
-            }}
+            icon={{ url: "/img/goods/marker_fake.svg" }}
           />
         </>
       </GoogleMap>

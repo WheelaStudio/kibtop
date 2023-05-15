@@ -16,7 +16,7 @@ const Event = ({ id, isDark, img, title, desc, background, link }) => {
           <h4 className="title event__title">{title}</h4>
           <p className="text event__text">{desc}</p>
           {!!title && (
-            <Link href={link} className="more-link-text event__link">
+            <Link href={{ link }} className="more-link-text event__link">
               <Text content="MORE" />
               <svg
                 className="more-icon"
