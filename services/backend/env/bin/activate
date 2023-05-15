@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/Users/Ulan10/Desktop/wheela_kibtop/services/backend/env"
+VIRTUAL_ENV="/Users/Ulan10/Desktop/kibtop/services/backend/env"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
