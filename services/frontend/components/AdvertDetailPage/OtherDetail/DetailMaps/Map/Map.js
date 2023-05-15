@@ -48,9 +48,9 @@ const Map = ({ center }) => {
         <>
           <Marker
             position={center}
-            icon={{
-              url: { icon },
-            }}
+            // icon={{
+            //   url: { icon },
+            // }}
           />
         </>
       </GoogleMap>

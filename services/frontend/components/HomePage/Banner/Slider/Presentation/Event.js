@@ -2,7 +2,7 @@ import Link from "next/link";
 import Text from "../../../../Elementes/Text/Text";
 import Image from "next/image";
 
-const Event = ({ id, isDark, img, title, desc, background }) => {
+const Event = ({ id, isDark, img, title, desc, background, link }) => {
   return (
     <>
       <div
@@ -16,9 +16,7 @@ const Event = ({ id, isDark, img, title, desc, background }) => {
           <h4 className="title event__title">{title}</h4>
           <p className="text event__text">{desc}</p>
           {!!title && (
-            <Link
-              href="www.wheelastudio.com"
-              className="more-link-text event__link">
+            <Link href="/add_advert " className="more-link-text event__link">
               <Text content="MORE" />
               <svg
                 className="more-icon"
