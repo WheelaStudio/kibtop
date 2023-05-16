@@ -17,137 +17,149 @@ import SubmitButtonContainer from "../../../../Fields/SubmitButton/SubmitButtonC
 import TitleField from "../../../../Fields/TitleField";
 
 const AddRealty = () => {
-    const {setValue, getValues, formState: {errors}} = useFormContext()
-    const {currency} = useCurrency()
+  const {
+    setValue,
+    getValues,
+    formState: { errors },
+  } = useFormContext();
+  const { currency } = useCurrency();
 
-    useEffect(() => {
-        setValue('isMonth', 'true', {shouldTouch: true, shouldValidate: true})
-        setValue('condition', 'Old', {shouldTouch: true, shouldValidate: true})
-        setValue('rooms', 'Studio', {shouldTouch: true, shouldValidate: true})
-        setValue('currency', currency, {shouldTouch: true, shouldValidate: true})
+  useEffect(() => {
+    setValue("isMonth", "true", { shouldTouch: true, shouldValidate: true });
+    setValue("condition", "Old", { shouldTouch: true, shouldValidate: true });
+    setValue("rooms", "Studio", { shouldTouch: true, shouldValidate: true });
+    setValue("currency", currency, { shouldTouch: true, shouldValidate: true });
+  }, []);
+  return (
+    <>
+      <div className="advert-form__field">
+        <label className="advert-form__label">
+          <Text content="title" />
+        </label>
 
-    }, [])
-    return (
-        <>
-            <div className="advert-form__field">
-                <label className="advert-form__label">
-                    <Text content="title" />
-                </label>
+        <TitleField />
+      </div>
 
-                <TitleField />
-            </div>
+      <div className="advert-form__field">
+        <label className="advert-form__label">
+          <Text content="transaction type" />
+        </label>
 
-            <div className="advert-form__field">
-                <label className="advert-form__label">
-                    <Text content="transaction type" />
-                </label>
+        <RadioGroup
+          name={"isMonth"}
+          inputs={[
+            { label: "Rent out", value: true },
+            { label: "Sell", value: false },
+          ]}
+        />
+      </div>
 
-                <RadioGroup name={'isMonth'} inputs={[
-                    {label: 'Rent out', value: true},
-                    {label: 'Sell', value: false},
+      <div className="advert-form__field">
+        <label className="advert-form__label">
+          <Text content="condition" />
+        </label>
 
-                ]} />
-            </div>
+        <RadioGroup
+          name={"condition"}
+          inputs={[
+            { label: "Old", value: "Old" },
+            { label: "New", value: "New" },
+          ]}
+        />
+      </div>
 
+      <div className="advert-form__field">
+        <label className="advert-form__label">
+          <Text content="rooms" />
+        </label>
 
-            <div className="advert-form__field">
-                <label className="advert-form__label">
-                    <Text content="condition" />
-                </label>
+        <RadioGroup
+          name={"rooms"}
+          inputs={[
+            { label: "Studio", value: "Studio" },
+            { label: "1+1", value: "1+1" },
+            { label: "2+1", value: "2+1" },
+            { label: "2+2", value: "2+2" },
+            { label: "3+1", value: "3+1" },
+            { label: "4+1 and more", value: "4+1 and more" },
+          ]}
+        />
+      </div>
 
-                <RadioGroup name={'condition'} inputs={[
-                    {label: 'Old', value: 'Old'},
-                    {label: 'New', value: 'New'},
+      <div className="advert-form__field">
+        <label className="advert-form__label">
+          <Text content="Square" />
+        </label>
 
-                ]} />
-            </div>
+        <SquareField />
+      </div>
 
-            <div className="advert-form__field">
-                <label className="advert-form__label">
-                    <Text content="rooms" />
-                </label>
+      <div className="advert-form__field">
+        <label className="advert-form__label">
+          <Text content="price" />
+        </label>
 
-                <RadioGroup name={'rooms'} inputs={[
-                    {label: 'Studio', value: 'Studio'},
-                    {label: '1+1', value: '1+1'},
-                    {label: '2+1', value: '2+1'},
-                    {label: '2+2', value: '2+2'},
-                    {label: '3+1', value: '3+1'},
-                    {label: '4+1 and more', value: '4+1 and more'},
-                ]} />
-            </div>
+        <CostField />
+      </div>
 
-            <div className="advert-form__field">
-                <label className="advert-form__label">
-                    <Text content="Square" />
-                </label>
+      <div className="advert-form__field">
+        <label className="advert-form__label">
+          <Text content="address" />
+        </label>
 
-                <SquareField />
-            </div>
+        <AddressFieldContainer />
+      </div>
 
-            <div className="advert-form__field">
-                <label className="advert-form__label">
-                    <Text content="price" />
-                </label>
+      <div className="advert-form__field advert-form__field---address">
+        <label className="advert-form__label">
+          <Text content="photo" />
+        </label>
 
-                <CostField />
-            </div>
+        <div className="advert-form__files">
+          <PhotoUploadsContainer />
+          <PhotosInput />
+        </div>
+      </div>
 
-            <div className="advert-form__field">
-                <label className="advert-form__label">
-                    <Text content="address" />
-                </label>
+      <div className="advert-form__field advert-form__field--mt">
+        <label className="advert-form__label">
+          <Text content="description" />
+        </label>
 
-                <AddressFieldContainer />
-            </div>
+        <div className="advert-form__files" style={{ marginLeft: 0 }}>
+          <DescriptionInput placeholderName={"apartment"} />
+        </div>
+      </div>
 
-            <div className="advert-form__field advert-form__field---address">
-                <label className="advert-form__label">
-                    <Text content="photo" />
-                </label>
+      <h4 className="title promote-title mob-hide">
+        <Text content="Promote your products" />
+      </h4>
 
-                <div className="advert-form__files">
-                    <PhotoUploadsContainer />
-                    <PhotosInput />
-                </div>
-            </div>
+      <div className="advert-form__field advert-form__field--mt mob-hide">
+        <label className="advert-form__label">
+          <Text content="Service sets" />
+        </label>
 
-            <div className="advert-form__field advert-form__field--mt">
-                <label className="advert-form__label">
-                    <Text content="description" />
-                </label>
+        <ServiceSets
+          requiredFields={[
+            "title",
+            "address",
+            "categoryName",
+            "condition",
+            "city",
+            "geocode",
+            "cost",
+            "description",
+            "currency",
+            "isMonth",
+            "photos",
+            "rooms",
+            "subCategory",
+          ]}
+        />
+      </div>
 
-                <div className="advert-form__files" style={{marginLeft: 0}}>
-                    <DescriptionInput placeholderName={"apartment"} />
-                </div>
-            </div>
-
-            <h4 className="title promote-title mob-hide">
-                <Text content="Promote your products" />
-            </h4>
-
-            <div className="advert-form__field advert-form__field--mt mob-hide">
-                <label className="advert-form__label">
-                    <Text content="Service sets" />
-                </label>
-
-                <ServiceSets requiredFields={['title', 
-                                                    'address',
-                                                    'categoryName', 
-                                                    'condition',
-                                                    'city', 
-                                                    'geocode', 
-                                                    'cost', 
-                                                    'description', 
-                                                    'currency', 
-                                                    'isMonth',
-                                                    'photos',
-                                                    'rooms',
-                                                    'subCategory',
-                                                    ]} />
-            </div>
-
-            <div className="advert-form__field advert-form__field--mt mob-hide">
+      {/* <div className="advert-form__field advert-form__field--mt mob-hide">
                 <label className="advert-form__label">
                     <Text content="Service sets" />
                 </label>
@@ -166,43 +178,50 @@ const AddRealty = () => {
                                                     'rooms',
                                                     'subCategory',
                                                     ]} />
-            </div>
+            </div> */}
 
-            <SubmitButtonContainer requiredFields={['title', 
-                                                    'address',
-                                                    'categoryName', 
-                                                    'condition',
-                                                    'city', 
-                                                    'geocode', 
-                                                    'cost', 
-                                                    'description', 
-                                                    'currency', 
-                                                    'isMonth',
-                                                    'photos',
-                                                    'rooms',
-                                                    'subCategory',
-                                                    ]} />
+      <SubmitButtonContainer
+        requiredFields={[
+          "title",
+          "address",
+          "categoryName",
+          "condition",
+          "city",
+          "geocode",
+          "cost",
+          "description",
+          "currency",
+          "isMonth",
+          "photos",
+          "rooms",
+          "subCategory",
+        ]}
+      />
 
-            <NextButtonContainer    requiredFields={['title', 
-                                                    'address',
-                                                    'categoryName', 
-                                                    'condition',
-                                                    'city', 
-                                                    'geocode', 
-                                                    'cost', 
-                                                    'description', 
-                                                    'currency', 
-                                                    'isMonth',
-                                                    'photos',
-                                                    'rooms',
-                                                    'subCategory',,
-                                                    ]} />
+      <NextButtonContainer
+        requiredFields={[
+          "title",
+          "address",
+          "categoryName",
+          "condition",
+          "city",
+          "geocode",
+          "cost",
+          "description",
+          "currency",
+          "isMonth",
+          "photos",
+          "rooms",
+          "subCategory",
+          ,
+        ]}
+      />
 
-            <p className="step-text">
-                <Text content="step" /> 2 <Text content="of" /> 3
-            </p>
-        </>
-    );
-}
+      <p className="step-text">
+        <Text content="step" /> 2 <Text content="of" /> 3
+      </p>
+    </>
+  );
+};
 
 export default AddRealty;
