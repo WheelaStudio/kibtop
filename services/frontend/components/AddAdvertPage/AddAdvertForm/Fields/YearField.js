@@ -1,11 +1,24 @@
 import { useFormContext } from "react-hook-form";
 import { useLanguage } from "../../../../locales/hooks/useLanguage";
 import Text from "../../../Elementes/Text/Text";
+import { useEffect } from "react";
 
 const YearField = () => {
   const { t } = useLanguage();
-  const { register, formState, getFieldState } = useFormContext();
+  const { register, formState, getFieldState, trigger } = useFormContext();
   const { error, isTouched } = getFieldState("year", formState);
+
+  useEffect(() => {
+    const input = document.querySelector('input[name="year"]');
+    const onFocusOut = () => {
+      trigger("year");
+    };
+    input.addEventListener("focusout", onFocusOut);
+
+    return () => {
+      input.removeEventListener("focusout", onFocusOut);
+    };
+  }, [trigger]);
 
   return (
     <>

@@ -1,25 +1,50 @@
 import { useFormContext } from "react-hook-form";
 import { useLanguage } from "../../../../locales/hooks/useLanguage";
+import { useEffect } from "react";
 
 const TitleField = () => {
-    const {t} = useLanguage()
-    const {register, formState, getFieldState} = useFormContext()
-    const {error, isTouched} = getFieldState('title', formState)
-    
-    return (
-        <>
-            <div className="advert-form__text-input">
-                <input {...register('title', {
-                        required: t('field is required')
-                    })}
-                    type="text" 
-                    placeholder={t('Only title')} 
-                    className={"empty-field empty-field--full" + ((!!error && isTouched) ? ' field--error': '')} />
+  const { t } = useLanguage();
+  const { register, formState, getFieldState, trigger } = useFormContext();
+  const { error, isTouched } = getFieldState("title", formState);
 
-                { (isTouched && !!error) && <p className="warn warn--absolute">{error.message}</p> }
-            </div>
-        </>
-    );
-}
+  useEffect(() => {
+    const onFocusOut = () => {
+      trigger("title");
+    };
+
+    const inputElement = document.getElementById("title-input");
+    inputElement.addEventListener("focusout", onFocusOut);
+
+    return () => {
+      inputElement.removeEventListener("focusout", onFocusOut);
+    };
+  }, [trigger]);
+
+  return (
+    <>
+      <div className="advert-form__text-input">
+        <input
+          {...register("title", {
+            required: {
+              value: true,
+              message: t("field is required"),
+            },
+          })}
+          type="text"
+          id="title-input"
+          placeholder={t("Only title")}
+          className={
+            "empty-field empty-field--full" +
+            (!!error && isTouched ? " field--error" : "")
+          }
+        />
+
+        {isTouched && !!error && (
+          <p className="warn warn--absolute">{error.message}</p>
+        )}
+      </div>
+    </>
+  );
+};
 
 export default TitleField;
