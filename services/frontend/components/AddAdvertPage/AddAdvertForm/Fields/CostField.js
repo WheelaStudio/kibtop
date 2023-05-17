@@ -52,7 +52,7 @@ const CostField = ({ placeholder = "Full amount" }) => {
               message: t("field is required"),
             },
             pattern: {
-              value: /^[0-9]+$/,
+              value: /^[0-9]\d{0,8}$/,
               message: t("invalid format"),
             },
           })}

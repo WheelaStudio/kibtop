@@ -107,7 +107,11 @@ const AddWork = () => {
         </label>
 
         <div className="advert-form__files" style={{ marginLeft: 0 }}>
-          <DescriptionInput placeholderName={"job"} />
+          <DescriptionInput
+            placeholderName={
+              getValues("workType") === "For work" ? "resume" : "job"
+            }
+          />
         </div>
       </div>
 

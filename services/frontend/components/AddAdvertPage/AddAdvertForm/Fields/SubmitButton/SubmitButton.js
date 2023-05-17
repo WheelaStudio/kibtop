@@ -8,27 +8,63 @@ const SubmitButton = ({
   isLoading,
   isPhoneNull,
   openAddPhoneModal,
+  hasEmptyFields,
 }) => {
   return (
     <>
       {isPhoneNull ? (
-        <button
-          disabled={isDisabled || isLoading}
-          onClick={openAddPhoneModal}
-          className="reg-btn reg-btn--add reg-btn--grey">
-          <Text content="Publish without promotion" />
-        </button>
-      ) : (
-        <button
-          onClick={onSubmitClick}
-          disabled={isDisabled || isLoading}
-          className="reg-btn reg-btn--add reg-btn--grey">
-          {isLoading ? (
-            <Text content="Publishing" />
-          ) : (
+        <>
+          <button
+            disabled={isDisabled || isLoading || hasEmptyFields}
+            onClick={openAddPhoneModal}
+            className="reg-btn reg-btn--add reg-btn--grey">
             <Text content="Publish without promotion" />
+          </button>
+
+          {isDisabled && (
+            <h3
+              style={{
+                paddingLeft: "40em",
+                color: "red",
+                fontSize: "14px",
+                marginTop: "5px",
+              }}>
+              Fill all the fields
+            </h3>
           )}
-        </button>
+        </>
+      ) : (
+        <>
+          <button
+            onClick={onSubmitClick}
+            disabled={isDisabled || isLoading || hasEmptyFields}
+            className="reg-btn reg-btn--add reg-btn--grey">
+            {" "}
+            {isLoading ? (
+              <Text content="Publishing" />
+            ) : (
+              <>
+                <Text content="Publish without promotion" />
+              </>
+            )}
+          </button>
+          {/* {isDisabled && (
+            <h3
+              style={{
+                paddingLeft: "26.2em",
+                paddingTop: "1em",
+                color: "red",
+                fontSize: "14px",
+                marginTop: "5px",
+                fontStyle: "normal",
+                fontWeight: 400,
+                lineHeight: "9px",
+                color: "#FF5A5A",
+              }}>
+              *Fill all the fields
+            </h3>
+          )} */}
+        </>
       )}
 
       {isLoading && (
