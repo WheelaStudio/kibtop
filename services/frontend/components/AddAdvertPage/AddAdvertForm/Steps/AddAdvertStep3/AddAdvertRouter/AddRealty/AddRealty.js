@@ -24,12 +24,23 @@ const AddRealty = () => {
   } = useFormContext();
   const { currency } = useCurrency();
 
+  const handleRadioChange = value => {
+    setValue("isMonth", value.toString(), {
+      shouldTouch: true,
+      shouldValidate: true,
+    });
+  };
+
   useEffect(() => {
     setValue("isMonth", "true", { shouldTouch: true, shouldValidate: true });
     setValue("condition", "Old", { shouldTouch: true, shouldValidate: true });
     setValue("rooms", "Studio", { shouldTouch: true, shouldValidate: true });
     setValue("currency", currency, { shouldTouch: true, shouldValidate: true });
   }, []);
+
+  const isMonth = getValues("isMonth") === "true";
+
+  let value = isMonth;
   return (
     <>
       <div className="advert-form__field">
@@ -51,6 +62,7 @@ const AddRealty = () => {
             { label: "Rent out", value: true },
             { label: "Sell", value: false },
           ]}
+          onChange={handleRadioChange}
         />
       </div>
 
@@ -98,8 +110,7 @@ const AddRealty = () => {
         <label className="advert-form__label">
           <Text content="price" />
         </label>
-
-        <CostField />
+        <CostField value={value} />
       </div>
 
       <div className="advert-form__field">

@@ -3,7 +3,7 @@ import { useFormContext } from "react-hook-form";
 import { useCurrency } from "../../../../locales/hooks/useCurrency";
 import { useLanguage } from "../../../../locales/hooks/useLanguage";
 
-const CostField = ({ placeholder = "Full amount" }) => {
+const CostField = ({ placeholder = "Full amount", value }) => {
   const { t } = useLanguage();
   const { register, setValue, watch, formState, getFieldState, trigger } =
     useFormContext();
@@ -65,9 +65,13 @@ const CostField = ({ placeholder = "Full amount" }) => {
           }
         />
 
-        <a onClick={onCurrencyClick} className="currency-input">
-          {data.currency}
+        <a
+          style={{ display: "flex", flexWrap: "nowrap" }}
+          onClick={onCurrencyClick}
+          className="currency-input">
+          {data.currency} {value ? <p>/month</p> : null}
         </a>
+
         {isTouched && !!error && (
           <p className="warn warn--absolute">{error.message}</p>
         )}
