@@ -1,6 +1,7 @@
 import React from "react";
 import Text from "../../../../Elementes/Text/Text";
 import { ColorRing } from "react-loader-spinner";
+import { useLanguage } from "../../../../../locales/hooks/useLanguage";
 
 const SubmitButton = ({
   onSubmitClick,
@@ -10,6 +11,7 @@ const SubmitButton = ({
   openAddPhoneModal,
   hasEmptyFields,
 }) => {
+  const { t } = useLanguage();
   return (
     <>
       {isPhoneNull ? (
@@ -29,7 +31,7 @@ const SubmitButton = ({
                 fontSize: "14px",
                 marginTop: "5px",
               }}>
-              Fill all the fields
+              {t("* Fill all the fields")}
             </h3>
           )}
         </>
@@ -48,22 +50,6 @@ const SubmitButton = ({
               </>
             )}
           </button>
-          {/* {isDisabled && (
-            <h3
-              style={{
-                paddingLeft: "26.2em",
-                paddingTop: "1em",
-                color: "red",
-                fontSize: "14px",
-                marginTop: "5px",
-                fontStyle: "normal",
-                fontWeight: 400,
-                lineHeight: "9px",
-                color: "#FF5A5A",
-              }}>
-              *Fill all the fields
-            </h3>
-          )} */}
         </>
       )}
 

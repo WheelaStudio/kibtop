@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useFormContext } from "react-hook-form";
+import { useFormContext, Controller } from "react-hook-form";
 import { useCurrency } from "../../../../../../../locales/hooks/useCurrency";
 import Text from "../../../../../../Elementes/Text/Text";
 import AddressField from "../../../../Fields/AddressField/AddressField";
@@ -29,6 +29,7 @@ const AddAvto = () => {
 
   useEffect(() => {
     setValue("currency", currency, { shouldTouch: true, shouldValidate: true });
+    setValue("isUsed", "true", { shouldTouch: true, shouldValidate: true });
   }, []);
   return (
     <>
@@ -46,6 +47,20 @@ const AddAvto = () => {
         </label>
 
         <BrandField />
+      </div>
+
+      <div className="advert-form__field">
+        <label className="advert-form__label">
+          <Text content="transaction type" />
+        </label>
+
+        <RadioGroup
+          name={"isUsed"}
+          inputs={[
+            { label: "New", value: true },
+            { label: "Used", value: false },
+          ]}
+        />
       </div>
 
       <div className="advert-form__field">
@@ -125,6 +140,7 @@ const AddAvto = () => {
             "brand",
             "year",
             "mileage",
+            "isUsed",
           ]}
         />
       </div>
@@ -166,6 +182,7 @@ const AddAvto = () => {
           "brand",
           "year",
           "mileage",
+          "isUsed",
         ]}
       />
 
@@ -184,6 +201,7 @@ const AddAvto = () => {
           "brand",
           "year",
           "mileage",
+          "isUsed",
         ]}
       />
 

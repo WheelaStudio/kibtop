@@ -27,7 +27,7 @@ const MileageField = () => {
           {...register("mileage", {
             required: "field is required",
             pattern: {
-              value: /^[1-9]{1}\d*$/,
+              value: /^[0-9]{1}\d*$/,
               message: "invalid format",
             },
           })}

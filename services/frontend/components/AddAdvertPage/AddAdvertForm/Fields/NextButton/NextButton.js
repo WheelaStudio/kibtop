@@ -1,7 +1,10 @@
 import React from "react";
 import Text from "../../../../Elementes/Text/Text";
+import { useLanguage } from "../../../../../locales/hooks/useLanguage";
 
 const NextButton = ({ isDisabled, onClick }) => {
+  const { t } = useLanguage();
+
   return (
     <>
       <div className="next-button-container">
@@ -17,7 +20,7 @@ const NextButton = ({ isDisabled, onClick }) => {
               lineHeight: "9px",
               color: "#FF5A5A",
             }}>
-            * Fill all the fields
+            {t("* Fill all the fields")}
           </p>
         )}
         <button

@@ -159,26 +159,25 @@ const AddRealty = () => {
         />
       </div>
 
-      {/* <div className="advert-form__field advert-form__field--mt mob-hide">
-                <label className="advert-form__label">
-                    <Text content="Service sets" />
-                </label>
-
-                <ServiceSetsGroupContainer requiredFields={['title', 
-                                                    'address',
-                                                    'categoryName', 
-                                                    'condition',
-                                                    'city', 
-                                                    'geocode', 
-                                                    'cost', 
-                                                    'description', 
-                                                    'currency', 
-                                                    'isMonth',
-                                                    'photos',
-                                                    'rooms',
-                                                    'subCategory',
-                                                    ]} />
-            </div> */}
+      <div className="advert-form__field advert-form__field--mt mob-hide">
+        <ServiceSetsGroupContainer
+          requiredFields={[
+            "title",
+            "address",
+            "categoryName",
+            "condition",
+            "city",
+            "geocode",
+            "cost",
+            "description",
+            "currency",
+            "isMonth",
+            "photos",
+            "rooms",
+            "subCategory",
+          ]}
+        />
+      </div>
 
       <SubmitButtonContainer
         requiredFields={[

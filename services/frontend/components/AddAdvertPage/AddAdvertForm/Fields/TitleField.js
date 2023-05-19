@@ -29,6 +29,7 @@ const TitleField = () => {
               value: true,
               message: t("field is required"),
             },
+            pattern: { value: /^.{0,24}$/, message: t("invalid format") },
           })}
           type="text"
           id="title-input"

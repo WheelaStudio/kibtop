@@ -215,8 +215,10 @@
 
   "Delete this ad": "Удалить этот товар",
 
+  "* Fill all the fields": "Заполните все поля",
   "transaction type": "тип продажи",
   "condition": "состояние",
+  "Used": "Вторичное",
   "rooms": "комнаты",
   "price": "цена",
   "photo": "фотография",
