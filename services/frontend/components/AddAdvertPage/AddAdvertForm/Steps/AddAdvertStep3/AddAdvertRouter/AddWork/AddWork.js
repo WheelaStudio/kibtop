@@ -17,109 +17,130 @@ import SubmitButtonContainer from "../../../../Fields/SubmitButton/SubmitButtonC
 import TitleField from "../../../../Fields/TitleField";
 
 const AddWork = () => {
-    const {setValue, getValues, formState: {errors}} = useFormContext()
-    const {currency} = useCurrency()
+  const {
+    setValue,
+    getValues,
+    formState: { errors },
+  } = useFormContext();
+  const { currency } = useCurrency();
 
-    useEffect(() => {
-        setValue('currency', currency, {shouldTouch: true, shouldValidate: true})
-        setValue('workType', 'For work', {shouldTouch: true, shouldValidate: true})
-        setValue('employment', 'Full time', {shouldTouch: true, shouldValidate: true})
-    }, [])
-    return (
-        <>
-            <div className="advert-form__field">
-                <label className="advert-form__label">
-                    <Text content="title" />
-                </label>
+  useEffect(() => {
+    setValue("currency", currency, { shouldTouch: true, shouldValidate: true });
+    setValue("workType", "For work", {
+      shouldTouch: true,
+      shouldValidate: true,
+    });
+    setValue("employment", "Full time", {
+      shouldTouch: true,
+      shouldValidate: true,
+    });
+  }, []);
+  return (
+    <>
+      <div className="advert-form__field">
+        <label className="advert-form__label">
+          <Text content="title" />
+        </label>
 
-                <TitleField />
-            </div>
+        <TitleField />
+      </div>
 
-            <div className="advert-form__field">
-                <label className="advert-form__label">
-                    <Text content="purpose" />
-                </label>
+      <div className="advert-form__field">
+        <label className="advert-form__label">
+          <Text content="purpose" />
+        </label>
 
-                <RadioGroup name={'workType'} inputs={[
-                    {label: 'Post your resume', value: 'For work'},
-                    {label: 'Place a vacancy ad', value: 'For an employee'},
+        <RadioGroup
+          name={"workType"}
+          inputs={[
+            { label: "Post your resume", value: "For work" },
+            { label: "Place a vacancy ad", value: "For an employee" },
+          ]}
+        />
+      </div>
 
-                ]} />
-            </div>
+      <div className="advert-form__field">
+        <label className="advert-form__label">
+          <Text content="Employment" />
+        </label>
 
-            <div className="advert-form__field">
-                <label className="advert-form__label">
-                    <Text content="Employment" />
-                </label>
+        <RadioGroup
+          name={"employment"}
+          inputs={[
+            { label: "Full time", value: "Full time" },
+            { label: "Partial", value: "Partial" },
+            { label: "Remote", value: "Remote" },
+          ]}
+        />
+      </div>
 
-                <RadioGroup name={'employment'} inputs={[
-                    {label: 'Full time', value: 'Full time'},
-                    {label: 'Partial', value: 'Partial'},
-                    {label: 'Remote', value: 'Remote'},
-                ]} />
-            </div>
+      <div className="advert-form__field">
+        <label className="advert-form__label">
+          <Text content="Salary" />
+        </label>
 
-            <div className="advert-form__field">
-                <label className="advert-form__label">
-                    <Text content="Salary" />
-                </label>
+        <CostField placeholder={"Salary for the month"} />
+      </div>
 
-                <CostField placeholder={"Salary for the month"} />
-            </div>
+      <div className="advert-form__field">
+        <label className="advert-form__label">
+          <Text content="address" />
+        </label>
 
-            <div className="advert-form__field">
-                <label className="advert-form__label">
-                    <Text content="address" />
-                </label>
+        <AddressFieldContainer />
+      </div>
 
-                <AddressFieldContainer />
-            </div>
+      <div className="advert-form__field advert-form__field---address">
+        <label className="advert-form__label">
+          <Text content="photo" />
+        </label>
 
-            <div className="advert-form__field advert-form__field---address">
-                <label className="advert-form__label">
-                    <Text content="photo" />
-                </label>
+        <div className="advert-form__files">
+          <PhotoUploadsContainer />
+          <PhotosInput />
+        </div>
+      </div>
 
-                <div className="advert-form__files">
-                    <PhotoUploadsContainer />
-                    <PhotosInput />
-                </div>
-            </div>
+      <div className="advert-form__field advert-form__field--mt">
+        <label className="advert-form__label">
+          <Text content="description" />
+        </label>
 
-            <div className="advert-form__field advert-form__field--mt">
-                <label className="advert-form__label">
-                    <Text content="description" />
-                </label>
+        <div className="advert-form__files" style={{ marginLeft: 0 }}>
+          <DescriptionInput
+            placeholderName={
+              getValues("workType") === "For work" ? "resume" : "job"
+            }
+          />
+        </div>
+      </div>
 
-                <div className="advert-form__files" style={{marginLeft: 0}}>
-                    <DescriptionInput placeholderName={"job"} />
-                </div>
-            </div>
+      <h4 className="title promote-title mob-hide">
+        <Text content="Promote your products" />
+      </h4>
 
-            <h4 className="title promote-title mob-hide">
-                <Text content="Promote your products" />
-            </h4>
+      <div className="advert-form__field advert-form__field--mt mob-hide">
+        <label className="advert-form__label">
+          <Text content="Service sets" />
+        </label>
 
-            <div className="advert-form__field advert-form__field--mt mob-hide">
-                <label className="advert-form__label">
-                    <Text content="Service sets" />
-                </label>
+        <ServiceSets
+          requiredFields={[
+            "title",
+            "address",
+            "categoryName",
+            "city",
+            "geocode",
+            "cost",
+            "description",
+            "currency",
+            "photos",
+            "subCategory",
+          ]}
+        />
+      </div>
 
-                <ServiceSets requiredFields={[
-                                                'title', 
-                                                'address',
-                                                'categoryName', 
-                                                'city', 
-                                                'geocode', 
-                                                'cost', 
-                                                'description', 
-                                                'currency', 
-                                                'photos',
-                                                'subCategory',
-                                                    ]} />
-            </div>
-
-            <div className="advert-form__field advert-form__field--mt mob-hide">
+      {/* <div className="advert-form__field advert-form__field--mt mob-hide">
                 <label className="advert-form__label">
                     <Text content="Service sets" />
                 </label>
@@ -136,39 +157,43 @@ const AddWork = () => {
                                                 'photos',
                                                 'subCategory',
                                                     ]} />
-            </div>
+            </div> */}
 
-            <SubmitButtonContainer requiredFields={[
-                                                    'title', 
-                                                    'address',
-                                                    'categoryName', 
-                                                    'city', 
-                                                    'geocode', 
-                                                    'cost', 
-                                                    'description', 
-                                                    'currency', 
-                                                    'photos',
-                                                    'subCategory',
-                                                    ]} />
+      <SubmitButtonContainer
+        requiredFields={[
+          "title",
+          "address",
+          "categoryName",
+          "city",
+          "geocode",
+          "cost",
+          "description",
+          "currency",
+          "photos",
+          "subCategory",
+        ]}
+      />
 
-            <NextButtonContainer    requiredFields={[
-                                                    'title', 
-                                                    'address',
-                                                    'categoryName', 
-                                                    'city', 
-                                                    'geocode', 
-                                                    'cost', 
-                                                    'description', 
-                                                    'currency', 
-                                                    'photos',
-                                                    'subCategory',
-                                                    ]} />
+      <NextButtonContainer
+        requiredFields={[
+          "title",
+          "address",
+          "categoryName",
+          "city",
+          "geocode",
+          "cost",
+          "description",
+          "currency",
+          "photos",
+          "subCategory",
+        ]}
+      />
 
-            <p className="step-text">
-                <Text content="step" /> 2 <Text content="of" /> 3
-            </p>
-        </>
-    );
-}
+      <p className="step-text">
+        <Text content="step" /> 2 <Text content="of" /> 3
+      </p>
+    </>
+  );
+};
 
 export default AddWork;

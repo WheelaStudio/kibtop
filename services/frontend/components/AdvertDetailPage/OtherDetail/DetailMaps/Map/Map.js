@@ -43,12 +43,8 @@ const Map = ({ center }) => {
         onLoad={onLoad}
         onUnmount={onUnmount}
         options={defaultOptions}>
-        {/* Child components, such as markers, info windows, etc. */}
         <>
-          <Marker
-            position={center}
-            icon={{ url: "/img/goods/marker_fake.svg" }}
-          />
+          <Marker position={center} />
         </>
       </GoogleMap>
     </>
