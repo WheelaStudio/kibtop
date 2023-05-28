@@ -30,9 +30,7 @@ const SubmitButton = ({
                 color: "red",
                 fontSize: "14px",
                 marginTop: "5px",
-              }}>
-              {/* {t("* Fill all the fields")} */}
-            </h3>
+              }}></h3>
           )}
         </>
       ) : (
