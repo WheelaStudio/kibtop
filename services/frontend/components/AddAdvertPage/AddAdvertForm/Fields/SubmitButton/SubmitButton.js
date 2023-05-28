@@ -31,7 +31,7 @@ const SubmitButton = ({
                 fontSize: "14px",
                 marginTop: "5px",
               }}>
-              {t("* Fill all the fields")}
+              {/* {t("* Fill all the fields")} */}
             </h3>
           )}
         </>

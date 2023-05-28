@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 import { useLanguage } from "../../../../locales/hooks/useLanguage";
 
@@ -17,7 +17,7 @@ const DescriptionInput = ({ placeholderName }) => {
   }
 
   useEffect(() => {
-    const input = document.querySelector('input[name="description"]');
+    const input = document.querySelector('textarea[name="description"]');
     const onFocusOut = () => {
       trigger("description");
     };
@@ -35,7 +35,10 @@ const DescriptionInput = ({ placeholderName }) => {
 
   return (
     <>
-      <div className="advert-form__text-input">
+      <div
+        className={`advert-form__text-input ${
+          isTouched && error ? "has-error" : ""
+        }`}>
         <textarea
           style={{ height: textareaheight }}
           {...register("description", {
@@ -47,10 +50,14 @@ const DescriptionInput = ({ placeholderName }) => {
             onChange: handleChange,
           })}
           placeholder={t(`Describe the ${placeholderName} in detail`)}
-          className={
-            "desc-field" + (!!error && isTouched ? " field--error" : "")
-          }></textarea>
-        {!!error && <p className="warn warn--absolute">{error.message}</p>}
+          className={`desc-field ${
+            isTouched && error ? "field--error_desc" : ""
+          }`}></textarea>
+        {isTouched && !!error && (
+          <>
+            <p className="warn warn--absolute">{error.message}</p>
+          </>
+        )}
       </div>
     </>
   );
