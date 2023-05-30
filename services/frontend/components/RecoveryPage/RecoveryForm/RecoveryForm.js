@@ -21,22 +21,17 @@ const RecoveryForm = ({ isLoading, onRecoverySubmit, isUserFail }) => {
   const { name, message } = seriealizeErrors(errors);
 
   useEffect(() => {
+    setEmailNotFound(isUserFail);
     if (isUserFail) {
-      setEmailNotFound(true);
-    } else {
-      setEmailNotFound(false);
-    }
-  }, [isUserFail]);
-
-  const handleFormSubmit = data => {
-    if (emailNotFound) {
       setError("email", {
         type: "submit",
         message: t("Email not found"),
       });
-      return;
+    } else {
+      setError("email", null);
     }
-
+  }, [isUserFail, setError, t]);
+  const handleFormSubmit = data => {
     onRecoverySubmit(data);
   };
 
@@ -50,14 +45,14 @@ const RecoveryForm = ({ isLoading, onRecoverySubmit, isUserFail }) => {
           <FormProvider {...RecoveryForm}>
             <EmailField />
             {emailNotFound && (
-              <p className="warn warn--top">{t("почта не найдена")}</p>
+              <p className="warn warn--top">{t("Email not found")}</p>
             )}
           </FormProvider>
         </div>
 
         <div className="submit">
           <button
-            disabled={!isValid && isLoading}
+            disabled={!isValid || isLoading}
             className="reg-btn reg-btn--confirm">
             <Text content="Submit code" />
           </button>

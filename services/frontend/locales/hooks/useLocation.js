@@ -14,11 +14,11 @@ const useLocation = () => {
 
             try {
               const response = await fetch(
-                `https://geocode.xyz/${latitude},${longitude}?json=1`
+                `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`
               );
               const data = await response.json();
 
-              const cityName = data?.city;
+              const cityName = data?.address?.city;
 
               changeLocation({ city: cityName, cityId: null });
               setLoading(false);

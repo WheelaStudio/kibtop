@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
-import PhotoUploads from "../PhotoUploads/PhotoUploads";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import Photo from "../PhotoUploads/Photo";
 
 const PhotoUploadsContainer = () => {
   const { watch, setValue } = useFormContext();
@@ -25,45 +26,63 @@ const PhotoUploadsContainer = () => {
     setValue(
       "photos",
       photos.filter((upload, uploadIndex) => uploadIndex !== index),
-      { shouldTouch: true, shouldValidate: true }
+      { shouldTouch: false, shouldValidate: true }
     );
   };
 
-  const handleDragStart = e => {
-    e.dataTransfer.setData(
-      "text/plain",
-      e.currentTarget.getAttribute("data-index")
-    );
-  };
+  const handleDragEnd = result => {
+    if (!result.destination) {
+      return;
+    }
 
-  const handleDragOver = e => {
-    e.preventDefault();
-  };
+    const newUploads = Array.from(uploads);
+    const [draggedUpload] = newUploads.splice(result.source.index, 1);
+    newUploads.splice(result.destination.index, 0, draggedUpload);
 
-  const handleDrop = e => {
-    e.preventDefault();
-
-    const draggedPhotoIndex = e.dataTransfer.getData("text/plain");
-    const droppedPhotoIndex = e.currentTarget.getAttribute("data-index");
-
-    const newPhotosOrder = [...photos];
-    const draggedPhoto = newPhotosOrder.splice(draggedPhotoIndex, 1)[0];
-    newPhotosOrder.splice(droppedPhotoIndex, 0, draggedPhoto);
-
-    setValue("photos", newPhotosOrder, {
-      shouldTouch: true,
-      shouldValidate: true,
-    });
+    setUploads(newUploads);
   };
 
   return (
-    <PhotoUploads
-      uploads={uploads}
-      deleteUpload={deleteUpload}
-      handleDragStart={handleDragStart}
-      handleDragOver={handleDragOver}
-      handleDrop={handleDrop}
-    />
+    <DragDropContext onDragEnd={handleDragEnd}>
+      <Droppable droppableId="uploads" direction="horizontal">
+        {(provided, snapshot) => (
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "flex-start",
+            }}
+            ref={provided.innerRef}
+            {...provided.droppableProps}>
+            {uploads.map((src, index) => (
+              <Draggable
+                key={index}
+                draggableId={`upload-${index}`}
+                index={index}
+                direction="vertical">
+                {(provided, snapshot) => (
+                  <div
+                    ref={provided.innerRef}
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                    style={{
+                      userSelect: "none",
+                      ...provided.draggableProps.style,
+                    }}>
+                    <Photo
+                      src={src}
+                      index={index}
+                      deleteUpload={deleteUpload}
+                    />
+                  </div>
+                )}
+              </Draggable>
+            ))}
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
+    </DragDropContext>
   );
 };
 

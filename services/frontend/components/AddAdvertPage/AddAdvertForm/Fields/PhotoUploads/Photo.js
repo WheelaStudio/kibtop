@@ -1,27 +1,14 @@
 import Image from "next/image";
 
-const Photo = ({
-  index,
-  src,
-  deleteUpload,
-  handleDragStart,
-  handleDragOver,
-  handleDrop,
-}) => {
+const Photo = ({ index, src, deleteUpload }) => {
   const onDeleteClick = e => {
     e.preventDefault();
     deleteUpload(index);
   };
 
   return (
-    <div
-      className="upload"
-      draggable
-      onDragStart={handleDragStart}
-      onDragOver={handleDragOver}
-      onDrop={handleDrop}
-      data-index={index}>
-      <img width={100} height={100} alt={""} src={src} className="uploads" />
+    <div className="upload" draggable data-index={index}>
+      <img width={100} height={100} alt={""} src={src} className="upload" />
 
       <button onClick={onDeleteClick} className="upload__del">
         <svg viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
