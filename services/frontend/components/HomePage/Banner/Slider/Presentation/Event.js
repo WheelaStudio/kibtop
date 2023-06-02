@@ -5,20 +5,18 @@ import Image from "next/image";
 const Event = ({ id, isDark, img, title, desc, background, link }) => {
   return (
     <>
-      <div
-        style={{ backgroundImage: `url(${background})` }}
-        className={"event" + (isDark ? "" : " event--light")}>
-        <div className="event__img">
+      <div style={{ backgroundImage: `url(${background})` }} className="event">
+        {/* <div className="event__img">
           {!!img && <img width={100} height={100} alt={""} src={img} />}
-        </div>
+        </div> */}
 
-        <article className="event__article">
-          <h4 className="title event__title">{title}</h4>
-          <p className="text event__text">{desc}</p>
-          {!!title && link && (
-            <Link href={link} className="more-link-text event__link">
-              <Text content="MORE" />
-              <svg
+        {/* <article className="event__article"> */}
+        {/* <h4 className="title event__title">{title}</h4> */}
+        {/* <p className="text event__text">{desc}</p> */}
+        {!!title && link && (
+          <Link href={link} className=" event__link">
+            {/* <Text content="MORE" /> */}
+            {/* <svg
                 className="more-icon"
                 viewBox="0 0 14 14"
                 xmlns="http://www.w3.org/2000/svg">
@@ -30,10 +28,10 @@ const Event = ({ id, isDark, img, title, desc, background, link }) => {
                     <rect width="14" height="14" fill="white" />
                   </clipPath>
                 </defs>
-              </svg>
-            </Link>
-          )}
-        </article>
+              </svg> */}
+          </Link>
+        )}
+        {/* </article> */}
       </div>
     </>
   );

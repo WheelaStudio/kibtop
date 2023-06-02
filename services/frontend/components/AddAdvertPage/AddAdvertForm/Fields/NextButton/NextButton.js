@@ -20,7 +20,7 @@ const NextButton = ({ isDisabled, onClick }) => {
               lineHeight: "9px",
               color: "#FF5A5A",
             }}>
-            {t("* Fill all the fields")}
+            {t("* Fill in all the fields")}
           </p>
         )}
         <button
