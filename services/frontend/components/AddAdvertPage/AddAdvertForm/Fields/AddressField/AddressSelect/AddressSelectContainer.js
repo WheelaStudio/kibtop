@@ -8,14 +8,16 @@ const AddressSelectContainer = ({ data, setAddressChoice }) => {
   const cities = data;
 
   return (
-    <>
-      <p style={{ marginLeft: "3em" }} className="warn">
-        {t("choose from the list below")}
-      </p>
+    <div
+      style={{
+        backgroundColor: "white",
+        zIndex: "10",
+      }}>
+      <p className="warn">{t("choose from the list below")}</p>
       <div style={{ display: "flex", flexDirection: "column" }}>
         <AddressSelect {...{ cities, setAddressChoice }} />
       </div>
-    </>
+    </div>
   );
 };
 
