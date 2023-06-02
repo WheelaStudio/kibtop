@@ -37,8 +37,6 @@ INSTALLED_APPS = [
     'chat.apps.ChatConfig',
 ]
 
-
-
 SITE_ID = 1
 
 MIDDLEWARE = [
@@ -96,7 +94,7 @@ CHANNEL_LAYERS = {
     },
 }
 
-if env("IS_DEPLOY"):
+if env("IS_DEPLOY") == 'True':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
@@ -114,8 +112,6 @@ else:
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
-
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {
