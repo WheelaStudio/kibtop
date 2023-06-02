@@ -94,7 +94,7 @@ CHANNEL_LAYERS = {
     },
 }
 
-if env("IS_DEPLOY") == 'True':
+if env("IS_DEPLOY") == 'True': #Определяет, какую базу использовать
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
