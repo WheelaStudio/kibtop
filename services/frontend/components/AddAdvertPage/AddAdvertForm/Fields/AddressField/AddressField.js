@@ -16,7 +16,6 @@ const AddressField = ({ isLoaded }) => {
   const russianCities = cityData.country;
   const [cityName, setCityName] = useState("");
   const [validCity, setValidCity] = useState(false);
-  const [touched, setTouched] = useState(false);
 
   const form = useFormContext();
   const {
@@ -78,9 +77,20 @@ const AddressField = ({ isLoaded }) => {
     });
   };
 
-  const { formState, getFieldState, register } = form;
+  const { formState, getFieldState, register, trigger } = form;
+  const { error, isTouched } = getFieldState("address", formState);
+  useEffect(() => {
+    const onFocusOut = () => {
+      trigger("address");
+    };
 
-  const { error } = getFieldState("geocode", formState);
+    const inputElement = document.getElementById("address-input");
+    inputElement.addEventListener("focusout", onFocusOut);
+
+    return () => {
+      inputElement.removeEventListener("focusout", onFocusOut);
+    };
+  }, [trigger]);
 
   useEffect(() => {
     if (isLoaded) init();
@@ -104,10 +114,6 @@ const AddressField = ({ isLoaded }) => {
     }
   };
 
-  const handleBlur = () => {
-    setTouched(true);
-  };
-
   useEffect(() => {
     const isValidCity = validateCityName(cityName);
     setValidCity(isValidCity);
@@ -122,26 +128,29 @@ const AddressField = ({ isLoaded }) => {
         type="text"
         hidden={true}
       />
-      <input
+      {/* <input
         {...register("address", {
           required: t("field is required"),
         })}
         type="text"
         hidden={true}
-      />
-      <input
+      /> */}
+      {/* <input
         {...register("city", {
           required: t("field is required"),
         })}
         type="text"
         hidden={true}
-      />
+      /> */}
       <div className="radio-group" ref={ref}>
         <div
           className={
             "search search--location search--address" +
-            (status === "OK" && touched ? " field--error" : "")
+            (!!error && isTouched ? " field--error" : "")
           }>
+          {!!error && isTouched && (
+            <p className="warn warn--absolute">{error.message}</p>
+          )}
           <svg
             viewBox="0 0 20 20"
             fill="none"
@@ -164,21 +173,28 @@ const AddressField = ({ isLoaded }) => {
               </clipPath>
             </defs>
           </svg>
-
           <div className="search__field">
             <input
+              {...register("address", {
+                required: t("field is required"),
+              })}
+              type="text"
+              id="address-input"
               value={value}
               onChange={handleInput}
-              onBlur={handleBlur}
               disabled={!ready}
               placeholder={t("City or region")}
-              type="text"
               setAddressChoice={handleSelect}
               style={{
                 opacity: status === "OK" ? 0.5 : 1,
                 transition: "opacity 0.3s ease",
               }}
             />
+            {isTouched && !!error && value.trim() === "" && (
+              <p style={{ marginTop: "3em" }} className="warn warn--absolute">
+                {error.message}
+              </p>
+            )}
           </div>
         </div>
         <div className="address-select">
