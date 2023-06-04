@@ -6,8 +6,7 @@ from sections.models import Stock
 
 
 class StockTranslationOptions(TranslationOptions):
-    #fields = ('title', 'desc',)
-    fields = ('title','image', 'image_mobile',)
+    fields = ('title', 'desc',)
 
 
 translator.register(Stock, StockTranslationOptions)
