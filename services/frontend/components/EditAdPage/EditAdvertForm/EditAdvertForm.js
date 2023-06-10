@@ -1,36 +1,39 @@
 import { FormProvider, useForm } from "react-hook-form";
-import AddPhoneField from "../../AddAdvertPage/AddPhone/AddPhoneForm/AddPhoneField/AddPhoneField";
 import Text from "../../Elementes/Text/Text";
 import CityField from "./Fields/CityField";
 import EmailField from "./Fields/EmailField";
-import FileField from "./Fields/FileField";
+import FilesField from "./Fields/FilesField";
 import NameField from "./Fields/NameField";
-import PhoneField from "./Fields/PhoneField";
+import AreaField from "./Fields/AreaField";
+import PriceField from "./Fields/PriceField";
 import ResendEmailButtonContainer from "./ResendEmailButton/ResendEmailButtonContainer";
 
-const EditProfileForm = ({
+const EditAdvertForm = ({
   onEditProfileSubmit,
-  email,
-  name,
-  city,
-  avatar,
-  phone,
+  title,
+  price,
+  address,
+  photo,
+  fileList,
+  description,
   isLoading,
   isSuccess,
 }) => {
-  const EditProfileForm = useForm({
+  const EditAdvertForm = useForm({
     mode: "onChange",
     defaultValues: {
-      name: name,
-      city,
-      email,
+      title,
+      price,
+      address,
+      photo,
+      description,
     },
   });
   const {
     handleSubmit,
     watch,
     formState: { isValid, errors },
-  } = EditProfileForm;
+  } = EditAdvertForm;
 
   const { phoneCode, phoneNumber } = watch();
   return (
@@ -38,18 +41,10 @@ const EditProfileForm = ({
       <form
         className="edit-profile"
         onSubmit={handleSubmit(onEditProfileSubmit)}>
-        <FormProvider {...EditProfileForm}>
-          <div className="edit-profile__field edit-profile__field--file">
-            <label className="edit-profile__label">
-              <Text content="Profile Photo" />
-            </label>
-
-            <FileField file={avatar} />
-          </div>
-
+        <FormProvider {...EditAdvertForm}>
           <div className="edit-profile__field">
             <label className="edit-profile__label">
-              <Text content="Your name" />
+              <Text content="Title" />
             </label>
 
             <NameField />
@@ -57,52 +52,44 @@ const EditProfileForm = ({
 
           <div className="edit-profile__field">
             <label className="edit-profile__label">
-              <Text content="Location" />
+              <Text content="Price" />
+            </label>
+
+            <PriceField />
+          </div>
+          <div className="edit-profile__field">
+            <label className="edit-profile__label">
+              <Text content="Address" />
             </label>
 
             <CityField />
           </div>
-
-          <div className="edit-profile__field">
+          <div className="edit-profile__field edit-profile__field--file">
             <label className="edit-profile__label">
-              <Text content="Your email" />
+              <Text content="Photo" />
             </label>
 
-            <EmailField />
+            <FilesField files={fileList} />
           </div>
-
           <div className="edit-profile__field">
             <label className="edit-profile__label">
-              <Text content="Your phone" />
+              <Text content="Description" />
             </label>
 
-            <PhoneField defaultValue={phone} />
+            <AreaField />
           </div>
         </FormProvider>
 
-        {isSuccess ? (
-          <div className="edit-form-ask">
-            <p className="ask-text">
-              <Text content="Please confirm the changes by following the link sent to your email" />
-            </p>
-            <ResendEmailButtonContainer />
-          </div>
-        ) : (
+        {
           <button
-            disabled={
-              !isValid ||
-              isLoading ||
-              !phoneCode ||
-              !phoneNumber ||
-              phoneNumber.includes("_")
-            }
+            disabled={!isValid || isLoading}
             className="reg-btn reg-btn--edit">
             <Text content="Apply" />
           </button>
-        )}
+        }
       </form>
     </>
   );
 };
 
-export default EditProfileForm;
+export default EditAdvertForm;
