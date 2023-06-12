@@ -824,7 +824,7 @@ press ctrl + F and paste:
   display: grid;
   box-sizing: border-box;
   width: 100%;
-  height: 100px;
+  height: 70px;
   padding: 10px;
 
   align-items: center;
@@ -836,7 +836,7 @@ press ctrl + F and paste:
 
   position: absolute;
   z-index: 2;
-  top: 70px;
+  top: 75px;
 }
 
 .advertisement-container {
