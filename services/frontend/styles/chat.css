@@ -1398,11 +1398,11 @@ press ctrl + F and paste:
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 10px;
   line-height: 20px;
   color: #414042;
 
-  min-height: 100px;
+  min-height: 70px;
   max-height: max-content;
 
   grid-gap: 5px;
