@@ -17,7 +17,7 @@ function AdvertisementComponent({ talk, advert, me }) {
     <>
       {!me?.isVerified && (
         <>
-          {seller.isVerified ? (
+          {!seller.isVerified ? (
             <>
               <div className="chat-advertisement chat-advertisement-verified">
                 <div className="alert-scammers__main">

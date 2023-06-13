@@ -835,8 +835,8 @@ press ctrl + F and paste:
   margin-bottom: 20px;
 
   position: absolute;
-  z-index: 2;
-  top: 75px;
+  z-index: 2s;
+  top: 175px;
 }
 
 .advertisement-container {
@@ -850,9 +850,23 @@ press ctrl + F and paste:
   color: #414042;
 }
 .alert-scammers__main {
+  font-size: 14px;
+  line-height: 20px;
   font-weight: 900;
 }
 
+@media (min-width: 599px) {
+  .alert-scammers__main {
+    font-size: 20px;
+    line-height: 20px;
+    font-weight: 900;
+  }
+  .alert-scammers__discription {
+    font-size: 13px;
+    line-height: 10px;
+    font-weight: 400;
+  }
+}
 .chat-advertisement__not-verified {
   grid-template-columns: 62px auto auto;
 }
