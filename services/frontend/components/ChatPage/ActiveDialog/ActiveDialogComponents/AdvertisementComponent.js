@@ -37,7 +37,7 @@ function AdvertisementComponent({ talk,  advert, me }) {
                                         <Link href={`/advert/${ product.category }/${ product.id }`}>{t("Go to the ad")}</Link>
                                     </div>
                                 </div>
-                            </>
+                            </>div
                         }
                     </>
             }

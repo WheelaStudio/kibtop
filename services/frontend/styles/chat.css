@@ -621,8 +621,8 @@ press ctrl + F and paste:
 
 .message-style {
   max-width: 80%;
-  border-radius: 20px;
-  padding: 20px;
+  border-radius: 15px;
+  padding: 8px;
   box-sizing: border-box;
   height: max-content;
 
