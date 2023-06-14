@@ -262,9 +262,9 @@
 }
 
 .event__link {
-  margin-top: 8em;
-  width: 10em;
-  height: 10em;
+  margin-top: 3em;
+  width: 14em;
+  height: 4em;
   display: flex;
 }
 @media (min-width: 1100px) {
