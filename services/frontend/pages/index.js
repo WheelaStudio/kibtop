@@ -9,45 +9,45 @@ import { useLanguage } from "../locales/hooks/useLanguage";
 import { GoodsApi } from "../services/IndexApi";
 import { getAuthData } from "../services/tools/getAuthData/getAuthData";
 
+const Index = ({ slides, recommendGoods, newGoods, authData }) => {
+  const { t } = useLanguage();
+  const title = `Kibtop - ${t("Home page")}`;
 
-const Index = ({slides, recommendGoods, newGoods, authData}) => {
-    const {t} = useLanguage()
-    const title = `Kibtop - ${t('Home page')}`
+  useAuthProvider(authData);
 
-    useAuthProvider(authData)
-
-    return (
-        <>
-            <Head>
-                <title>
-                    {title}
-                </title>
-                <meta property="og:title" content={title} />
-                <meta property="og:description" content={title} />
-                <meta property="og:type" content="website" />
-                <meta property="og:url" content="https://kibtop.com" />
-                <meta property="og:image" content="https://kibtop.com/img/kibtop.png" />
-            </Head>
-                <Header />
-                <HomePage {...{slides, recommendGoods, newGoods}} />
-            
-        </>
-    );
-}
-
+  console.log(slides);
+  return (
+    <>
+      <Head>
+        <title>{title}</title>
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={title} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://kibtop.com" />
+        <meta property="og:image" content="https://kibtop.com/img/kibtop.png" />
+      </Head>
+      <Header />
+      <HomePage {...{ slides, recommendGoods, newGoods }} />
+    </>
+  );
+};
 
 export async function getServerSideProps(context) {
-    const {locale} = context
-    const slides = await GoodsApi.getSlider(locale)
+  const { locale } = context;
+  const slides = await GoodsApi.getSlider(locale);
 
+  const recommendGoods = await GoodsApi.getRecommends(locale);
 
-    const recommendGoods = await GoodsApi.getRecommends(locale)
-    
-    const newGoods = await GoodsApi.getNews(locale)
+  const newGoods = await GoodsApi.getNews(locale);
 
-    return {
-        props: {slides, recommendGoods, newGoods, authData: await getAuthData(context)}
-    }
+  return {
+    props: {
+      slides,
+      recommendGoods,
+      newGoods,
+      authData: await getAuthData(context),
+    },
+  };
 }
 
 export default Index;

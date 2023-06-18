@@ -12,15 +12,21 @@ export const serializeGoods = (res, lang) =>
   }));
 
 export const serializeSlider = (res, lang) =>
-  res.map(product => ({
-    id: product.id,
-    isDark: product.isDark,
-    img: product.img,
-    title: product[`title_${lang}`],
-    desc: product[`desc_${lang}`],
-    background: product.background,
-    link: product.link,
-  }));
+  res.map(product => {
+    console.log("Product:", product);
+    const desktopImage = product[`image_${lang}`];
+    const mobileImage = product[`image_mobile_${lang}`];
+    return {
+      id: product.id,
+      // isDark: product.isDark,
+      img: desktopImage,
+      title: product[`title_${lang}`],
+      // desc: product[`desc_${lang}`],
+      // background: product.background,
+      link: product.link,
+      ...(mobileImage && { img_mobile: mobileImage }), // Add img_mobile property if mobileImage is available
+    };
+  });
 
 export const GoodsApi = {
   async getRecommends(lang) {
@@ -53,7 +59,7 @@ export const GoodsApi = {
         const res = data.results[lang];
 
         const slides = serializeSlider(res, lang);
-
+        console.log("Serialized Sliders:", slides);
         return slides;
       })
       .catch(err => null);
