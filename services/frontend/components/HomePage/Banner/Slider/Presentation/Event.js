@@ -1,11 +1,34 @@
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Text from "../../../../Elementes/Text/Text";
 import Image from "next/image";
 
-const Event = ({ id, isDark, img, title, desc, background, link }) => {
+const Event = ({ img, img_mobile, title, link }) => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const backgroundImageStyle = {
+    backgroundImage: `url(${isMobile ? img_mobile : img})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+  };
+
   return (
     <>
-      <div style={{ backgroundImage: `url(${img})` }} className="event">
+      <div style={backgroundImageStyle} className="event">
         {/* <div className="event__img">
           {!!img && <img width={100} height={100} alt={""} src={img} />}
         </div> */}
@@ -15,7 +38,7 @@ const Event = ({ id, isDark, img, title, desc, background, link }) => {
         {/* <p className="text event__text">{desc}</p> */}
         {!!title && link && (
           <Link href={link} className="event__link">
-            {/* <Text content="MORE" /> */}
+            <Text />
             {/* <svg
                 className="more-icon"
                 viewBox="0 0 14 14"

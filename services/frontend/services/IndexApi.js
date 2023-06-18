@@ -14,14 +14,17 @@ export const serializeGoods = (res, lang) =>
 export const serializeSlider = (res, lang) =>
   res.map(product => {
     console.log("Product:", product);
+    const desktopImage = product[`image_${lang}`];
+    const mobileImage = product[`image_mobile_${lang}`];
     return {
       id: product.id,
       // isDark: product.isDark,
-      img: product[`image_${lang}`],
+      img: desktopImage,
       title: product[`title_${lang}`],
       // desc: product[`desc_${lang}`],
       // background: product.background,
       link: product.link,
+      ...(mobileImage && { img_mobile: mobileImage }), // Add img_mobile property if mobileImage is available
     };
   });
 
