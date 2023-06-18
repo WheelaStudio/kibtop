@@ -10,7 +10,6 @@ const Slider = ({
   offset,
 }) => {
   const sliderLineEl = useRef(null);
-
   const slide = () =>
     sliderLineEl.current
       ? `${sliderLineEl.current.childNodes[0].clientWidth}px`

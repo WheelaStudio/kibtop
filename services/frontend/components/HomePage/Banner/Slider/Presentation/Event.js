@@ -5,7 +5,7 @@ import Image from "next/image";
 const Event = ({ id, isDark, img, title, desc, background, link }) => {
   return (
     <>
-      <div style={{ backgroundImage: `url(${background})` }} className="event">
+      <div style={{ backgroundImage: `url(${img})` }} className="event">
         {/* <div className="event__img">
           {!!img && <img width={100} height={100} alt={""} src={img} />}
         </div> */}
