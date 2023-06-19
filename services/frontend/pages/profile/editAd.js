@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import EditProfilePage from "../../components/EditProfilePage/EditProfilePage";
+import EditAdvertPage from "../../components/EditAdPage/EditAdPage";
 import EditProfileHead from "../../components/Heads/EditProfileHead";
 import { useLanguage } from "../../locales/hooks/useLanguage";
 import { AuthApi } from "../../services/AuthApi";
@@ -10,7 +10,7 @@ import { getServerSideUser } from "../../services/tools/getServerSideUser/getSer
 
 const Edit = ({ user }) => {
   const { t } = useLanguage();
-  const title = `Kibtop - ${t("Edit profile")}`;
+  const title = `Kibtop - ${t("Edit ad")}`;
   return (
     <>
       <Head>
@@ -21,7 +21,7 @@ const Edit = ({ user }) => {
         <meta property="og:url" content="https://kibtop.com" />
         <meta property="og:image" content="https://kibtop.com/img/kibtop.png" />
       </Head>
-      <EditProfilePage {...{ user }} />
+      <EditAdvertPage {...{ user }} />
     </>
   );
 };
