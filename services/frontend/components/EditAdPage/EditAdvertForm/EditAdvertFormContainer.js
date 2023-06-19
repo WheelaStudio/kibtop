@@ -7,7 +7,7 @@ import {
   setAdvertEditingActivated,
   setAdvertEditingSuccess,
 } from "../../../store/slices/AdvertSlice";
-import EditProfileForm from "./EditProfileForm";
+import EditAdvertForm from "./EditAdvertForm";
 
 const EditAdvertFormContainer = ({ advert }) => {
   const { email, name, city, avatar, isSuccess, isLoading, isActivated } =
@@ -35,7 +35,7 @@ const EditAdvertFormContainer = ({ advert }) => {
   const advertData = advert || { email, name, city, avatar };
 
   return (
-    <EditProfileForm
+    <EditAdvertForm
       {...{ onEditAdvertSubmit, isLoading, isSuccess, ...advertData }}
     />
   );
