@@ -1,21 +1,22 @@
 import Header from "../Header/Header";
 import HeaderService from "../Header/HeaderService/HeaderService";
 import SettingsNav from "../SettingsPage/SettingsNav";
-import EditAdvertFormContainer from "./EditAdvertForm/EditAdvertFormContainer";
+import EditProfileFormContainer from "./EditProfileForm/EditProfileFormContainer";
 
-const EditAdvertPage = ({ advert }) => {
-  return (
-    <>
-      <Header />
-      <HeaderService />
-      <main className="main">
-        <SettingsNav title="Product name" />
-        <div className="container">
-          <EditAdvertFormContainer advert={advert} />
-        </div>
-      </main>
-    </>
-  );
-};
+const EditProfilePage = ({user}) => {
 
-export default EditAdvertPage;
+    return (
+        <>
+            <Header />
+            <HeaderService />
+            <main className="main">
+                <SettingsNav title="Product name" />
+                <div className="container">
+                <EditProfileFormContainer user={user} />
+                </div>
+            </main>
+        </>
+    );
+}
+
+export default EditProfilePage;

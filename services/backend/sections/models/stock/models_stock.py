@@ -9,7 +9,7 @@ class Stock(models.Model):
     title = models.CharField(max_length=255)
     #desc = models.TextField()
     #background = models.FileField(upload_to='stock/')
-    link = models.URLField(max_length=255)
+    link = models.CharField(max_length=255)
 
     def __str__(self):
         return self.title
