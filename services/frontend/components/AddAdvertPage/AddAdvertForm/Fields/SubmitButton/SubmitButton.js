@@ -12,6 +12,13 @@ const SubmitButton = ({
   hasEmptyFields,
 }) => {
   const { t } = useLanguage();
+
+  const currentUrl = window.location.href;
+
+  const handleStopPublishing = () => {
+    window.location.href = currentUrl;
+  };
+
   return (
     <>
       {isPhoneNull ? (
@@ -77,6 +84,23 @@ const SubmitButton = ({
             wrapperClass="blocks-wrapper"
             colors={["#e15b64", "#f47e60", "#f8b26a", "#abbd81", "#849b87"]}
           />
+          {isLoading && (
+            <>
+              <button
+                onClick={handleStopPublishing}
+                className="reg-btn"
+                style={{
+                  top: "35em",
+                  position: "fixed",
+                  backgroundColor: "red",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}>
+                Stop Publishing
+              </button>
+            </>
+          )}
         </div>
       )}
     </>

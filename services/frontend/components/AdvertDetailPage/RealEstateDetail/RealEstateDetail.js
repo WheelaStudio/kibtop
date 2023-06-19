@@ -12,45 +12,49 @@ import SimilarAds from "../OtherDetail/SimilarAds/SimilarAds";
 import RealtyParameterContainer from "./RealtyParameter/RealtyParameterContainer";
 import SimilaRealtyAds from "./SimilaRealtyAds/SimilaRealtyAds";
 
-const RealEstateDetail = ({serverAdvert}) => {
-    return (
-        <>
-            <DetailNav {...{serverAdvert}} />
-                
-            <div className="container container--detail">
-                <DetailBannerContainer {...{serverAdvert}} />
+const RealEstateDetail = ({ serverAdvert }) => {
+  return (
+    <>
+      <DetailNav {...{ serverAdvert }} />
 
-                <DetailCardContainer {...{serverAdvert}} />
-            </div>
+      <div className="container container--detail">
+        <DetailBannerContainer {...{ serverAdvert }} />
 
-            <div className="container container-brad">
-                <div className="detail-wrapper">
-                    <DetailDataContainer {...{serverAdvert}} />
+        <DetailCardContainer {...{ serverAdvert }} />
+      </div>
 
-                    <DetailMapsContainer />
+      <div className="container container-brad">
+        <div className="detail-wrapper">
+          <DetailDataContainer {...{ serverAdvert }} />
 
-                    <RealtyParameterContainer {...{serverAdvert}} />
+          <DetailMapsContainer />
 
-                    <div className="detail-wrapper__container detail-wrapper__container--date">
-                        <DetailDateContainer {...{serverAdvert}} />
-                    </div>
+          <RealtyParameterContainer {...{ serverAdvert }} />
 
-                    <DetailProfileContainer />
+          <div className="detail-wrapper__container detail-wrapper__container--date">
+            <DetailDateContainer {...{ serverAdvert }} />
+          </div>
 
-                    <div className="detail-wrapper__container">
-                        <DetailDateContainer className={'exception'} {...{serverAdvert}} />
+          <DetailProfileContainer />
 
-                        <Link href="/support" className="detail-tag-text detail-tag-text--red">
-                            <Text content="Complain about the ad" />
-                        </Link>
-                    </div>
-                </div>
-            </div>
+          <div className="detail-wrapper__container">
+            <DetailDateContainer
+              className={"exception"}
+              {...{ serverAdvert }}
+            />
 
-            <SimilaRealtyAds />
+            <Link
+              href="/support"
+              className="detail-tag-text detail-tag-text--red">
+              <Text content="Complain about the ad" />
+            </Link>
+          </div>
+        </div>
+      </div>
 
-        </>
-    );
-}
+      <SimilaRealtyAds />
+    </>
+  );
+};
 
 export default RealEstateDetail;

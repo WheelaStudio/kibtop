@@ -1,16 +1,22 @@
+import { useState, useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 import { useLanguage } from "../../../../../locales/hooks/useLanguage";
 import AddressSelectContainer from "./AddressSelect/AddressSelectContainer";
-
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from "use-places-autocomplete";
 import useOnclickOutside from "react-cool-onclickoutside";
-import { useEffect } from "react";
+import { City } from "country-state-city";
+import cityData from "./citiesdb.json";
 
 const AddressField = ({ isLoaded }) => {
   const { t } = useLanguage();
+  const allCities = City.getAllCities();
+  const russianCities = cityData.country;
+  const [cityName, setCityName] = useState("");
+  const [validCity, setValidCity] = useState(false);
+
   const form = useFormContext();
   const {
     ready,
@@ -34,6 +40,8 @@ const AddressField = ({ isLoaded }) => {
     form.setValue("geocode", null);
     form.setValue("address", null);
     form.setValue("city", null);
+
+    setCityName(e.target.value);
   };
 
   const handleSelect = place => () => {
@@ -43,8 +51,11 @@ const AddressField = ({ isLoaded }) => {
       terms,
     } = place;
     clearSuggestions();
-
+    console.log(description);
     setValue(description, false);
+    const cleanDescription = description.replace(/[^a-zA-Zа-яА-я0-9\s]/g, "");
+
+    setValue(cleanDescription, false);
 
     form.setValue("address", main_text, {
       shouldTouch: true,
@@ -56,7 +67,7 @@ const AddressField = ({ isLoaded }) => {
       shouldValidate: true,
     });
 
-    getGeocode({ address: description }).then(results => {
+    getGeocode({ address: cleanDescription }).then(results => {
       const { lat, lng } = getLatLng(results[0]);
       form.setValue("geocode", `${lat} ${lng}`, {
         shouldTouch: true,
@@ -66,13 +77,47 @@ const AddressField = ({ isLoaded }) => {
     });
   };
 
-  const { formState, getFieldState, register } = form;
+  const { formState, getFieldState, register, trigger } = form;
+  const { error, isTouched } = getFieldState("address", formState);
+  useEffect(() => {
+    const onFocusOut = () => {
+      trigger("address");
+    };
 
-  const { error } = getFieldState("geocode", formState);
+    const inputElement = document.getElementById("address-input");
+    inputElement.addEventListener("focusout", onFocusOut);
+
+    return () => {
+      inputElement.removeEventListener("focusout", onFocusOut);
+    };
+  }, [trigger]);
 
   useEffect(() => {
     if (isLoaded) init();
   }, [isLoaded]);
+
+  const validateCityName = city => {
+    const lowerCaseCity = city.toLowerCase();
+
+    if (/^[a-zA-Z]+$/.test(lowerCaseCity)) {
+      const cityFromCityState = allCities.find(
+        c => c.name.toLowerCase() === lowerCaseCity
+      );
+
+      return !!cityFromCityState;
+    } else {
+      const cityFromCityData = russianCities.find(
+        c => c.name && c.name.toLowerCase() === lowerCaseCity
+      );
+
+      return !!cityFromCityData;
+    }
+  };
+
+  useEffect(() => {
+    const isValidCity = validateCityName(cityName);
+    setValidCity(isValidCity);
+  }, [cityName, allCities, russianCities]);
 
   return (
     <>
@@ -83,27 +128,29 @@ const AddressField = ({ isLoaded }) => {
         type="text"
         hidden={true}
       />
-      <input
+      {/* <input
         {...register("address", {
           required: t("field is required"),
         })}
         type="text"
         hidden={true}
-      />
-      <input
+      /> */}
+      {/* <input
         {...register("city", {
           required: t("field is required"),
         })}
         type="text"
         hidden={true}
-      />
-
+      /> */}
       <div className="radio-group" ref={ref}>
         <div
           className={
             "search search--location search--address" +
-            (!!error ? " field--error" : "")
+            (!!error && isTouched ? " field--error" : "")
           }>
+          {!!error && isTouched && (
+            <p className="warn warn--absolute">{error.message}</p>
+          )}
           <svg
             viewBox="0 0 20 20"
             fill="none"
@@ -126,22 +173,35 @@ const AddressField = ({ isLoaded }) => {
               </clipPath>
             </defs>
           </svg>
-
           <div className="search__field">
             <input
+              {...register("address", {
+                required: t("field is required"),
+              })}
+              type="text"
+              id="address-input"
               value={value}
               onChange={handleInput}
               disabled={!ready}
               placeholder={t("City or region")}
-              type="text"
+              setAddressChoice={handleSelect}
+              style={{
+                opacity: status === "OK" ? 0.5 : 1,
+                transition: "opacity 0.3s ease",
+              }}
             />
+            {isTouched && !!error && value.trim() === "" && (
+              <p style={{ marginTop: "3em" }} className="warn warn--absolute">
+                {error.message}
+              </p>
+            )}
           </div>
-          {!!error && <p className="warn warn--absolute">{error.message}</p>}
         </div>
         <div className="address-select">
           {status === "OK" && (
             <AddressSelectContainer
-              {...{ data, setAddressChoice: handleSelect }}
+              data={data}
+              setAddressChoice={handleSelect}
             />
           )}
         </div>

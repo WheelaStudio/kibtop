@@ -8,19 +8,17 @@ import HomePageHead from "./HomePageHead";
 import News from "./News/News";
 import Recommend from "./Recommend/Recommend";
 
-const HomePage = ({slides, recommendGoods, newGoods}) => {
-    return (
-        <>
-
-            <HeaderService />
-            <CategoriesNav />
-            <BannerContainer {...{slides}} />
-            <Recommend {...{recommendGoods}} />
-            <News {...{newGoods}} />
-            <AddAdvertMobileButton />
-            
-        </>
-    );
-}
+const HomePage = ({ slides, recommendGoods, newGoods }) => {
+  return (
+    <>
+      <HeaderService />
+      <CategoriesNav />
+      <BannerContainer {...{ slides }} />
+      <Recommend {...{ recommendGoods }} />
+      <News {...{ newGoods }} />
+      <AddAdvertMobileButton />
+    </>
+  );
+};
 
 export default HomePage;

@@ -4,12 +4,10 @@ import { setAdvertSellerThunk } from "../../../../store/slices/AdvertSlice";
 import DetailProfile from "./DetailProfile";
 
 const DetailProfileContainer = () => {
-    const {seller, userId} = useSelector(state => state.advert)
-    const dispatch = useDispatch()
+  const { seller, userId } = useSelector(state => state.advert);
+  const dispatch = useDispatch();
 
-    
-
-    return <DetailProfile {...{...seller, userId}} />;
-}
+  return <DetailProfile {...{ ...seller, userId }} />;
+};
 
 export default DetailProfileContainer;

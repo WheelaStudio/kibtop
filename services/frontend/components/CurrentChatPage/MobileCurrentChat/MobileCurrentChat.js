@@ -6,38 +6,39 @@ import Header from "../../Header/Header";
 import HeaderService from "../../Header/HeaderService/HeaderService";
 import MobileMessages from "./MobileMessages/MobileMessages";
 import MobileChatHeader from "./MobileChatHeader/MobileChatHeader";
-import style from "./mobile_chat.module.scss"
+import style from "./mobile_chat.module.scss";
 import AdvertisementComponent from "../../ChatPage/ActiveDialog/ActiveDialogComponents/AdvertisementComponent";
 import ChatNavBarContainer from "../../ChatPage/NavBar/ChatNavBarContainer";
 import CurrentDialogContainer from "../../ChatPage/ActiveDialog/Dialogs/CurrentDialogContainer";
 import { useRef } from "react";
 import { useLoadingMessages } from "../../ChatPage/LoadingMessagesContext/useLoadingMessages";
 import { useEffect } from "react";
+// import ChatNavBar from "../../ChatPage/NavBar/ChatNavBar"
 
-const MobileCurrentChat = ({messages, me, talk, connectedUsers, advert}) => {
-    const messagesLent = useRef(null)
-    const {loadingMessages} = useLoadingMessages()
-    useEffect(() => {
-        if(messagesLent.current) messagesLent.current.scrollTop = messagesLent.current.scrollHeight
-    }, [messagesLent.current, messages, loadingMessages])
+const MobileCurrentChat = ({ messages, me, talk, connectedUsers, advert }) => {
+  const messagesLent = useRef(null);
+  const { loadingMessages } = useLoadingMessages();
+  useEffect(() => {
+    if (messagesLent.current)
+      messagesLent.current.scrollTop = messagesLent.current.scrollHeight;
+  }, [messagesLent.current, messages, loadingMessages]);
 
-    return (
-        <>
-            <div className={`${style.chatBody} chat-mobile-elem`}>
-                    <MobileChatHeader {...{talk, connectedUsers}} />
-                
-                
-                
-                <div className={`container ${style.dialogMain}`} ref={messagesLent}>
-                        <AdvertisementComponent {...{talk, advert, me}} />
-                    
-                        <MobileMessages {...{messages, me}} />
-                </div>
+  return (
+    <>
+      <div className={`${style.chatBody} chat-mobile-elem`}>
+        <MobileChatHeader {...{ talk, connectedUsers }} />
 
-                <ChatInput  />
-            </div>
-        </>
-    );
-}
+        <div className={`container ${style.dialogMain}`} ref={messagesLent}>
+          <AdvertisementComponent {...{ talk, advert, me }} />
+          {/* <ChatNavBar {...{talk}} /> */}
+
+          <MobileMessages {...{ messages, me }} />
+        </div>
+
+        <ChatInput />
+      </div>
+    </>
+  );
+};
 
 export default MobileCurrentChat;

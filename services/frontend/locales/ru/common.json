@@ -78,6 +78,7 @@
   "password is too easy": "слишком лёгкий пароль",
   "passwords aren't the same": "пароли не совпадают",
   "invalid format": "неверный формат",
+  "invalid city": "неверный город",
   "email is registered": "почта занята",
   "Incorrect email or password": "Неверная почта или пароль",
 
@@ -88,7 +89,6 @@
 
   "Welcome back": "С возвращением",
   "to": "в",
-
   "Password recovery": "Восстановление пароля",
   "Change password": "Изменить пароль",
   "Link is not valid": "Ссылка не действительна",
@@ -216,7 +216,7 @@
   "Delete this ad": "Удалить этот товар",
 
   "Email not found": "Почта не найдена",
-  "* Fill all the fields": "Заполните все поля",
+  "* Fill in all the fields": "* Заполните все поля",
   "transaction type": "тип продажи",
   "condition": "состояние",
   "Used": "Вторичное",
@@ -237,6 +237,7 @@
   "VIP ad for 7 days": "VIP товар на 7 дней",
   "for": "за",
   "total": "итого",
+  "choose from the list below": "выберите город из списка",
   "Publish without promotion": "Опубликовать без продвижения",
   "Brand name": "Имя бренда",
   "Mileage in kilometers": "Пробег в километрах",
