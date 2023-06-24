@@ -32,7 +32,7 @@ const EditAdvertFormContainer = ({ advert }) => {
     );
   };
 
-  const advertData = advert || { email, name, city, avatar };
+  const advertData = advert || { email, name, city };
 
   return (
     <EditAdvertForm

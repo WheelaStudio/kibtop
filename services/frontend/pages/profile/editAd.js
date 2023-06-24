@@ -8,7 +8,7 @@ import { AuthApi } from "../../services/AuthApi";
 import { ProfileApi } from "../../services/ProfileApi";
 import { getServerSideUser } from "../../services/tools/getServerSideUser/getServerSideUser";
 
-const Edit = ({ user }) => {
+const Edit = ({ advert }) => {
   const { t } = useLanguage();
   const title = `Kibtop - ${t("Edit ad")}`;
   return (
@@ -21,7 +21,7 @@ const Edit = ({ user }) => {
         <meta property="og:url" content="https://kibtop.com" />
         <meta property="og:image" content="https://kibtop.com/img/kibtop.png" />
       </Head>
-      <EditAdvertPage {...{ user }} />
+      <EditAdvertPage {...{ advert }} />
     </>
   );
 };

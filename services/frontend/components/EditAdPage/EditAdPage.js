@@ -3,15 +3,15 @@ import HeaderService from "../Header/HeaderService/HeaderService";
 import SettingsNav from "../SettingsPage/SettingsNav";
 import EditAdvertFormContainer from "./EditAdvertForm/EditAdvertFormContainer";
 
-const EditAdvertPage = ({ user }) => {
+const EditAdvertPage = ({ advert }) => {
   return (
     <>
       <Header />
       <HeaderService />
       <main className="main">
-        <SettingsNav title="Product name" />
+        <SettingsNav title="Edit Advert" />
         <div className="container">
-          <EditAdvertFormContainer user={user} />
+          <EditAdvertFormContainer advert={advert} />
         </div>
       </main>
     </>
