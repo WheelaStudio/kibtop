@@ -1,44 +1,90 @@
+// import { useEffect } from "react";
+// import { useDispatch, useSelector } from "react-redux";
+// import { useRouter } from "next/router";
+// import {
+//   editAdvertDataThunk,
+//   setAdvertDataThunk,
+//   setAdvertEditingActivated,
+//   setAdvertEditingSuccess,
+// } from "../../../store/slices/AdvertSlice";
+// import EditAdvertForm from "./EditAdvertForm";
+
+// const EditAdvertFormContainer = ({ advert }) => {
+//   const {
+//     title,
+//     price,
+//     address,
+//     photo,
+//     fileList,
+//     description,
+//     isSuccess,
+//     isLoading,
+//     isActivated,
+//   } = useSelector(state => state.advert);
+//   const { push } = useRouter();
+//   const dispatch = useDispatch();
+
+//   useEffect(() => {
+//     // if (isActivated) {
+//     //   dispatch(setAdvertEditingActivated(false));
+//     //   dispatch(setAdvertEditingSuccess(false));
+//     //   push("/advert");
+//     // }
+//     if (1 == 1) {
+//       dispatch(setAdvertDataThunk());
+//     }
+//   }, []);
+
+//   const onEditAdvertSubmit = data => {
+//     dispatch(
+//       editAdvertDataThunk({
+//         advertId: advert.advertId,
+//         data,
+//       })
+//     );
+//   };
+
+//   const advertData = advert || {
+//     title,
+//     price,
+//     address,
+//     photo,
+//     fileList,
+//     description,
+//   };
+
+//   return (
+//     <EditAdvertForm
+//       onEditAdvertSubmit={onEditAdvertSubmit}
+//       isLoading={isLoading}
+//       isSuccess={isSuccess}
+//       {...advertData}
+//     />
+//   );
+// };
+
+// export default EditAdvertFormContainer;
+
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
-  editAdvertDataThunk,
+  setAdvertData,
   setAdvertDataThunk,
-  setAdvertEditingActivated,
-  setAdvertEditingSuccess,
 } from "../../../store/slices/AdvertSlice";
-import EditAdvertForm from "./EditAdvertForm";
 
-const EditAdvertFormContainer = ({ advert }) => {
-  const { email, name, city, avatar, isSuccess, isLoading, isActivated } =
-    useSelector(state => state.advert);
-  const { push } = useRouter();
+const EditAdvertContainer = ({ children }) => {
+  const {
+    query: { category, advertId },
+    locale,
+  } = useRouter();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (isActivated) {
-      dispatch(setAdvertEditingActivated(false));
-      dispatch(setAdvertEditingSuccess(false));
-      push("/advert");
-    }
-    if (!email || !name || !city || !avatar) dispatch(setAdvertDataThunk());
-  }, [email, name, city, avatar, isActivated]);
+    dispatch(setAdvertDataThunk(advertId, category, locale));
+  }, [category, advertId, locale]);
 
-  const onEditAdvertSubmit = data => {
-    const { email, name, city, file, phoneNumber, phoneCode } = data;
-    const phone = `+${phoneNumber}`;
-    dispatch(
-      editAdvertDataThunk({ email, name, city, avatar: file[0], phone })
-    );
-  };
-
-  const advertData = advert || { email, name, city };
-
-  return (
-    <EditAdvertForm
-      {...{ onEditAdvertSubmit, isLoading, isSuccess, ...advertData }}
-    />
-  );
+  return <>{children}</>;
 };
 
-export default EditAdvertFormContainer;
+export default EditAdvertContainer;

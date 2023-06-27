@@ -12,17 +12,17 @@ import EditProfileForm from "./EditProfileForm";
 const EditProfileFormContainer = ({ user }) => {
   const { email, name, city, avatar, isSuccess, isLoading, isActivated } =
     useSelector(state => state.profile);
-  const { push } = useRouter();
+  // const { push } = useRouter();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (isActivated) {
-      dispatch(setProfileEditingActivated(false));
-      dispatch(setProfileEditingSuccess(false));
-      push("/profile");
-    }
-    if (!email || !name || !city || !avatar) dispatch(setProfileDataThunk());
-  }, [email, name, city, avatar, isActivated]);
+  // useEffect(() => {
+  //   if (isActivated) {
+  //     dispatch(setProfileEditingActivated(false));
+  //     dispatch(setProfileEditingSuccess(false));
+  //     push("/profile");
+  //   }
+  //   if (!email || !name || !city || !avatar) dispatch(setProfileDataThunk());
+  // }, [email, name, city, avatar, isActivated]);
 
   const onEditProfileSubmit = data => {
     const { email, name, city, file, phoneNumber, phoneCode } = data;

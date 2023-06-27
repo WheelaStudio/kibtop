@@ -1,12 +1,9 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import EditAdvertPage from "../../components/EditAdPage/EditAdPage";
-import EditProfileHead from "../../components/Heads/EditProfileHead";
-import { useLanguage } from "../../locales/hooks/useLanguage";
-import { AuthApi } from "../../services/AuthApi";
-import { ProfileApi } from "../../services/ProfileApi";
-import { getServerSideUser } from "../../services/tools/getServerSideUser/getServerSideUser";
+import EditAdvertPage from "../../../../components/EditAdPage/EditAdPage";
+import { useLanguage } from "../../../../locales/hooks/useLanguage";
+import { AdvertApi } from "../../../../services/AdvertApi";
 
 const Edit = ({ advert }) => {
   const { t } = useLanguage();
@@ -21,7 +18,7 @@ const Edit = ({ advert }) => {
         <meta property="og:url" content="https://kibtop.com" />
         <meta property="og:image" content="https://kibtop.com/img/kibtop.png" />
       </Head>
-      <EditAdvertPage {...{ advert }} />
+      <EditAdvertPage advert={advert} />
     </>
   );
 };
@@ -29,21 +26,11 @@ const Edit = ({ advert }) => {
 export async function getServerSideProps({ req, res }) {
   const { access } = req.cookies;
 
-  let user = await ProfileApi.getUserData(access).catch(err => null);
-
-  if (!user) user = await getServerSideUser(req.cookies);
-
-  if (!user) {
-    return {
-      redirect: {
-        destination: "/auth/login/",
-        permanent: false,
-      },
-    };
-  }
-
+  let advert = await AdvertApi.getAdvertDatails(access).catch(err => null);
+  console.log(advert);
   return {
-    props: { user },
+    props: { advert },
   };
 }
+
 export default Edit;

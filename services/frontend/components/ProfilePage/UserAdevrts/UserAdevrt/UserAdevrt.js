@@ -3,7 +3,6 @@ import { useCurrency } from "../../../../locales/hooks/useCurrency";
 import { BASE_URL } from "../../../../services/Instance";
 import LikeButtonContainer from "../../../HomePage/LikeButton/LikeButtonContainer";
 import EditAdvertButtonContainer from "./EditAdvertButton/EditAdvertButtonContainer";
-import Image from "next/image";
 
 const UserAdevrt = ({
   advertId,
@@ -41,7 +40,7 @@ const UserAdevrt = ({
 
           <div className="advert__column advert__column--right">
             <LikeButtonContainer {...{ id: advertId, category }} />
-            <Link href={`/advert/${category}/${advertId}/edit`}>
+            <Link href={`/advert/${category}/${advertId}/editAd`}>
               <EditAdvertButtonContainer />
             </Link>
 

@@ -26,24 +26,24 @@ const Edit = ({ user }) => {
   );
 };
 
-export async function getServerSideProps({ req, res }) {
-  const { access } = req.cookies;
+// export async function getServerSideProps({ req, res }) {
+//   const { access } = req.cookies;
 
-  let user = await ProfileApi.getUserData(access).catch(err => null);
+//   let user = await ProfileApi.getUserData(access).catch(err => null);
 
-  if (!user) user = await getServerSideUser(req.cookies);
+//   if (!user) user = await getServerSideUser(req.cookies);
 
-  if (!user) {
-    return {
-      redirect: {
-        destination: "/auth/login/",
-        permanent: false,
-      },
-    };
-  }
+//   if (!user) {
+//     return {
+//       redirect: {
+//         destination: "/auth/login/",
+//         permanent: false,
+//       },
+//     };
+//   }
 
-  return {
-    props: { user },
-  };
-}
+//   return {
+//     props: { user },
+//   };
+// }
 export default Edit;

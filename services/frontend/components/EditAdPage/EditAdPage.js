@@ -1,17 +1,39 @@
 import Header from "../Header/Header";
+import { useRouter } from "next/router";
 import HeaderService from "../Header/HeaderService/HeaderService";
-import SettingsNav from "../SettingsPage/SettingsNav";
-import EditAdvertFormContainer from "./EditAdvertForm/EditAdvertFormContainer";
+import SettingsNavForEdit from "../SettingsPage/SettingsNavForEdit";
+import EditAdvertRouter from "../EditAdPage/EditAdvertForm/EditAdvertRouter";
 
 const EditAdvertPage = ({ advert }) => {
+  const {
+    query: { category },
+    push,
+  } = useRouter();
+  const allPaths = [
+    "avto",
+    "children",
+    "electronics",
+    "fashion",
+    "house_garden",
+    "realty",
+    "services",
+    "work",
+    "free",
+  ];
+
   return (
     <>
       <Header />
       <HeaderService />
       <main className="main">
-        <SettingsNav title="Edit Advert" />
+        <SettingsNavForEdit title="Edit Advert" />
         <div className="container">
-          <EditAdvertFormContainer advert={advert} />
+          {/* <EditAdvertFormContainer advert={advert} /> */}
+          {!allPaths.some(categoryPath => categoryPath === category) ? (
+            <></>
+          ) : (
+            <EditAdvertRouter {...{ category, advert }} />
+          )}
         </div>
       </main>
     </>

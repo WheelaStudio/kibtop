@@ -106,10 +106,24 @@ const AdvertSlice = createSlice({
 
 export const { setAdvertData, setAdvertSellerData, setSimilarAdverts } =
   AdvertSlice.actions;
+export const editAdvertDataThunk =
+  ({ advertId, data }) =>
+  async dispatch => {
+    try {
+      const response = await AdvertApi.editAdvertData(advertId, data);
+      console.log(response);
+      dispatch(setAdvertData(data));
+      dispatch(setAdvertEditingActivated(true));
+      dispatch(setAdvertEditingSuccess(true));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
 export const setAdvertDataThunk =
   (advertId, category, lang) => async dispatch => {
     const advert = await AdvertApi.getAdvertDatails(advertId, category, lang);
+    console.log(advert, category, lang);
     if (!!advert) dispatch(setAdvertData(advert));
   };
 

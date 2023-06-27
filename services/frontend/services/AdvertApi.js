@@ -8,12 +8,25 @@ import { serializeUserData } from "./tools/serializers/UserSerializers";
 
 export const AdvertApi = {
   async getAdvertDatails(advertId, category, lang) {
+    try {
+      const response = await instance.get(`${category}/${advertId}/`);
+      return serializeAdvertDatails(response.data, lang, category);
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  },
+  async editAdvertData(advertId, category, data) {
+    console.log(data);
     return await instance
-      .get(`${category}/${advertId}/`)
+      .put(`${category}/${advertId}/`, data)
       .then(({ data }) => {
-        return serializeAdvertDatails(data, lang, category);
+        return data;
       })
-      .catch(err => null);
+      .catch(err => {
+        console.log(err);
+        throw err;
+      });
   },
   async editUserData(email, name, city, avatar, phone) {
     const formData = !!avatar

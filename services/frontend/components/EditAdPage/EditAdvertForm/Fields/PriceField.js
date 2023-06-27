@@ -16,10 +16,10 @@ const PriceField = () => {
             "edit-profile__input" +
             (isError ? " edit-profile__input--error" : "")
           }
-          {...register("email", {
+          {...register("number", {
             required: t("field is required"),
           })}
-          type="email"
+          type="number"
           placeholder={t("100")}
         />
         <a
