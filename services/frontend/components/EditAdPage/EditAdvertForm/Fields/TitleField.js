@@ -2,7 +2,7 @@ import { useFormContext } from "react-hook-form";
 import { useLanguage } from "../../../../locales/hooks/useLanguage";
 import { useEffect } from "react";
 
-const TitleField = () => {
+const TitleField = ({ defaultValue }) => {
   const { t } = useLanguage();
   const { register, formState, getFieldState, trigger } = useFormContext();
   const { error, isTouched } = getFieldState("title", formState);
@@ -34,6 +34,7 @@ const TitleField = () => {
           type="text"
           id="title-input"
           placeholder={t("Only title")}
+          defaultValue={defaultValue}
           className={
             "empty-field empty-field--full" +
             (!!error && isTouched ? " field--error" : "")

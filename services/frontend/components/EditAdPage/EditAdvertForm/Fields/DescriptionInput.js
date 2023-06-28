@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 import { useLanguage } from "../../../../locales/hooks/useLanguage";
 
-const DescriptionInput = ({ placeholderName }) => {
+const DescriptionInput = ({ placeholderName, defaultValue }) => {
   const { t } = useLanguage();
   const { register, getFieldState, formState, trigger } = useFormContext();
 
@@ -49,6 +49,7 @@ const DescriptionInput = ({ placeholderName }) => {
             },
             onChange: handleChange,
           })}
+          defaultValue={defaultValue}
           placeholder={t(`Describe the ${placeholderName} in detail`)}
           className={`desc-field ${
             isTouched && error ? "field--error_desc" : ""

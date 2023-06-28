@@ -3,7 +3,7 @@ import { useLanguage } from "../../../../locales/hooks/useLanguage";
 import Text from "../../../Elementes/Text/Text";
 import { useEffect } from "react";
 
-const MileageField = () => {
+const MileageField = ({ defaultValue }) => {
   const { t } = useLanguage();
   const { register, formState, getFieldState, trigger } = useFormContext();
   const { error, isTouched } = getFieldState("mileage", formState);
@@ -31,6 +31,7 @@ const MileageField = () => {
               message: "invalid format",
             },
           })}
+          defaultValue={defaultValue}
           type="text"
           placeholder={t("Mileage in kilometers")}
           className={

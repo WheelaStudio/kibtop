@@ -9,6 +9,7 @@ const RadioInput = ({ label, value, name }) => {
     <>
       <label className="radio-option">
         <input
+          // defaultValue={condition}
           {...register(name, {
             required: t("field is required"),
           })}

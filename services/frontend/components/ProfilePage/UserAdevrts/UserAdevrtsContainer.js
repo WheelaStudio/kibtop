@@ -6,20 +6,20 @@ import { ProfileApi } from "../../../services/ProfileApi";
 import { getUserAdvertsThunk } from "../../../store/slices/ProfileSlice";
 import UserAdevrts from "./UserAdevrts";
 
-const UserAdevrtsContainer = ({serverAds, user}) => {
-    const {locale} = useRouter()
+const UserAdevrtsContainer = ({ serverAds, user }) => {
+  const { locale } = useRouter();
 
-    const {adverts} = useSelector(state => state.profile)
-    const dispatch = useDispatch()
-    
-    useEffect(() => {
-        if(!!user.userId && !!locale) dispatch(getUserAdvertsThunk(user.userId, locale))
-    }, [adverts.length, user.userId, locale])
+  const { adverts } = useSelector(state => state.profile);
+  const dispatch = useDispatch();
 
-    const data = !!adverts.length ? adverts : serverAds
+  useEffect(() => {
+    if (!!user.userId && !!locale)
+      dispatch(getUserAdvertsThunk(user.userId, locale));
+  }, [adverts.length, user.userId, locale]);
 
+  const data = !!adverts.length ? adverts : serverAds;
 
-    return <UserAdevrts {...{adverts: data}} />;
-}
+  return <UserAdevrts {...{ adverts: data }} />;
+};
 
 export default UserAdevrtsContainer;

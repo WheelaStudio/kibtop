@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { AdvertApi } from "../../services/AdvertApi";
 
 const initialState = {
@@ -31,6 +31,10 @@ const initialState = {
     avatar: null,
     phone: null,
   },
+  isSuccess: false,
+  isLoading: false,
+
+  isActivated: false,
 
   similarAdverts: [],
 };
@@ -98,23 +102,85 @@ const AdvertSlice = createSlice({
       state.seller.phone = payload.phone;
     },
 
+    setAdvertEditingLoading(state, { payload }) {
+      state.isLoading = payload;
+    },
+
+    setAdvertEditingSuccess(state, { payload }) {
+      state.isSuccess = payload;
+    },
+
+    setAdvertEditingActivated(state, { payload }) {
+      state.isActivated = payload;
+    },
+
     setSimilarAdverts(state, { payload }) {
       state.similarAdverts = payload;
     },
   },
 });
 
-export const { setAdvertData, setAdvertSellerData, setSimilarAdverts } =
-  AdvertSlice.actions;
+export const {
+  setAdvertData,
+  setAdvertSellerData,
+  setAdvertEditingLoading,
+  setAdvertEditingSuccess,
+  setAdvertEditingActivated,
+  setSimilarAdverts,
+} = AdvertSlice.actions;
+
 export const editAdvertDataThunk =
-  ({ advertId, data }) =>
+  ({
+    advertId,
+    category,
+    title,
+    description,
+    cost,
+    square,
+    address,
+    city,
+    geocode,
+    userId,
+  }) =>
   async dispatch => {
+    console.log(
+      "adid: ",
+      advertId,
+      "category: ",
+      category,
+      "title: ",
+      title,
+      "description: ",
+      description,
+      "cost: ",
+      cost,
+      "square: ",
+      square,
+      "address: ",
+      address,
+      "city: ",
+      city,
+      "geocode: ",
+      geocode,
+      "userId: ",
+      userId
+    );
+
     try {
-      const response = await AdvertApi.editAdvertData(advertId, data);
+      const response = await AdvertApi.editAdvertData(
+        userId,
+        advertId,
+        category,
+        title,
+        description,
+        cost,
+        city
+      );
       console.log(response);
-      dispatch(setAdvertData(data));
-      dispatch(setAdvertEditingActivated(true));
+      dispatch(setAdvertData(response));
+
       dispatch(setAdvertEditingSuccess(true));
+      dispatch(setAdvertEditingLoading(false));
     } catch (error) {
       console.log(error);
     }
@@ -123,7 +189,7 @@ export const editAdvertDataThunk =
 export const setAdvertDataThunk =
   (advertId, category, lang) => async dispatch => {
     const advert = await AdvertApi.getAdvertDatails(advertId, category, lang);
-    console.log(advert, category, lang);
+    console.log("setAdvertDataThunk: ", advert);
     if (!!advert) dispatch(setAdvertData(advert));
   };
 

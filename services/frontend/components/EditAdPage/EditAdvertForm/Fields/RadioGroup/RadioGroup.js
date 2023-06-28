@@ -1,6 +1,7 @@
 import RadioInput from "./RadioInput/RadioInput";
 
 const RadioGroup = ({ name, inputs }) => {
+  // console.log(defaultValue);
   return (
     <>
       <div className="radio-group">

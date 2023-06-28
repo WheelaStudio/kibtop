@@ -19,7 +19,30 @@ import SubmitButtonContainer from "../../../../Fields/SubmitButton/SubmitButtonC
 import TitleField from "../../../../Fields/TitleField";
 import YearField from "../../../../Fields/YearField";
 
-const AddAvto = () => {
+const AddAvto = ({
+  title,
+  description,
+  categoryName,
+  subCategoryName,
+  condition,
+  brand,
+  mileage,
+  year,
+  rooms,
+  employment,
+  workType,
+  date,
+  address,
+  city,
+  geocode,
+  img,
+  uploads,
+  userId,
+  advertId,
+  cost,
+  square,
+  isMonth,
+}) => {
   const {
     setValue,
     getValues,
@@ -38,7 +61,7 @@ const AddAvto = () => {
           <Text content="title" />
         </label>
 
-        <TitleField />
+        <TitleField defaultValue={title} />
       </div>
 
       <div className="advert-form__field">
@@ -68,7 +91,7 @@ const AddAvto = () => {
           <Text content="Mileage" />
         </label>
 
-        <MileageField />
+        <MileageField defaultValue={mileage} />
       </div>
 
       <div className="advert-form__field">
@@ -76,7 +99,7 @@ const AddAvto = () => {
           <Text content="Year" />
         </label>
 
-        <YearField />
+        <YearField defaultValue={year} />
       </div>
 
       <div className="advert-form__field">
@@ -84,7 +107,7 @@ const AddAvto = () => {
           <Text content="price" />
         </label>
 
-        <CostField />
+        <CostField defaultValue={cost} />
       </div>
 
       <div className="advert-form__field">
@@ -112,37 +135,11 @@ const AddAvto = () => {
         </label>
 
         <div className="advert-form__files" style={{ marginLeft: 0 }}>
-          <DescriptionInput placeholderName={"car"} />
+          <DescriptionInput
+            placeholderName={"car"}
+            defaultValue={description}
+          />
         </div>
-      </div>
-
-      <h4 className="title promote-title mob-hide">
-        <Text content="Promote your products" />
-      </h4>
-
-      <div className="advert-form__field advert-form__field--mt mob-hide">
-        <label className="advert-form__label">
-          <Text content="Service sets" />
-        </label>
-
-        <ServiceSets
-          requiredFields={[
-            "title",
-            "address",
-            "categoryName",
-            "city",
-            "geocode",
-            "cost",
-            "description",
-            "currency",
-            "photos",
-            "subCategory",
-            "brand",
-            "year",
-            "mileage",
-            "isUsed",
-          ]}
-        />
       </div>
 
       {/* <div className="advert-form__field advert-form__field--mt mob-hide">

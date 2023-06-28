@@ -1,6 +1,4 @@
 import Head from "next/head";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
 import EditAdvertPage from "../../../../components/EditAdPage/EditAdPage";
 import { useLanguage } from "../../../../locales/hooks/useLanguage";
 import { AdvertApi } from "../../../../services/AdvertApi";
@@ -18,19 +16,35 @@ const Edit = ({ advert }) => {
         <meta property="og:url" content="https://kibtop.com" />
         <meta property="og:image" content="https://kibtop.com/img/kibtop.png" />
       </Head>
-      <EditAdvertPage advert={advert} />
+      <EditAdvertPage {...{ advert }} />
     </>
   );
 };
 
-export async function getServerSideProps({ req, res }) {
-  const { access } = req.cookies;
+// export async function getServerSideProps({
+//   req,
+//   res,
+//   locale,
+//   query: { advertId, category },
+// }) {
+//   const serverAdvert = await AdvertApi.getAdvertDatails(
+//     advertId,
+//     category,
+//     locale
+//   );
+//   console.log(serverAdvert);
+//   if (!serverAdvert) {
+//     return {
+//       redirect: {
+//         destination: "/",
+//         permanent: false,
+//       },
+//     };
+//   }
 
-  let advert = await AdvertApi.getAdvertDatails(access).catch(err => null);
-  console.log(advert);
-  return {
-    props: { advert },
-  };
-}
+//   return {
+//     props: { serverAdvert },
+//   };
+// }
 
 export default Edit;

@@ -31,7 +31,7 @@ const EditProfileForm = ({
     watch,
     formState: { isValid, errors },
   } = EditProfileForm;
-
+  // console.log(onEditProfileSubmit);
   const { phoneCode, phoneNumber } = watch();
   return (
     <>

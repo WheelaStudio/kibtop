@@ -3,7 +3,7 @@ import { useLanguage } from "../../../../locales/hooks/useLanguage";
 import Text from "../../../Elementes/Text/Text";
 import { useEffect } from "react";
 
-const YearField = () => {
+const YearField = ({ defaultValue }) => {
   const { t } = useLanguage();
   const { register, formState, getFieldState, trigger } = useFormContext();
   const { error, isTouched } = getFieldState("year", formState);
@@ -31,6 +31,7 @@ const YearField = () => {
               message: "invalid format",
             },
           })}
+          defaultValue={defaultValue}
           type="text"
           placeholder={t("Year of release")}
           className={

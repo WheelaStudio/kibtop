@@ -10,7 +10,7 @@ import useOnclickOutside from "react-cool-onclickoutside";
 import { City } from "country-state-city";
 import cityData from "./citiesdb.json";
 
-const AddressField = ({ isLoaded }) => {
+const AddressField = ({ isLoaded, address, city, geocode }) => {
   const { t } = useLanguage();
   const allCities = City.getAllCities();
   const russianCities = cityData.country;
@@ -178,6 +178,7 @@ const AddressField = ({ isLoaded }) => {
               {...register("address", {
                 required: t("field is required"),
               })}
+              defaultValue="hello"
               type="text"
               id="address-input"
               value={value}

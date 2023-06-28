@@ -1,8 +1,9 @@
-import { instance } from "./Instance";
+import { instance, createHeaders } from "./Instance";
 import {
   serializeAdvertDatails,
   serializeCategory,
 } from "./tools/serializers/AdvertsSerializers";
+import FormDataCreator from "./tools/FormDataCreator";
 import { serializeChatData } from "./tools/serializers/ChatSerializers";
 import { serializeUserData } from "./tools/serializers/UserSerializers";
 
@@ -12,43 +13,44 @@ export const AdvertApi = {
       const response = await instance.get(`${category}/${advertId}/`);
       return serializeAdvertDatails(response.data, lang, category);
     } catch (error) {
-      console.log(error);
+      console.log("error", error);
       return null;
     }
   },
-  async editAdvertData(advertId, category, data) {
-    console.log(data);
-    return await instance
-      .put(`${category}/${advertId}/`, data)
-      .then(({ data }) => {
-        return data;
-      })
-      .catch(err => {
-        console.log(err);
-        throw err;
-      });
-  },
-  async editUserData(email, name, city, avatar, phone) {
-    const formData = !!avatar
-      ? FormDataCreator({
-          first_name: name,
-          email: email,
-          addres: city || "",
-          upload_user: avatar || "",
-          phone: phone,
-        })
-      : {
-          first_name: name,
-          email: email,
-          addres: city || "",
-          upload_user: undefined,
-          phone: phone,
-        };
-
-    return await instance.put("auth/users/me/", formData, {
+  async editAdvertData(
+    userId,
+    advertId,
+    category,
+    title,
+    description,
+    cost,
+    city
+  ) {
+    const formData = FormDataCreator({
+      title_en: title,
+      address: city,
+      price: cost,
+      description_en: description,
+      recommend: true,
+      publisher: true,
+      user: userId,
+    });
+    console.log(
+      "adid",
+      advertId,
+      category,
+      title,
+      description,
+      cost,
+      city,
+      "userid",
+      userId
+    );
+    return await instance.patch(`${category}/${advertId}/`, formData, {
       headers: await createHeaders(),
     });
   },
+
   async getAdvertSeller(userId) {
     return await instance
       .get(`auth/users/${userId}/`)

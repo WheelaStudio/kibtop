@@ -17,16 +17,17 @@ import SubmitButtonContainer from "../../../../Fields/SubmitButton/SubmitButtonC
 import TitleField from "../../../../Fields/TitleField";
 
 const AddOther = () => {
-  const {
-    setValue,
-    getValues,
-    formState: { errors },
-  } = useFormContext();
-  const { currency } = useCurrency();
+  // const {
+  //   setValue,
+  //   getValues,
+  //   formState: { errors },
+  // } = useFormContext();
 
-  useEffect(() => {
-    setValue("currency", currency, { shouldTouch: true, shouldValidate: true });
-  }, []);
+  // const { currency } = useCurrency();
+
+  // useEffect(() => {
+  //   setValue("currency", currency, { shouldTouch: true, shouldValidate: true });
+  // }, []);
   return (
     <>
       <div className="advert-form__field">

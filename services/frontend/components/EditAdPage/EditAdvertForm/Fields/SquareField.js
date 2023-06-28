@@ -3,7 +3,7 @@ import { useLanguage } from "../../../../locales/hooks/useLanguage";
 import Text from "../../../Elementes/Text/Text";
 import { useEffect } from "react";
 
-const SquareField = () => {
+const SquareField = ({ defaultValue }) => {
   const { t } = useLanguage();
   const { register, formState, getFieldState, trigger } = useFormContext();
   const { error, isTouched } = getFieldState("square", formState);
@@ -32,6 +32,7 @@ const SquareField = () => {
             },
           })}
           type="text"
+          defaultValue={defaultValue}
           placeholder={t("Square")}
           className={
             "empty-field empty-field--small" +

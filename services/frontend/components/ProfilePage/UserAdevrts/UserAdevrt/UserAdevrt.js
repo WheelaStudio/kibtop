@@ -40,7 +40,7 @@ const UserAdevrt = ({
 
           <div className="advert__column advert__column--right">
             <LikeButtonContainer {...{ id: advertId, category }} />
-            <Link href={`/advert/${category}/${advertId}/editAd`}>
+            <Link href={`/advert/${category}/${advertId}/editad`}>
               <EditAdvertButtonContainer />
             </Link>
 

@@ -14,7 +14,7 @@ export const HomePageApi = createApi({
       }),
       transformResponse: (data, meta, lang) => {
         const res = data.results[lang];
-        console.log(res, data);
+        // console.log(res, data);
         return serializeSlider(res, lang);
       },
       providesTags: result => ["Slides"],

@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { useLanguage } from "../../../../locales/hooks/useLanguage";
 import Text from "../../../Elementes/Text/Text";
-import { fileFormValid, serializeUploads } from "./validators";
+import Image from "next/image";
 
-const PhotosInput = ({ uploads }) => {
+const FileField = ({ file }) => {
   const { t } = useLanguage();
-  const { register, formState, getFieldState, watch, setValue, getValues } =
-    useFormContext();
+  const [valueSrc, setValueSrc] = useState(null);
+  const { register, formState, getFieldState, watch } = useFormContext();
 
   const { isDirty, error } = getFieldState("file", formState);
 
@@ -15,37 +15,58 @@ const PhotosInput = ({ uploads }) => {
 
   const value = watch("file");
 
-  const isSelectedStyle = isError ? " label-file--error" : "";
+  const fileFormValid = filelist => {
+    if (!filelist || filelist.length === 0) return true;
 
-  const onPhotosChange = e => {
-    const { photos } = getValues();
+    const fileName = filelist[0].name;
+    const fileFormat = fileName.split(".")[fileName.split(".").length - 1];
 
-    setValue("photos", [...photos, ...e.target.files], {
-      shouldTouch: true,
-      shouldValidate: true,
-    });
-    setValue("file", null, { shouldTouch: true, shouldValidate: true });
+    const allowedFormats = ["jpg", "jpeg", "png"];
+    if (!allowedFormats.some(format => format === fileFormat)) return false;
+
+    const fileSize = filelist[0].size;
+    const fileSizeKb = fileSize / 1024;
+    const fileSizeMb = fileSize / 1024 ** 2;
+
+    if (fileSizeKb < 30 || fileSizeMb > 10) return false;
+
+    return true;
   };
+
+  useEffect(() => {
+    if (!value?.length || !FileReader) {
+      setValueSrc(null);
+      return;
+    }
+
+    if (!fileFormValid(value)) return;
+
+    const fileReader = new FileReader();
+
+    fileReader.onload = () => {
+      setValueSrc(fileReader.result);
+    };
+
+    fileReader.readAsDataURL(value[0]);
+  }, [value]);
+
+  const isSelectedStyle = isError ? " label-file--error" : "";
 
   return (
     <>
       <div style={{ display: "flex" }}>
         <label
           htmlFor="avatar"
-          className={
-            "label-file label-file--edit label-file--add" + isSelectedStyle
-          }>
+          className={"label-file label-file--edit" + isSelectedStyle}>
           <input
             {...register("file", {
               validate: {
                 format: val => fileFormValid(val) || t("invalid format"),
               },
-              onChange: onPhotosChange,
             })}
-            // defaultValue={uploads}
             id="avatar"
             type="file"
-            accept=".jpg,.jpeg,.png"
+            accept="image/*"
             placeholder={t("Your email")}
           />
 
@@ -71,17 +92,26 @@ const PhotosInput = ({ uploads }) => {
               <Text content="Add photo" />
             </p>
           )}
-        </label>
 
-        <input
-          {...register("photos")}
-          type="file"
-          accept="image/*"
-          hidden={true}
-        />
+          <img
+            width={100}
+            height={100}
+            alt={""}
+            src={valueSrc || file}
+            className="file-img file-img--edit"
+            style={{ opacity: (valueSrc || file) && !error ? 1 : 0 }}
+          />
+        </label>
+        {isError ? (
+          <p className="warn warn--mobile-hide">{error.message}</p>
+        ) : (
+          <p className="form__text form__text--mobile-hide">
+            <Text content="Add photo" />
+          </p>
+        )}
       </div>
     </>
   );
 };
 
-export default PhotosInput;
+export default FileField;
