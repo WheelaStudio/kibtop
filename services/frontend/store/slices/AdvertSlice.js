@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { AdvertApi } from "../../services/AdvertApi";
+import { EditAdvertApi } from "../../services/EditAdvertApi";
 
 const initialState = {
   title: null,
@@ -129,63 +130,21 @@ export const {
   setSimilarAdverts,
 } = AdvertSlice.actions;
 
-export const editAdvertDataThunk =
-  ({
-    advertId,
-    category,
-    title,
-    description,
-    cost,
-    square,
-    address,
-    city,
-    geocode,
-    userId,
-  }) =>
-  async dispatch => {
-    console.log(
-      "adid: ",
-      advertId,
-      "category: ",
-      category,
-      "title: ",
-      title,
-      "description: ",
-      description,
-      "cost: ",
-      cost,
-      "square: ",
-      square,
-      "address: ",
-      address,
-      "city: ",
-      city,
-      "geocode: ",
-      geocode,
-      "userId: ",
-      userId
+export const editAdvertThunk =
+  (data, category, advertId, lang) => async dispatch => {
+    console.log("data from slice: ", data, advertId);
+    // dispatch(setAddAdvertLoading(true));
+    await EditAdvertApi.editAdvert(data, category, advertId, lang).then(
+      advert => {
+        // dispatch(setAddAdvertLoading(false));
+        // dispatch(setNewAdvertData(advert));
+      }
     );
-
-    try {
-      const response = await AdvertApi.editAdvertData(
-        userId,
-        advertId,
-        category,
-        title,
-        description,
-        cost,
-        city
-      );
-      console.log(response);
-      dispatch(setAdvertData(response));
-
-      dispatch(setAdvertEditingSuccess(true));
-      dispatch(setAdvertEditingLoading(false));
-    } catch (error) {
-      console.log(error);
-    }
+    // .catch(err => {
+    //     dispatch(setAddAdvertLoading(false))
+    //     console.log(err);
+    // })
   };
-
 export const setAdvertDataThunk =
   (advertId, category, lang) => async dispatch => {
     const advert = await AdvertApi.getAdvertDatails(advertId, category, lang);

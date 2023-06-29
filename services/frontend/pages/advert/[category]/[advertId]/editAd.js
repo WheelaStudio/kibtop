@@ -1,5 +1,5 @@
 import Head from "next/head";
-import EditAdvertPage from "../../../../components/EditAdPage/EditAdPage";
+import EditAdvertPage from "../../../../components/EditAdvertPage/EditAdvertPage";
 import { useLanguage } from "../../../../locales/hooks/useLanguage";
 import { AdvertApi } from "../../../../services/AdvertApi";
 
