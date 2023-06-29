@@ -17,50 +17,6 @@ export const AdvertApi = {
       return null;
     }
   },
-  async editAdvertData(
-    advertId,
-    category,
-    title,
-    description,
-    cost,
-    square,
-    address,
-    city,
-    geocode,
-    isMonth,
-    rooms,
-    condition,
-    currency,
-    // uploads,
-    userId
-  ) {
-    const formData = FormDataCreator({
-      title_en: title,
-      user: userId,
-      address: address,
-      city: city,
-      geocode: geocode,
-      full_price: cost,
-      price: cost,
-      // uploads: uploads,
-      square: square,
-      description_en: description,
-      recommend: true,
-      publisher: true,
-      all_old_new_en: condition,
-      number_rooms_en: rooms,
-      type_sell: isMonth,
-      price: cost,
-      currency: currency,
-    });
-
-    // console.log("file:", uploads);
-    return await instance
-      .patch(`${category}/${advertId}/`, formData, {
-        headers: await createHeaders(),
-      })
-      .catch(err => console.log(err));
-  },
 
   async getAdvertSeller(userId) {
     return await instance
