@@ -1,8 +1,15 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useFormContext, FormProvider, useForm } from "react-hook-form";
-import { useCurrency } from "../../../../../../../locales/hooks/useCurrency";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setAdvertDataThunk,
+  editAdvertDataThunk,
+  setAdvertEditingActivated,
+  setAdvertEditingSuccess,
+} from "../../../../../../../store/slices/AdvertSlice";
 import Text from "../../../../../../Elementes/Text/Text";
+import { useCurrency } from "../../../../../../../locales/hooks/useCurrency";
 import AddressField from "../../../../Fields/AddressField/AddressField";
 import AddressFieldContainer from "../../../../Fields/AddressField/AddressFieldContainer";
 import CostField from "../../../../Fields/CostField";
@@ -12,16 +19,9 @@ import PhotoUploadsContainer from "../../../../Fields/PhotoUploads/PhotoUploadsC
 import RadioGroup from "../../../../Fields/RadioGroup/RadioGroup";
 import SquareField from "../../../../Fields/SquareField";
 import TitleField from "../../../../Fields/TitleField";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  setAdvertDataThunk,
-  editAdvertDataThunk,
-  setAdvertEditingActivated,
-  setAdvertEditingSuccess,
-} from "../../../../../../../store/slices/AdvertSlice";
 import FileField from "../../../../Fields/FileField";
 
-const EditRealty = ({
+const AddRealty = ({
   advertId,
   category,
   title,
@@ -45,11 +45,29 @@ const EditRealty = ({
   const { push } = useRouter();
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    if (isActivated) {
+      dispatch(setAdvertEditingActivated(false));
+      dispatch(setAdvertEditingSuccess(false));
+      push("/profile");
+    }
+
+    if (
+      !advertId ||
+      !title ||
+      !description ||
+      !cost ||
+      !square ||
+      !address ||
+      !geocode ||
+      !isActivated
+    )
+      dispatch(setAdvertDataThunk());
+  }, [title, description, cost, square, address, city, geocode, isActivated]);
+
   const EditAdvertForm = useForm({
     mode: "onChange",
     defaultValues: {
-      advertId,
-      category,
       title,
       description,
       cost,
@@ -95,28 +113,6 @@ const EditRealty = ({
     );
   };
 
-  useEffect(() => {
-    if (isActivated) {
-      dispatch(setAdvertEditingActivated(false));
-      dispatch(setAdvertEditingSuccess(false));
-      push("/profile");
-    }
-
-    if (!advertId || !title || !description || !cost || !square || !address)
-      dispatch(setAdvertDataThunk());
-  }, [
-    advertId,
-    category,
-    title,
-    description,
-    cost,
-    square,
-    address,
-    city,
-    geocode,
-    isActivated,
-  ]);
-
   const handleRadioChange = value => {
     setValue("isMonth", value.toString(), {
       shouldTouch: true,
@@ -124,12 +120,12 @@ const EditRealty = ({
     });
   };
 
-  // useEffect(() => {
-  //   setValue("isMonth", "true", { shouldTouch: true, shouldValidate: true });
-  //   setValue("condition", "Old", { shouldTouch: true, shouldValidate: true });
-  //   setValue("rooms", "Studio", { shouldTouch: true, shouldValidate: true });
-  //   setValue("currency", currency, { shouldTouch: true, shouldValidate: true });
-  // }, []);
+  useEffect(() => {
+    setValue("isMonth", "true", { shouldTouch: true, shouldValidate: true });
+    setValue("condition", "Old", { shouldTouch: true, shouldValidate: true });
+    setValue("rooms", "Studio", { shouldTouch: true, shouldValidate: true });
+    setValue("currency", currency, { shouldTouch: true, shouldValidate: true });
+  }, []);
 
   // const isMonth = getValues("isMonth") === "true";
 
@@ -144,7 +140,7 @@ const EditRealty = ({
               <Text content="title" />
             </label>
 
-            <TitleField defaultValue={title} />
+            <TitleField />
           </div>
 
           <div className="advert-form__field">
@@ -196,17 +192,17 @@ const EditRealty = ({
 
           <div className="advert-form__field">
             <label className="advert-form__label">
-              <Text content="Square" />
+              <Text content="square" />
             </label>
 
-            <SquareField defaultValue={square} />
+            <SquareField />
           </div>
 
           <div className="advert-form__field">
             <label className="advert-form__label">
               <Text content="price" />
             </label>
-            <CostField defaultValue={cost} />
+            <CostField />
           </div>
 
           <div className="advert-form__field">
@@ -214,7 +210,7 @@ const EditRealty = ({
               <Text content="address" />
             </label>
 
-            <AddressFieldContainer defaultValues={{ address, city, geocode }} />
+            <AddressFieldContainer />
           </div>
 
           <div className="advert-form__field advert-form__field---address">
@@ -235,19 +231,16 @@ const EditRealty = ({
             </label>
 
             <div className="advert-form__files" style={{ marginLeft: 0 }}>
-              <DescriptionInput
-                placeholderName={"apartment"}
-                defaultValue={description}
-              />
+              <DescriptionInput placeholderName={"apartment"} />
             </div>
           </div>
 
-          {/* <button type="submit" className="reg-btn reg-btn--edit">
+          <button type="submit" className="reg-btn reg-btn--edit">
             <Text content="Apply" />
-          </button> */}
+          </button>
         </FormProvider>
 
-        {isSuccess ? (
+        {/* {isSuccess ? (
           <div className="edit-form-ask">
             <p className="ask-text"></p>
           </div>
@@ -255,10 +248,10 @@ const EditRealty = ({
           <button disabled={isLoading} className="reg-btn reg-btn--edit">
             <Text content="Apply" />
           </button>
-        )}
+        )} */}
       </form>
     </>
   );
 };
 
-export default EditRealty;
+export default AddRealty;

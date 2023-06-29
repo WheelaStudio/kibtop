@@ -32,7 +32,7 @@ const SquareField = ({ defaultValue }) => {
             },
           })}
           type="text"
-          defaultValue={defaultValue}
+          // defaultValue={defaultValue}
           placeholder={t("Square")}
           className={
             "empty-field empty-field--small" +

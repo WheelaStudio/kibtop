@@ -189,7 +189,7 @@ export const editAdvertDataThunk =
 export const setAdvertDataThunk =
   (advertId, category, lang) => async dispatch => {
     const advert = await AdvertApi.getAdvertDatails(advertId, category, lang);
-    console.log("setAdvertDataThunk: ", advert);
+    // console.log("setAdvertDataThunk: ", advert);
     if (!!advert) dispatch(setAdvertData(advert));
   };
 

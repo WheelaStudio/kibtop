@@ -1,24 +1,22 @@
-import React, { useEffect, useState } from "react";
-import { instance } from "../../services/Instance";
-import Header from "../Header/Header";
+import React, { useEffect } from "react";
 import { useRouter } from "next/router";
-import HeaderService from "../Header/HeaderService/HeaderService";
-import SettingsNavForEdit from "../SettingsPage/SettingsNavForEdit";
-import EditAdvertFormContainer from "./EditAdvertForm/Steps/EditStep/EditAdvertRouting/EditAdvertFormContainer";
-import { useLanguage } from "../../locales/hooks/useLanguage";
 import { useDispatch, useSelector } from "react-redux";
 import { setAdvertDataThunk } from "../../store/slices/AdvertSlice";
+import EditAdvertRouting from "./EditAdvertForm/Steps/EditStep/EditAdvertRouting/EditAdvertRouting";
+import Header from "../Header/Header";
+import HeaderService from "../Header/HeaderService/HeaderService";
+import SettingsNavForEdit from "../SettingsPage/SettingsNavForEdit";
+import { useLanguage } from "../../locales/hooks/useLanguage";
 
 const EditAdvertPage = () => {
   const { t } = useLanguage();
   const dispatch = useDispatch();
+
   const { query, push } = useRouter();
   const category = query.category;
   const advertId = query.advertId;
+
   // console.log("query: ", query);
-
-  //test
-
   const allPaths = [
     "avto",
     "children",
@@ -151,13 +149,7 @@ const EditAdvertPage = () => {
           {!allPaths.some(categoryPath => categoryPath === category) ? (
             <></>
           ) : (
-            <>
-              {
-                <EditAdvertFormContainer
-                  {...{ category, advertId, advertData }}
-                />
-              }
-            </>
+            <>{<EditAdvertRouting {...{ category, advertId, advertData }} />}</>
           )}
         </div>
       </main>
