@@ -51,7 +51,7 @@ const AddressField = ({ isLoaded }) => {
       terms,
     } = place;
     clearSuggestions();
-    console.log(description);
+    // console.log(description);
     setValue(description, false);
     const cleanDescription = description.replace(/[^a-zA-Zа-яА-я0-9\s]/g, "");
 
@@ -73,7 +73,7 @@ const AddressField = ({ isLoaded }) => {
         shouldTouch: true,
         shouldValidate: true,
       });
-      console.log("📍 Coordinates: ", { lat, lng });
+      // console.log("📍 Coordinates: ", { lat, lng });
     });
   };
 

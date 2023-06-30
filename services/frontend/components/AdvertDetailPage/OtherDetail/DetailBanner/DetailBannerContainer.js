@@ -8,6 +8,7 @@ const DetailBannerContainer = ({ serverAdvert }) => {
   const storeAdvert = useSelector(state => state.advert);
 
   const advert = !!storeAdvert.advertId ? storeAdvert : serverAdvert;
+  // const advert = !!storeAdvert.advertId ? storeAdvert : serverAdvert;/
 
   const { uploads } = advert;
   const items = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }];

@@ -15,7 +15,6 @@ const SliderContainer = ({ offset, setOffset, items, transition }) => {
   const switchToBefore = () => {
     setOffset(offsetBefore);
   };
-
   const slideList = [
     items[offsetBefore],
     items[offset],

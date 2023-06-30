@@ -13,7 +13,6 @@ export const serializeGoods = (res, lang) =>
 
 export const serializeSlider = (res, lang) =>
   res.map(product => {
-    console.log("Product:", product);
     const desktopImage = product[`image_${lang}`];
     const mobileImage = product[`image_mobile_${lang}`];
     return {

@@ -15,7 +15,7 @@ const Index = ({ slides, recommendGoods, newGoods, authData }) => {
 
   useAuthProvider(authData);
 
-  console.log(slides);
+  // console.log(slides);
   return (
     <>
       <Head>

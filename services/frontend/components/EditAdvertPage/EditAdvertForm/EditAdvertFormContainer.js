@@ -10,7 +10,6 @@ const EditAdvertFormContainer = () => {
   const adId = query.advertId;
 
   const onEditAdvertSubmit = data => {
-    console.log("data bef submit: ", adId);
     dispatch(editAdvertThunk({ ...data }, category, adId, locale));
     push(`/profile/`);
   };

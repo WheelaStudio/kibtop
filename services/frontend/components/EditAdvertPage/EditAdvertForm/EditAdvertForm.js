@@ -123,7 +123,7 @@ const EditAdvertForm = ({ onEditAdvertSubmit, category }) => {
     formState: { isValid, errors },
   } = EditAdvertForm;
 
-  console.log("errors: ", errors);
+  // console.log("errors: ", errors);
 
   const onSubmitClick = handleSubmit(onEditAdvertSubmit);
 

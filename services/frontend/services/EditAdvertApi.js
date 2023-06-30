@@ -1,12 +1,12 @@
 import { createHeaders, instance } from "./Instance";
 import FormDataCreator from "./tools/FormDataCreator";
-import { serializeAdvertDatails } from "./tools/serializers/AdvertsSerializers";
+import { serializeEditAdvertDatails } from "./tools/serializers/AdvertsSerializers";
 import { serializeCreateAdvertData } from "./tools/serializers/CreateAdvertSerializers";
 
 export const EditAdvertApi = {
   async editAdvert(data, category, advertId, lang) {
     console.log("in api: ", data);
-    let url = `${category}/${advertId}/`;
+    let url = `${category}/create/`;
     if (
       (data["subCategory"] == "Land" || data["subCategory"] == "Other") &&
       category == "realty"
@@ -14,33 +14,28 @@ export const EditAdvertApi = {
       url = `realty_land/${advertId}/`;
     }
     const body = serializeCreateAdvertData(data, category, lang);
+
+    // console.log("body: ", body.photos);
     return await instance
-      .patch(url, body, {
+      .post(url, body, {
         headers: await createHeaders(),
       })
       .then(async res => {
         if (category == "realty_land") category = "realty";
-        const { advertId } = serializeAdvertDatails(res.data, lang, category);
+        const { advertId } = serializeEditAdvertDatails(
+          res.data,
+          lang,
+          category
+        );
         const { photos } = data;
 
-        // for await (const photo of photos) {
-        //   const formData = FormDataCreator({
-        //     [`${category}_full_upload`]: advertId,
-        //     uploads: photo,
-        //   });
-
-        //   await instance.patch(`${category}/full_uploads/`, formData, {
-        //     headers: await createHeaders(),
-        //   });
-        // }
         for await (const photo of photos) {
           const formData = FormDataCreator({
+            [`${category}_full_upload`]: advertId,
             uploads: photo,
-            sort_order: 0,
-            realty_full_upload: advertId,
           });
 
-          await instance.patch(`${category}/full_uploads/`, formData, {
+          await instance.post(`${category}/full_uploads/`, formData, {
             headers: await createHeaders(),
           });
         }

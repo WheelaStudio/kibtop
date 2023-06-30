@@ -2,6 +2,7 @@ import Head from "next/head";
 import EditAdvertPage from "../../../../components/EditAdvertPage/EditAdvertPage";
 import { useLanguage } from "../../../../locales/hooks/useLanguage";
 import { AdvertApi } from "../../../../services/AdvertApi";
+import AddAdvertPage from "../../../../components/AddAdvertPage copy/AddAdvertPage";
 
 const Edit = ({ advert }) => {
   const { t } = useLanguage();
@@ -17,6 +18,7 @@ const Edit = ({ advert }) => {
         <meta property="og:image" content="https://kibtop.com/img/kibtop.png" />
       </Head>
       <EditAdvertPage {...{ advert }} />
+      {/* <AddAdvertPage /> */}
     </>
   );
 };
