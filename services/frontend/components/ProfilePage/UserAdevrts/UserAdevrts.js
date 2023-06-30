@@ -2,6 +2,8 @@ import AddAdvertWarn from "../AddAdvertWarn/AddAdvertWarn";
 import UserAdevrt from "./UserAdevrt/UserAdevrt";
 
 const UserAdevrts = ({ adverts }) => {
+  // console.log(adverts);
+
   return (
     <>
       {!!adverts?.length ? (

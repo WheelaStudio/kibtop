@@ -5,6 +5,7 @@ import { serializeCreateAdvertData } from "./tools/serializers/CreateAdvertSeria
 
 export const EditAdvertApi = {
   async editAdvert(data, category, advertId, lang) {
+    console.log("in api: ", data);
     let url = `${category}/${advertId}/`;
     if (
       (data["subCategory"] == "Land" || data["subCategory"] == "Other") &&
@@ -22,16 +23,28 @@ export const EditAdvertApi = {
         const { advertId } = serializeAdvertDatails(res.data, lang, category);
         const { photos } = data;
 
+        // for await (const photo of photos) {
+        //   const formData = FormDataCreator({
+        //     [`${category}_full_upload`]: advertId,
+        //     uploads: photo,
+        //   });
+
+        //   await instance.patch(`${category}/full_uploads/`, formData, {
+        //     headers: await createHeaders(),
+        //   });
+        // }
         for await (const photo of photos) {
           const formData = FormDataCreator({
-            [`${category}_full_upload`]: advertId,
             uploads: photo,
+            sort_order: 0,
+            realty_full_upload: advertId,
           });
 
-          await instance.patch(`${category}/${advertId}`, formData, {
+          await instance.patch(`${category}/full_uploads/`, formData, {
             headers: await createHeaders(),
           });
         }
+
         if (res.data.url != null) {
           console.log("Why am i here?");
           window.location.replace(res.data.url);

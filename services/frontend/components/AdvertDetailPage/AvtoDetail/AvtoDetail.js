@@ -10,43 +10,48 @@ import DetailProfileContainer from "../OtherDetail/DetailProfile/DetailProfileCo
 import SimilarAds from "../OtherDetail/SimilarAds/SimilarAds";
 import AvtoParameterContainer from "./AvtoParameter/AvtoParameterContainer";
 
-const AvtoDetail = ({serverAdvert}) => {
-    return (
-        <>
-            <DetailNav {...{serverAdvert}} />
-            <div className="container container--detail">
-                <DetailBannerContainer {...{serverAdvert}} />
+const AvtoDetail = ({ serverAdvert }) => {
+  return (
+    <>
+      <DetailNav {...{ serverAdvert }} />
+      <div className="container container--detail">
+        <DetailBannerContainer {...{ serverAdvert }} />
 
-                <DetailCardContainer {...{serverAdvert}} />
-            </div>
+        <DetailCardContainer {...{ serverAdvert }} />
+      </div>
 
-            <div className="container container-brad">
-                <div className="detail-wrapper">
-                    <DetailDataContainer {...{serverAdvert}} />
+      <div className="container container-brad">
+        <div className="detail-wrapper">
+          <DetailDataContainer {...{ serverAdvert }} />
 
-                    <DetailMapsContainer />
+          <DetailMapsContainer />
 
-                    <AvtoParameterContainer {...{serverAdvert}} />
+          <AvtoParameterContainer {...{ serverAdvert }} />
 
-                    <div className="detail-wrapper__container detail-wrapper__container--date">
-                        <DetailDateContainer {...{serverAdvert}} />
-                    </div>
+          <div className="detail-wrapper__container detail-wrapper__container--date">
+            <DetailDateContainer {...{ serverAdvert }} />
+          </div>
 
-                    <DetailProfileContainer />
+          <DetailProfileContainer />
 
-                    <div className="detail-wrapper__container">
-                        <DetailDateContainer className={'exception'} {...{serverAdvert}} />
+          <div className="detail-wrapper__container">
+            <DetailDateContainer
+              className={"exception"}
+              {...{ serverAdvert }}
+            />
 
-                        <Link href="/support" className="detail-tag-text detail-tag-text--red">
-                            <Text content="Complain about the ad" />
-                        </Link>
-                    </div>
-                </div>
-            </div>
+            <Link
+              href="/support"
+              className="detail-tag-text detail-tag-text--red">
+              <Text content="Complain about the ad" />
+            </Link>
+          </div>
+        </div>
+      </div>
 
-            <SimilarAds />
-        </>
-    );
-}
+      <SimilarAds />
+    </>
+  );
+};
 
 export default AvtoDetail;

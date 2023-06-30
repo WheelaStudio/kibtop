@@ -1,4 +1,4 @@
-import EditAdvertNav from "./EditAdvertNav/EditAdvertNav";
+import EditAdvertNav from "./EditAdvertNav/AddAdvertNav";
 import EditAdvertRouter from "./EditAdvertRouter/EditAdvertRouter";
 
 const EditAdvertStep = ({ category, advertId }) => {

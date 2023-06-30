@@ -11,46 +11,50 @@ import SimilarAds from "../OtherDetail/SimilarAds/SimilarAds";
 import FreeParameter from "./FreeParameter/FreeParameter";
 import AdvertsPropertyContainer from "./FreeParameter/AdvertsPropertyContainer";
 
-const FreeDetail = ({serverAdvert}) => {
-    return (
-        <>
-            <DetailNav {...{serverAdvert}} />
-            <div className="container container--detail">
-                <DetailBannerContainer {...{serverAdvert}} />
+const FreeDetail = ({ serverAdvert }) => {
+  return (
+    <>
+      <DetailNav {...{ serverAdvert }} />
+      <div className="container container--detail">
+        <DetailBannerContainer {...{ serverAdvert }} />
 
-                <DetailCardContainer {...{serverAdvert}} />
-            </div>
+        <DetailCardContainer {...{ serverAdvert }} />
+      </div>
 
-            <div className="container container-brad">
-                <div className="detail-wrapper">
-                    <DetailDataContainer {...{serverAdvert}} />
+      <div className="container container-brad">
+        <div className="detail-wrapper">
+          <DetailDataContainer {...{ serverAdvert }} />
 
-                    <DetailMapsContainer />
+          <DetailMapsContainer />
 
-                    <AdvertsPropertyContainer {...{serverAdvert}}>
-                        <FreeParameter />
-                    </AdvertsPropertyContainer>
-                    
+          <AdvertsPropertyContainer {...{ serverAdvert }}>
+            <FreeParameter />
+          </AdvertsPropertyContainer>
 
-                    <div className="detail-wrapper__container detail-wrapper__container--date">
-                        <DetailDateContainer {...{serverAdvert}} />
-                    </div>
+          <div className="detail-wrapper__container detail-wrapper__container--date">
+            <DetailDateContainer {...{ serverAdvert }} />
+          </div>
 
-                    <DetailProfileContainer />
+          <DetailProfileContainer />
 
-                    <div className="detail-wrapper__container">
-                        <DetailDateContainer className={'exception'} {...{serverAdvert}} />
+          <div className="detail-wrapper__container">
+            <DetailDateContainer
+              className={"exception"}
+              {...{ serverAdvert }}
+            />
 
-                        <Link href="/support" className="detail-tag-text detail-tag-text--red">
-                            <Text content="Complain about the ad" />
-                        </Link>
-                    </div>
-                </div>
-            </div>
+            <Link
+              href="/support"
+              className="detail-tag-text detail-tag-text--red">
+              <Text content="Complain about the ad" />
+            </Link>
+          </div>
+        </div>
+      </div>
 
-            <SimilarAds />
-        </>
-    );
-}
+      <SimilarAds />
+    </>
+  );
+};
 
 export default FreeDetail;
