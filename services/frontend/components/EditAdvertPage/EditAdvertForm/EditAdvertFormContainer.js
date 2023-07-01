@@ -6,6 +6,7 @@ import {
   editAdvertThunk,
 } from "../../../store/slices/EditAdvertSlice";
 import EditAdvertRouter from "./Steps/EditAdvertStep/EditAdvertRouter/EditAdvertRouter";
+import { addAdvertThunk } from "../../../store/slices/AddAdvertSlice";
 
 const EditAdvertFormContainer = () => {
   const dispatch = useDispatch();
@@ -22,6 +23,8 @@ const EditAdvertFormContainer = () => {
   const {
     title,
     description,
+    categoryName,
+    subCategoryName,
     condition,
     brand,
     mileage,
@@ -41,14 +44,21 @@ const EditAdvertFormContainer = () => {
     currency,
     userId,
   } = useSelector(state => state.editAdvert);
-
   const onEditAdvertSubmit = data => {
-    dispatch(editAdvertThunk({ ...data }, category, advertId, locale));
-    push(`/profile`);
+    dispatch(
+      editAdvertThunk({ ...data }, category, advertId, locale, subCategoryName)
+    );
+    push(`/profile/`);
+    setTimeout(() => {
+      window.location.reload();
+    }, 3000);
   };
+
   const advertData = {
     title,
     description,
+    categoryName,
+    // subCategoryName,
     condition,
     brand,
     mileage,
