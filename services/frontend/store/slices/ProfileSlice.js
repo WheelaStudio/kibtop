@@ -93,7 +93,6 @@ export const {
 
 export const setProfileDataThunk = () => async dispatch => {
   const user = await ProfileApi.getUserData().catch(err => null);
-  // console.log(user);
   if (!user) return;
   dispatch(setProfileData({ ...user }));
 };

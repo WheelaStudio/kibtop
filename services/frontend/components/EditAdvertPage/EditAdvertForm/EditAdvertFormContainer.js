@@ -1,20 +1,77 @@
 import { useRouter } from "next/router";
-import { useDispatch } from "react-redux";
-import { editAdvertThunk } from "../../../store/slices/AdvertSlice";
-import EditAdvertForm from "./EditAdvertForm";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import {
+  setAdvertDataThunk,
+  editAdvertThunk,
+} from "../../../store/slices/EditAdvertSlice";
+import EditAdvertRouter from "./Steps/EditAdvertStep/EditAdvertRouter/EditAdvertRouter";
 
 const EditAdvertFormContainer = () => {
   const dispatch = useDispatch();
-  const { query, push, locale } = useRouter();
-  const category = query.category;
-  const adId = query.advertId;
+  const {
+    query: { category, advertId },
+    locale,
+    push,
+  } = useRouter();
+
+  useEffect(() => {
+    dispatch(setAdvertDataThunk(advertId, category, locale));
+  }, []);
+
+  const {
+    title,
+    description,
+    condition,
+    brand,
+    mileage,
+    year,
+    rooms,
+    employment,
+    workType,
+    date,
+    address,
+    city,
+    geocode,
+    img,
+    uploads,
+    cost,
+    square,
+    isMonth,
+    currency,
+    userId,
+  } = useSelector(state => state.editAdvert);
 
   const onEditAdvertSubmit = data => {
-    dispatch(editAdvertThunk({ ...data }, category, adId, locale));
-    push(`/profile/`);
+    dispatch(editAdvertThunk({ ...data }, category, advertId, locale));
+    push(`/profile`);
+  };
+  const advertData = {
+    title,
+    description,
+    condition,
+    brand,
+    mileage,
+    year,
+    rooms,
+    employment,
+    workType,
+    date,
+    address,
+    city,
+    geocode,
+    img,
+    uploads,
+    cost,
+    square,
+    isMonth,
+    currency,
+    userId,
   };
 
-  return <EditAdvertForm {...{ onEditAdvertSubmit, category }} />;
+  return (
+    <EditAdvertRouter {...{ onEditAdvertSubmit, category, ...advertData }} />
+  );
 };
 
 export default EditAdvertFormContainer;

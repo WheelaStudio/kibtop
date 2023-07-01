@@ -9,25 +9,30 @@ import HeaderButton from "./_HeaderComponents/HeaderButton";
 import LogoComponent from "./_HeaderComponents/LogoComponent";
 import UsernameComponent from "./_HeaderComponents/UsernameComponent";
 
-function ChatHeader({talk, connectedUsers }) {
+function ChatHeader({ talk, connectedUsers }) {
+  const seller = talk || {};
+  // console.log(seller);
+  return (
+    <div className="dialog-header">
+      <LogoComponent photo={seller.avatar} />
 
-    const seller = talk || {}
-    console.log(seller);
-    return (
-            <div className="dialog-header">
-                <LogoComponent photo={seller.avatar}/>
+      <UsernameComponent
+        username={seller.name}
+        isVerified={seller.isVerified}
+        online={connectedUsers?.includes(seller.userId)}
+      />
 
-                <UsernameComponent username={seller.name} isVerified={seller.isVerified} online={connectedUsers?.includes(seller.userId)}/>
-            
-                <HeaderButton condition={true} sellerId={seller.userId} isVerified={seller.isVerified} />
+      <HeaderButton
+        condition={true}
+        sellerId={seller.userId}
+        isVerified={seller.isVerified}
+      />
 
-
-                <CurrentDialogContainer>
-                    <AdvertisementComponent />
-                </CurrentDialogContainer>
-            </div>
-            );
-
+      <CurrentDialogContainer>
+        <AdvertisementComponent />
+      </CurrentDialogContainer>
+    </div>
+  );
 }
 
 export default ChatHeader;

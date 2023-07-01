@@ -14,7 +14,7 @@ export const AdvertApi = {
       // console.log("resp: ", response);
       return serializeAdvertDatails(response.data, lang, category);
     } catch (error) {
-      // console.log("error", error);
+      console.log("error", error);
       return null;
     }
   },

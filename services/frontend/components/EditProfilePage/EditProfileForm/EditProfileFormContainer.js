@@ -21,7 +21,7 @@ const EditProfileFormContainer = ({ user }) => {
       dispatch(setProfileEditingSuccess(false));
       push("/profile");
     }
-    if (!email || !name || !city || !avatar) dispatch(setProfileDataThunk());
+    dispatch(setProfileDataThunk());
   }, [email, name, city, avatar, isActivated]);
 
   const onEditProfileSubmit = data => {

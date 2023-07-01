@@ -32,8 +32,8 @@ export const serializeCreateAdvertData = (data, category, lang) => {
   const newAdvertData = {
     [`title`]: data.title,
     [`description`]: data.description,
-    // [`category`]: data.categoryName,
-    // [`sub_category`]: data.subCategory,
+    [`category`]: data.categoryName,
+    [`sub_category`]: data.subCategory,
     [`all_old_new`]: data.condition,
     brand: data.brand,
     mileage: data.mileage,

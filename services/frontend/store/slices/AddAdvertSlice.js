@@ -5,7 +5,7 @@ import { setScrollDisable } from "../tools/setScrollDisable";
 import { setProfileDataThunk } from "./ProfileSlice";
 
 const initialState = {
-  formStep: 4,
+  formStep: 1,
   category: null,
   subCategoryText: null,
 

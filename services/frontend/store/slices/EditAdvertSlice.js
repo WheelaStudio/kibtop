@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { AdvertApi } from "../../services/AdvertApi";
+import { EditAdvertApi } from "../../services/EditAdvertApi";
 
 const initialState = {
   title: null,
@@ -25,18 +26,10 @@ const initialState = {
   square: null,
   isMonth: null,
   currency: null,
-
-  seller: {
-    name: null,
-    avatar: null,
-    phone: null,
-  },
-
-  similarAdverts: [],
 };
 
-const AdvertSlice = createSlice({
-  name: "advert",
+const editAdvertSlice = createSlice({
+  name: "editadvert",
   initialState,
   reducers: {
     setAdvertData(state, { payload }) {
@@ -91,36 +84,22 @@ const AdvertSlice = createSlice({
       state.isMonth = isMonth || null;
       state.currency = currency || null;
     },
-
-    setAdvertSellerData(state, { payload }) {
-      state.seller.name = payload.name;
-      state.seller.avatar = payload.avatar;
-      state.seller.phone = payload.phone;
-    },
-
-    setSimilarAdverts(state, { payload }) {
-      state.similarAdverts = payload;
-    },
   },
 });
 
-export const { setAdvertData, setAdvertSellerData, setSimilarAdverts } =
-  AdvertSlice.actions;
+export const { setAdvertData, setAdvertEditingActivated } =
+  editAdvertSlice.actions;
 
 export const setAdvertDataThunk =
   (advertId, category, lang) => async dispatch => {
     const advert = await AdvertApi.getAdvertDatails(advertId, category, lang);
-    if (!!advert) dispatch(setAdvertData(advert));
+    if (!advert) return;
+    dispatch(setAdvertData({ ...advert }));
   };
 
-export const setAdvertSellerThunk = userId => async dispatch => {
-  const seller = await AdvertApi.getAdvertSeller(userId);
-  if (!!seller) dispatch(setAdvertSellerData(seller));
-};
+export const editAdvertThunk =
+  (data, category, advertId, lang) => async dispatch => {
+    await EditAdvertApi.editAdvert(data, category, advertId, lang);
+  };
 
-export const getSimilarAdvertsThunk = (category, lang) => async dispatch => {
-  const adverts = await AdvertApi.getSimilarAdverts(category, lang);
-  if (!!adverts?.length) dispatch(setSimilarAdverts(adverts));
-};
-
-export const AdvertReducer = AdvertSlice.reducer;
+export const EditAdvertReducer = editAdvertSlice.reducer;

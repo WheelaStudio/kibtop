@@ -4,20 +4,18 @@ import { serializeEditAdvertDatails } from "./tools/serializers/AdvertsSerialize
 import { serializeCreateAdvertData } from "./tools/serializers/CreateAdvertSerializers";
 
 export const EditAdvertApi = {
-  async editAdvert(data, category, advertId, lang) {
-    console.log("in api: ", data);
-    let url = `${category}/create/`;
+  async editAdvert(data, category, adId, lang) {
+    let url = `${category}/${adId}/`;
     if (
       (data["subCategory"] == "Land" || data["subCategory"] == "Other") &&
       category == "realty"
     ) {
-      url = `realty_land/${advertId}/`;
+      url = `realty_land/${adId}/`;
     }
     const body = serializeCreateAdvertData(data, category, lang);
 
-    // console.log("body: ", body.photos);
     return await instance
-      .post(url, body, {
+      .put(url, body, {
         headers: await createHeaders(),
       })
       .then(async res => {
@@ -35,7 +33,7 @@ export const EditAdvertApi = {
             uploads: photo,
           });
 
-          await instance.post(`${category}/full_uploads/`, formData, {
+          await instance.put(`${category}/full_uploads/${adId}/`, formData, {
             headers: await createHeaders(),
           });
         }

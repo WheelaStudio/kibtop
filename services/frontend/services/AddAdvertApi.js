@@ -32,9 +32,6 @@ export const AddAdvertApi = {
             headers: await createHeaders(),
           });
         }
-        await instance.delete(`${category}/${advertId}/`, {
-          headers: await createHeaders(),
-        });
         if (res.data.url != null) {
           console.log("Why am i here?");
           window.location.replace(res.data.url);

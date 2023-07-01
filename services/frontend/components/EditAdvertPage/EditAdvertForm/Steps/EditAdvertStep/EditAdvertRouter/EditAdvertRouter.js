@@ -1,54 +1,105 @@
-import { useEffect } from "react";
-import { useRouter } from "next/router";
-import { useDispatch } from "react-redux";
-import { setAdvertDataThunk } from "../../../../../../store/slices/AdvertSlice";
+import { FormProvider, useForm } from "react-hook-form";
 import EditAvto from "./EditAvto/EditAvto";
 import EditFree from "./EditFree/EditFree";
 import EditOther from "./EditOther/EditOther";
 import EditRealty from "./EditRealty/EditRealty";
 import EditWork from "./EditWork/EditWork";
 import EditRealtyLand from "./EditRealty/EditRealtyLand";
-import EditAdvertContainer from "./EditAdvertContainer";
 
-const EditAdvertRouter = ({ category }) => {
-  const dispatch = useDispatch();
+const EditAdvertRouter = ({
+  onEditAdvertSubmit,
+  category,
+  title,
+  description,
+  condition,
+  brand,
+  mileage,
+  year,
+  rooms,
+  employment,
+  workType,
+  date,
+  address,
+  city,
+  geocode,
+  img,
+  uploads,
+  cost,
+  square,
+  isMonth,
+  currency,
+  userId,
+}) => {
+  if (!title && !description && !userId) {
+    return <div></div>;
+  }
 
+  const EditAdvertForm = useForm({
+    mode: "onChange",
+    defaultValues: {
+      photos: [],
+      title,
+      description,
+      condition,
+      brand,
+      mileage,
+      year,
+      rooms,
+      employment,
+      workType,
+      date,
+      address,
+      city,
+      geocode,
+      img,
+      uploads,
+      cost,
+      square,
+      isMonth,
+      currency,
+      userId,
+    },
+  });
   const {
-    query: { category: routerCategory, advertId: routerAdvertId },
-    locale,
-  } = useRouter();
+    handleSubmit,
+    formState: { isValid, errors },
+  } = EditAdvertForm;
 
-  useEffect(() => {
-    dispatch(setAdvertDataThunk(routerAdvertId, routerCategory, locale));
-  }, [routerCategory, routerAdvertId, locale]);
+  const onSubmitClick = handleSubmit(onEditAdvertSubmit);
 
   return (
     <>
-      <EditAdvertContainer>
-        {category === "realty" ? (
-          <EditRealty />
-        ) : category === "realty_land" ? (
-          <EditRealtyLand />
-        ) : category === "avto" ? (
-          <EditAvto />
-        ) : category === "work" ? (
-          <EditWork />
-        ) : category === "services" ? (
-          <EditOther />
-        ) : category === "children" ? (
-          <EditOther />
-        ) : category === "electronics" ? (
-          <EditOther />
-        ) : category === "house_garden" ? (
-          <EditOther />
-        ) : category === "free" ? (
-          <EditFree />
-        ) : category === "fashion" ? (
-          <EditOther />
-        ) : (
-          ""
-        )}
-      </EditAdvertContainer>
+      <form onSubmit={handleSubmit(onSubmitClick)} className="advert-form">
+        <div className="container">
+          <div className="advert-form__fields">
+            <FormProvider {...EditAdvertForm}>
+              {category === "realty" ? (
+                <EditRealty />
+              ) : category === "realty_land" ? (
+                <EditRealtyLand />
+              ) : category === "avto" ? (
+                <EditAvto />
+              ) : category === "work" ? (
+                <EditWork />
+              ) : category === "services" ? (
+                <EditOther />
+              ) : category === "children" ? (
+                <EditOther />
+              ) : category === "electronics" ? (
+                <EditOther />
+              ) : category === "house_garden" ? (
+                <EditOther />
+              ) : category === "free" ? (
+                <EditFree />
+              ) : category === "fashion" ? (
+                <EditOther />
+              ) : (
+                ""
+              )}
+            </FormProvider>
+          </div>
+        </div>
+      </form>
     </>
   );
 };
