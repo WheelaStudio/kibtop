@@ -25,7 +25,6 @@ const DetailBannerState = ({ offset, setOffset, items }) => {
   ];
 
   const transition = 1000;
-
   const dots = items.map((value, index) => index);
 
   return (

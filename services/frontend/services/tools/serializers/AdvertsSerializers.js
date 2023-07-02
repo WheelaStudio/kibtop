@@ -11,6 +11,7 @@ const serializeAdvertUploads = uploads => uploads.map(({ uploads }) => uploads);
 
 const serializeAdvertsUploadsNull = (categoryUploads, AdvertUpload) => {
   const uploads = serializeAdvertUploads(categoryUploads);
+  console.log(uploads, "here");
 
   return !!categoryUploads?.length && !uploads?.some(upload => !upload)
     ? uploads
@@ -115,6 +116,22 @@ export const serializeFavorites = categories => {
   return fullFavorites;
 };
 export const serializeAdvertDatails = (advert, lang, category) => {
+  let uploads = [];
+  let initUploads = [];
+  let hasRemovedItems = false;
+
+  advert[`${category}_full_upload`].forEach(item => {
+    if (item.sort_order !== 1000) {
+      if (!hasRemovedItems) {
+        initUploads.splice(0, uploads.length);
+        hasRemovedItems = true;
+      }
+      uploads.push(item.uploads);
+    } else if (item.sort_order === 1000) {
+      initUploads.push(item.uploads);
+    }
+  });
+
   return {
     title: advert[`title_${lang}`] || null,
     description: advert[`description_${lang}`] || null,
@@ -132,10 +149,7 @@ export const serializeAdvertDatails = (advert, lang, category) => {
     city: advert.city || null,
     geocode: advert.geocode || null,
     img: advert.upload || null,
-    uploads: serializeAdvertsUploadsNull(
-      advert[`${category}_full_upload`],
-      advert.upload
-    ),
+    uploads: uploads.length > 0 ? uploads : initUploads,
     userId: advert.user || null,
     advertId: advert.id || null,
     cost: advert.price || null,
@@ -145,7 +159,13 @@ export const serializeAdvertDatails = (advert, lang, category) => {
     category,
   };
 };
-export const serializeEditAdvertDatails = (advert, lang, category) => {
+export const serializeEditAdvertDatails = (
+  advert,
+  lang,
+  category,
+  uploadsData
+) => {
+  console.log("za", uploadsData);
   return {
     title: advert[`title_${lang}`] || null,
     description: advert[`description_${lang}`] || null,
@@ -165,7 +185,7 @@ export const serializeEditAdvertDatails = (advert, lang, category) => {
     img: advert.upload || null,
     uploads: serializeAdvertsUploadsNull(
       advert[`${category}_full_upload`],
-      advert.upload
+      uploadsData
     ),
     userId: advert.user || null,
     advertId: advert.id || null,

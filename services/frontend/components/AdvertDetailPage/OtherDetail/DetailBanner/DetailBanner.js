@@ -67,7 +67,6 @@ const DetailBanner = ({
     const isLeftSwipe = distance > minSwipeDistance;
     if (isLeftSwipe && !isDisabled) onNext();
   };
-  // console.log("slidelist: ", slideList);
   return (
     <>
       <div

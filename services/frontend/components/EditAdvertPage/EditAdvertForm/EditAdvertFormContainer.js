@@ -1,12 +1,9 @@
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import {
-  setAdvertDataThunk,
-  editAdvertThunk,
-} from "../../../store/slices/EditAdvertSlice";
+import { editAdvertThunk } from "../../../store/slices/EditAdvertSlice";
 import EditAdvertRouter from "./Steps/EditAdvertStep/EditAdvertRouter/EditAdvertRouter";
-import { addAdvertThunk } from "../../../store/slices/AddAdvertSlice";
+import { setAdvertDataThunk } from "../../../store/slices/AdvertSlice";
 
 const EditAdvertFormContainer = () => {
   const dispatch = useDispatch();
@@ -15,7 +12,6 @@ const EditAdvertFormContainer = () => {
     locale,
     push,
   } = useRouter();
-
   useEffect(() => {
     dispatch(setAdvertDataThunk(advertId, category, locale));
   }, []);
@@ -43,15 +39,18 @@ const EditAdvertFormContainer = () => {
     isMonth,
     currency,
     userId,
-  } = useSelector(state => state.editAdvert);
+  } = useSelector(state => state.advert);
+
+  console.log(title);
+
   const onEditAdvertSubmit = data => {
     dispatch(
       editAdvertThunk({ ...data }, category, advertId, locale, subCategoryName)
     );
     push(`/profile/`);
-    setTimeout(() => {
-      window.location.reload();
-    }, 3000);
+    // setTimeout(() => {
+    //   window.location.reload();
+    // }, 2000);
   };
 
   const advertData = {
@@ -78,7 +77,6 @@ const EditAdvertFormContainer = () => {
     currency,
     userId,
   };
-
   return (
     <EditAdvertRouter {...{ onEditAdvertSubmit, category, ...advertData }} />
   );

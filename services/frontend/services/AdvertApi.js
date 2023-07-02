@@ -1,6 +1,7 @@
 import { instance, createHeaders } from "./Instance";
 import {
   serializeAdvertDatails,
+  serializeEditAdvertDatails,
   serializeCategory,
 } from "./tools/serializers/AdvertsSerializers";
 import FormDataCreator from "./tools/FormDataCreator";
@@ -11,8 +12,26 @@ export const AdvertApi = {
   async getAdvertDatails(advertId, category, lang) {
     try {
       const response = await instance.get(`${category}/${advertId}/`);
-      // console.log("resp: ", response);
+      console.log("resp: ", response);
       return serializeAdvertDatails(response.data, lang, category);
+    } catch (error) {
+      console.log("error", error);
+      return null;
+    }
+  },
+  async getEditAdvertDatails(advertId, category, lang) {
+    try {
+      const responseForEdit = await instance.get(`${category}/${advertId}/`);
+      const uploadsData = responseForEdit.data.realty_full_upload.map(
+        item => item
+      );
+      console.log("resp: ", uploadsData);
+      return serializeEditAdvertDatails(
+        responseForEdit.data,
+        lang,
+        category,
+        uploadsData
+      );
     } catch (error) {
       console.log("error", error);
       return null;

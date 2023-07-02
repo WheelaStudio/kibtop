@@ -70,7 +70,7 @@ const EditAdvertRouter = ({
   } = EditAdvertForm;
 
   const onSubmitClick = handleSubmit(onEditAdvertSubmit);
-
+  console.log(category);
   return (
     <>
       <form onSubmit={handleSubmit(onSubmitClick)} className="advert-form">

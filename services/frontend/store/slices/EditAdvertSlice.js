@@ -91,43 +91,40 @@ const editAdvertSlice = createSlice({
 export const { setAdvertData, setAdvertEditingActivated } =
   editAdvertSlice.actions;
 
+export const setEditAdvertDataThunk =
+  (advertId, category, lang) => async dispatch => {
+    const advert = await AdvertApi.getEditAdvertDatails(
+      advertId,
+      category,
+      lang
+    );
+
+    if (!advert) return;
+    dispatch(setAdvertData({ ...advert }));
+    return advert;
+  };
+export const editAdvertThunk =
+  (data, category, lang, advertId) => async dispatch => {
+    await EditAdvertApi.editAdvert(data, category, advertId, lang);
+  };
+
 // export const setAdvertDataThunk =
 //   (advertId, category, lang) => async dispatch => {
 //     const advert = await AdvertApi.getAdvertDatails(advertId, category, lang);
 //     if (!advert) return;
 //     dispatch(setAdvertData({ ...advert }));
-//     return advert;
 //   };
+
 // export const editAdvertThunk =
-//   (data, category, advertId, lang) => async dispatch => {
-//     // const { subCategory } = useSelector.editAdvert;
-//     // console.log(subCategory);
-//     await EditAdvertApi.editAdvert(data, category, advertId, lang);
+//   (data, category, advertId, lang, subCategoryName) => async dispatch => {
+//     await EditAdvertApi.editAdvert(
+//       data,
+//       category,
+//       advertId,
+//       lang,
+//       subCategoryName
+//     );
 //     await EditAdvertApi.deleteLastAdvert(category, advertId, lang);
 //   };
-export const setAdvertDataThunk =
-  (advertId, category, lang) => async dispatch => {
-    const advert = await AdvertApi.getAdvertDatails(advertId, category, lang);
-    if (!advert) return;
-    dispatch(setAdvertData({ ...advert }));
-    const { subCategoryName } = advert;
-    // dispatch(editAdvertThunk(subCategoryName));
-  };
-
-export const editAdvertThunk =
-  (data, category, advertId, lang, subCategoryName) => async dispatch => {
-    // const subCategoryName = useSelector(
-    //   state => state.editAdvert.subCategoryName
-    // );
-
-    await EditAdvertApi.editAdvert(
-      data,
-      category,
-      advertId,
-      lang,
-      subCategoryName
-    );
-    await EditAdvertApi.deleteLastAdvert(category, advertId, lang);
-  };
 
 export const EditAdvertReducer = editAdvertSlice.reducer;
