@@ -11,7 +11,7 @@ import ServiceSetsGroupContainer from "../../../../Fields/ServiceSetsGroup/Servi
 import SubmitButtonContainer from "../../../../Fields/SubmitButton/SubmitButtonContainer";
 import TitleField from "../../../../Fields/TitleField";
 
-const EditFree = () => {
+const EditFree = ({ address, uploads }) => {
   const { setValue } = useFormContext();
   useEffect(() => {
     setValue("cost", "0");
@@ -33,7 +33,7 @@ const EditFree = () => {
           <Text content="address" />
         </label>
 
-        <AddressFieldContainer />
+        <AddressFieldContainer address={address} />
       </div>
 
       <div className="advert-form__field advert-form__field---address">
@@ -42,7 +42,7 @@ const EditFree = () => {
         </label>
 
         <div className="advert-form__files">
-          <PhotoUploadsContainer />
+          <PhotoUploadsContainer uploads={uploads} />
           <PhotosInput />
         </div>
       </div>

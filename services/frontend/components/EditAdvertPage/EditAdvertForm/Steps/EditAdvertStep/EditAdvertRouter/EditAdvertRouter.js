@@ -35,7 +35,6 @@ const EditAdvertRouter = ({
   if (!title && !description && !userId) {
     return <div></div>;
   }
-
   const EditAdvertForm = useForm({
     mode: "onChange",
     defaultValues: {
@@ -70,7 +69,6 @@ const EditAdvertRouter = ({
   } = EditAdvertForm;
 
   const onSubmitClick = handleSubmit(onEditAdvertSubmit);
-  console.log(category);
   return (
     <>
       <form onSubmit={handleSubmit(onSubmitClick)} className="advert-form">
@@ -78,25 +76,30 @@ const EditAdvertRouter = ({
           <div className="advert-form__fields">
             <FormProvider {...EditAdvertForm}>
               {category === "realty" ? (
-                <EditRealty />
+                <EditRealty
+                  uploads={uploads}
+                  address={address}
+                  city={city}
+                  geocode={geocode}
+                />
               ) : category === "realty_land" ? (
-                <EditRealtyLand />
+                <EditRealtyLand address={city} uploads={uploads} />
               ) : category === "avto" ? (
-                <EditAvto />
+                <EditAvto address={city} uploads={uploads} />
               ) : category === "work" ? (
-                <EditWork />
+                <EditWork address={city} uploads={uploads} />
               ) : category === "services" ? (
-                <EditOther />
+                <EditOther address={city} uploads={uploads} />
               ) : category === "children" ? (
-                <EditOther />
+                <EditOther address={city} />
               ) : category === "electronics" ? (
-                <EditOther />
+                <EditOther address={city} />
               ) : category === "house_garden" ? (
-                <EditOther />
+                <EditOther address={city} />
               ) : category === "free" ? (
-                <EditFree />
+                <EditFree address={city} uploads={uploads} />
               ) : category === "fashion" ? (
-                <EditOther />
+                <EditOther address={city} />
               ) : (
                 ""
               )}

@@ -41,16 +41,11 @@ const EditAdvertFormContainer = () => {
     userId,
   } = useSelector(state => state.advert);
 
-  console.log(title);
-
   const onEditAdvertSubmit = data => {
     dispatch(
       editAdvertThunk({ ...data }, category, advertId, locale, subCategoryName)
     );
     push(`/profile/`);
-    // setTimeout(() => {
-    //   window.location.reload();
-    // }, 2000);
   };
 
   const advertData = {

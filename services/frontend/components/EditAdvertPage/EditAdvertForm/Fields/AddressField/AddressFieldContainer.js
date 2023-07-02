@@ -4,10 +4,17 @@ import { useState } from "react";
 import { useMapContext } from "../../../../../locales/hooks/useMapContext";
 import AddressField from "./AddressField";
 
-const AddressFieldContainer = () => {
-  const {isLoaded} = useMapContext()
+const AddressFieldContainer = ({ address, city, geocode }) => {
+  const { isLoaded } = useMapContext();
 
-  return <AddressField isLoaded={isLoaded} />;
-}
+  return (
+    <AddressField
+      address={address}
+      city={city}
+      geocode={geocode}
+      isLoaded={isLoaded}
+    />
+  );
+};
 
 export default AddressFieldContainer;

@@ -3,11 +3,36 @@ import { useFormContext } from "react-hook-form";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import Photo from "./Photo";
 
-const PhotoUploadsContainer = () => {
+const PhotoUploadsContainer = ({ uploads: initialUploads }) => {
   const { watch, setValue } = useFormContext();
   const { photos } = watch();
-
   const [uploads, setUploads] = useState([]);
+
+  useEffect(() => {
+    const combinedUploads = [...initialUploads, ...photos];
+    setUploads(combinedUploads);
+  }, [initialUploads, photos]);
+
+  useEffect(() => {
+    setUploads([]);
+
+    initialUploads?.forEach(url => {
+      fetch(url)
+        .then(response => response.blob())
+        .then(blob => {
+          const file = new File([blob], url);
+          const fileReader = new FileReader();
+          fileReader.onload = e => {
+            const src = e.currentTarget.result;
+            setUploads(uploads => [...uploads, src]);
+          };
+          fileReader.readAsDataURL(file);
+        })
+        .catch(error => {
+          console.error(`Error fetching file from URL: ${url}`, error);
+        });
+    });
+  }, [initialUploads]);
 
   useEffect(() => {
     setUploads([]);
@@ -28,6 +53,7 @@ const PhotoUploadsContainer = () => {
       photos.filter((upload, uploadIndex) => uploadIndex !== index),
       { shouldTouch: false, shouldValidate: true }
     );
+    setUploads([]);
   };
 
   const handleDragEnd = result => {

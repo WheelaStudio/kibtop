@@ -16,7 +16,7 @@ import SquareField from "../../../../Fields/SquareField";
 import SubmitButtonContainer from "../../../../Fields/SubmitButton/SubmitButtonContainer";
 import TitleField from "../../../../Fields/TitleField";
 
-const EditOther = () => {
+const EditOther = ({ address, uploads }) => {
   const {
     setValue,
     getValues,
@@ -50,7 +50,7 @@ const EditOther = () => {
           <Text content="address" />
         </label>
 
-        <AddressFieldContainer />
+        <AddressFieldContainer address={address} />
       </div>
 
       <div className="advert-form__field advert-form__field---address">
@@ -59,7 +59,7 @@ const EditOther = () => {
         </label>
 
         <div className="advert-form__files">
-          <PhotoUploadsContainer />
+          <PhotoUploadsContainer uploads={uploads} />
           <PhotosInput />
         </div>
       </div>

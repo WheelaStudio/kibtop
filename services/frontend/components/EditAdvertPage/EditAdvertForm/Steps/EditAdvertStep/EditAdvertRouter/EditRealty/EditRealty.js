@@ -16,7 +16,7 @@ import SquareField from "../../../../Fields/SquareField";
 import SubmitButtonContainer from "../../../../Fields/SubmitButton/SubmitButtonContainer";
 import TitleField from "../../../../Fields/TitleField";
 
-const EditRealty = () => {
+const EditRealty = ({ uploads, address, city, geocode }) => {
   const {
     setValue,
     getValues,
@@ -118,7 +118,11 @@ const EditRealty = () => {
           <Text content="address" />
         </label>
 
-        <AddressFieldContainer />
+        <AddressFieldContainer
+          address={address}
+          city={city}
+          geocode={geocode}
+        />
       </div>
 
       <div className="advert-form__field advert-form__field---address">
@@ -127,7 +131,7 @@ const EditRealty = () => {
         </label>
 
         <div className="advert-form__files">
-          <PhotoUploadsContainer />
+          <PhotoUploadsContainer uploads={uploads} />
           <PhotosInput />
         </div>
       </div>

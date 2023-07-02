@@ -121,9 +121,14 @@ export const serializeAdvertDatails = (advert, lang, category) => {
   let hasRemovedItems = false;
 
   advert[`${category}_full_upload`].forEach(item => {
-    if (item.sort_order !== 1000) {
+    if (item.sort_order === 1003 || item.sort_order === 1002) {
+      initUploads = [];
+      uploads = [];
+      uploads.push(item.uploads);
+    } else if (item.sort_order === 1001) {
       if (!hasRemovedItems) {
-        initUploads.splice(0, uploads.length);
+        initUploads = [];
+        uploads = [];
         hasRemovedItems = true;
       }
       uploads.push(item.uploads);
@@ -165,7 +170,6 @@ export const serializeEditAdvertDatails = (
   category,
   uploadsData
 ) => {
-  console.log("za", uploadsData);
   return {
     title: advert[`title_${lang}`] || null,
     description: advert[`description_${lang}`] || null,

@@ -10,12 +10,13 @@ import useOnclickOutside from "react-cool-onclickoutside";
 import { City } from "country-state-city";
 import cityData from "./citiesdb.json";
 
-const AddressField = ({ isLoaded }) => {
+const AddressField = ({ address, city, geocode, isLoaded }) => {
   const { t } = useLanguage();
   const allCities = City.getAllCities();
   const russianCities = cityData.country;
   const [cityName, setCityName] = useState("");
   const [validCity, setValidCity] = useState(false);
+  const [clicked, setClicked] = useState(false);
 
   const form = useFormContext();
   const {
@@ -51,7 +52,6 @@ const AddressField = ({ isLoaded }) => {
       terms,
     } = place;
     clearSuggestions();
-    // console.log(description);
     setValue(description, false);
     const cleanDescription = description.replace(/[^a-zA-Zа-яА-я0-9\s]/g, "");
 
@@ -119,23 +119,26 @@ const AddressField = ({ isLoaded }) => {
     setValidCity(isValidCity);
   }, [cityName, allCities, russianCities]);
 
+  const handleClick = () => {
+    setClicked(true);
+  };
   return (
     <>
-      <input
+      {/* <input
         {...register("geocode", {
           required: t("field is required"),
         })}
         type="text"
         hidden={true}
       />
-      {/* <input
+      <input
         {...register("address", {
           required: t("field is required"),
         })}
         type="text"
         hidden={true}
-      /> */}
-      {/* <input
+      />
+      <input
         {...register("city", {
           required: t("field is required"),
         })}
@@ -180,7 +183,9 @@ const AddressField = ({ isLoaded }) => {
               })}
               type="text"
               id="address-input"
-              value={value}
+              defaultValue={!clicked ? address : undefined}
+              value={clicked ? value : undefined}
+              onClick={handleClick}
               onChange={handleInput}
               disabled={!ready}
               placeholder={t("City or region")}
@@ -190,6 +195,7 @@ const AddressField = ({ isLoaded }) => {
                 transition: "opacity 0.3s ease",
               }}
             />
+
             {isTouched && !!error && value.trim() === "" && (
               <p style={{ marginTop: "3em" }} className="warn warn--absolute">
                 {error.message}

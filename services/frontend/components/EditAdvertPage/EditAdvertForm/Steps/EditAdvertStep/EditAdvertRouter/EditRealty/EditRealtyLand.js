@@ -16,7 +16,7 @@ import SquareField from "../../../../Fields/SquareField";
 import SubmitButtonContainer from "../../../../Fields/SubmitButton/SubmitButtonContainer";
 import TitleField from "../../../../Fields/TitleField";
 
-const EditRealtyLand = () => {
+const EditRealtyLand = ({ address }) => {
   const {
     setValue,
     getValues,
@@ -74,7 +74,7 @@ const EditRealtyLand = () => {
           <Text content="address" />
         </label>
 
-        <AddressFieldContainer />
+        <AddressFieldContainer address={address} />
       </div>
 
       <div className="advert-form__field advert-form__field---address">

@@ -19,7 +19,7 @@ import SubmitButtonContainer from "../../../../Fields/SubmitButton/SubmitButtonC
 import TitleField from "../../../../Fields/TitleField";
 import YearField from "../../../../Fields/YearField";
 
-const EditAvto = () => {
+const EditAvto = ({ address, uploads }) => {
   const {
     setValue,
     getValues,
@@ -92,7 +92,7 @@ const EditAvto = () => {
           <Text content="address" />
         </label>
 
-        <AddressFieldContainer />
+        <AddressFieldContainer address={address} />
       </div>
 
       <div className="advert-form__field advert-form__field---address">
@@ -101,7 +101,7 @@ const EditAvto = () => {
         </label>
 
         <div className="advert-form__files">
-          <PhotoUploadsContainer />
+          <PhotoUploadsContainer uploads={uploads} />
           <PhotosInput />
         </div>
       </div>
