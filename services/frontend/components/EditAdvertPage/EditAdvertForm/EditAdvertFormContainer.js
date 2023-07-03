@@ -39,15 +39,16 @@ const EditAdvertFormContainer = () => {
     isMonth,
     currency,
     userId,
+    uploadsId,
   } = useSelector(state => state.advert);
-
-  if (!title && !description && !userId) {
-    return <div></div>;
+  const uploadId = uploadsId;
+  if (!title && !description && !userId && !uploads) {
+    return <div>Loading...</div>;
   }
-
+  console.log(uploadId, "bul");
   const onEditAdvertSubmit = data => {
     dispatch(
-      editAdvertThunk({ ...data }, category, advertId, locale, subCategoryName)
+      editAdvertThunk({ ...data }, category, advertId, locale, uploadId)
     );
     push(`/profile/`);
   };

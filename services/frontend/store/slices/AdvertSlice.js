@@ -25,6 +25,7 @@ const initialState = {
   square: null,
   isMonth: null,
   currency: null,
+  uploadsId: null,
 
   seller: {
     name: null,
@@ -65,8 +66,8 @@ const AdvertSlice = createSlice({
         square,
         isMonth,
         currency,
+        uploadsId,
       } = payload;
-
       state.title = title || null;
       state.description = description || null;
       state.categoryName = categoryName || null;
@@ -90,6 +91,7 @@ const AdvertSlice = createSlice({
       state.square = square || null;
       state.isMonth = isMonth || null;
       state.currency = currency || null;
+      state.uploadsId = uploadsId || null;
     },
 
     setAdvertSellerData(state, { payload }) {
@@ -110,7 +112,6 @@ export const { setAdvertData, setAdvertSellerData, setSimilarAdverts } =
 export const setAdvertDataThunk =
   (advertId, category, lang) => async dispatch => {
     const advert = await AdvertApi.getAdvertDatails(advertId, category, lang);
-    // console.log(advert);
     if (!!advert) dispatch(setAdvertData(advert));
   };
 

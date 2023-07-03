@@ -92,8 +92,8 @@ export const { setAdvertData, setAdvertEditingActivated } =
   editAdvertSlice.actions;
 
 export const editAdvertThunk =
-  (data, category, lang, advertId) => async dispatch => {
-    await EditAdvertApi.editAdvert(data, category, advertId, lang);
+  (data, category, advertId, lang, uploadsId) => async dispatch => {
+    await EditAdvertApi.editAdvert(data, category, advertId, lang, uploadsId);
   };
 
 export const EditAdvertReducer = editAdvertSlice.reducer;

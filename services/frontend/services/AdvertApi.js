@@ -12,7 +12,6 @@ export const AdvertApi = {
   async getAdvertDatails(advertId, category, lang) {
     try {
       const response = await instance.get(`${category}/${advertId}/`);
-      // console.log("resp: ", response);
       return serializeAdvertDatails(response.data, lang, category);
     } catch (error) {
       console.log("error", error);

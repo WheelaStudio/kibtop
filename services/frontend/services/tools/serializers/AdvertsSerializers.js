@@ -116,28 +116,29 @@ export const serializeFavorites = categories => {
   return fullFavorites;
 };
 export const serializeAdvertDatails = (advert, lang, category) => {
-  let upload = [];
-  let uploads = [];
-  let initUploads = [];
-  let hasRemovedItems = false;
+  // let upload = [];
+  // let uploads = [];
+  // let initUploads = [];
+  // let hasRemovedItems = false;
 
-  advert[`${category}_full_upload`].forEach(item => {
-    if (item.sort_order === 1002) {
-      uploads = [];
-      initUploads = [];
-      uploads.push(item.uploads);
-    } else if (item.sort_order === 1001) {
-      if (!hasRemovedItems) {
-        initUploads = [];
-        uploads = [];
-        hasRemovedItems = true;
-      }
-      uploads.push(item.uploads);
-    } else if (item.sort_order === 1000) {
-      initUploads.push(item.uploads);
-    }
-  });
+  // advert[`${category}_full_upload`].forEach(item => {
+  //   if (item.sort_order === 1002) {
+  //     uploads = [];
+  //     initUploads = [];
+  //     uploads.push(item.uploads);
+  //   } else if (item.sort_order === 1001) {
+  //     if (!hasRemovedItems) {
+  //       initUploads = [];
+  //       uploads = [];
+  //       hasRemovedItems = true;
+  //     }
+  //     uploads.push(item.uploads);
+  //   } else if (item.sort_order === 1000) {
+  //     initUploads.push(item.uploads);
+  //   }
+  // });
 
+  let uploadId = advert[`${category}_full_upload`].map(item => item.id);
   return {
     title: advert[`title_${lang}`] || null,
     description: advert[`description_${lang}`] || null,
@@ -155,7 +156,11 @@ export const serializeAdvertDatails = (advert, lang, category) => {
     city: advert.city || null,
     geocode: advert.geocode || null,
     img: advert.upload || null,
-    uploads: uploads.length > 0 ? uploads : initUploads,
+    uploads: serializeAdvertsUploadsNull(
+      advert[`${category}_full_upload`],
+      advert.upload
+    ),
+    // uploads: uploads.length > 0 ? uploads : initUploads,
     userId: advert.user || null,
     advertId: advert.id || null,
     cost: advert.price || null,
@@ -163,6 +168,7 @@ export const serializeAdvertDatails = (advert, lang, category) => {
     isMonth: advert.type_sell || null,
     currency: advert.currency || null,
     category,
+    uploadsId: uploadId,
   };
 };
 // export const serializeEditAdvertDatails = (

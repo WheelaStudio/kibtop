@@ -13,7 +13,7 @@ const order = (() => {
 })();
 
 export const EditAdvertApi = {
-  async editAdvert(data, category, lang, advertId) {
+  async editAdvert(data, category, advertId, lang, uploadsId) {
     let url = `${category}/${advertId}/`;
     if (
       (data["subCategory"] == "Land" || data["subCategory"] == "Other") &&
@@ -37,19 +37,26 @@ export const EditAdvertApi = {
           sortOrder
         );
         const { photos } = data;
+        for (let i = 0; i < photos.length; i++) {
+          const photo = photos[i];
+          const uploadId = uploadsId[i];
 
-        for await (const photo of photos) {
           const formData = FormDataCreator({
             [`${category}_full_upload`]: advertId,
-            sort_order: sortOrder,
             uploads: photo,
           });
-          await instance.post(`${category}/full_uploads/`, formData, {
-            headers: await createHeaders(),
-          });
+
+          await instance.patch(
+            `${category}/full_uploads/${uploadId}/`,
+            formData,
+            {
+              headers: await createHeaders(),
+            }
+          );
         }
+
         if (res.data.url != null) {
-          console.log("Why am i here?");
+          console.log("Why am I here?");
           window.location.replace(res.data.url);
         }
 
