@@ -46,13 +46,19 @@ export const EditAdvertApi = {
             uploads: photo,
           });
 
-          await instance.patch(
-            `${category}/full_uploads/${uploadId}/`,
-            formData,
-            {
+          if (uploadId) {
+            await instance.put(
+              `${category}/full_uploads/${uploadId}/`,
+              formData,
+              {
+                headers: await createHeaders(),
+              }
+            );
+          } else {
+            await instance.post(`${category}/full_uploads/`, formData, {
               headers: await createHeaders(),
-            }
-          );
+            });
+          }
         }
 
         if (res.data.url != null) {
