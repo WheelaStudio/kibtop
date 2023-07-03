@@ -7,9 +7,9 @@ const PhotoUploadsContainer = ({ uploads: initialUploads }) => {
   const { watch, setValue } = useFormContext();
   const { photos } = watch();
   const [uploads, setUploads] = useState([]);
-
+  console.log("photos", photos);
   useEffect(() => {
-    const combinedUploads = [...initialUploads, ...photos];
+    const combinedUploads = [initialUploads, ...photos];
     setUploads(combinedUploads);
   }, [initialUploads, photos]);
 

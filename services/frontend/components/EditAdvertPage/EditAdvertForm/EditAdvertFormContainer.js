@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { editAdvertThunk } from "../../../store/slices/EditAdvertSlice";
-import EditAdvertRouter from "./Steps/EditAdvertStep/EditAdvertRouter/EditAdvertRouter";
+import EditAdvertForm from "../EditAdvertForm/Steps/EditAdvertStep/EditAdvertRouter/EditAdvertForm";
 import { setAdvertDataThunk } from "../../../store/slices/AdvertSlice";
+import { editAdvertThunk } from "../../../store/slices/EditAdvertSlice";
 
 const EditAdvertFormContainer = () => {
   const dispatch = useDispatch();
@@ -41,6 +41,10 @@ const EditAdvertFormContainer = () => {
     userId,
   } = useSelector(state => state.advert);
 
+  if (!title && !description && !userId) {
+    return <div></div>;
+  }
+
   const onEditAdvertSubmit = data => {
     dispatch(
       editAdvertThunk({ ...data }, category, advertId, locale, subCategoryName)
@@ -48,11 +52,11 @@ const EditAdvertFormContainer = () => {
     push(`/profile/`);
   };
 
-  const advertData = {
+  const defaultValues = {
+    photos: [],
     title,
     description,
     categoryName,
-    // subCategoryName,
     condition,
     brand,
     mileage,
@@ -72,8 +76,38 @@ const EditAdvertFormContainer = () => {
     currency,
     userId,
   };
+
+  const advertData = {
+    title,
+    description,
+    categoryName,
+    condition,
+    brand,
+    mileage,
+    year,
+    rooms,
+    employment,
+    workType,
+    date,
+    address,
+    city,
+    geocode,
+    img,
+    uploads,
+    cost,
+    square,
+    isMonth,
+    currency,
+    userId,
+  };
+
   return (
-    <EditAdvertRouter {...{ onEditAdvertSubmit, category, ...advertData }} />
+    <EditAdvertForm
+      defaultValues={defaultValues}
+      onEditAdvertSubmit={onEditAdvertSubmit}
+      category={category}
+      advertData={advertData}
+    />
   );
 };
 

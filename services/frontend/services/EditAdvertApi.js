@@ -39,7 +39,6 @@ export const EditAdvertApi = {
         const { photos } = data;
 
         for await (const photo of photos) {
-          console.log("alee", sortOrder);
           const formData = FormDataCreator({
             [`${category}_full_upload`]: advertId,
             sort_order: sortOrder,

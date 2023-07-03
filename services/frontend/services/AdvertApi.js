@@ -19,25 +19,6 @@ export const AdvertApi = {
       return null;
     }
   },
-  async getEditAdvertDatails(advertId, category, lang) {
-    try {
-      const responseForEdit = await instance.get(`${category}/${advertId}/`);
-      const uploadsData = responseForEdit.data.realty_full_upload.map(
-        item => item
-      );
-      console.log("resp: ", uploadsData);
-      return serializeEditAdvertDatails(
-        responseForEdit.data,
-        lang,
-        category,
-        uploadsData
-      );
-    } catch (error) {
-      console.log("error", error);
-      return null;
-    }
-  },
-
   async getAdvertSeller(userId) {
     return await instance
       .get(`auth/users/${userId}/`)

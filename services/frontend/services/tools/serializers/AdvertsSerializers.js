@@ -116,14 +116,15 @@ export const serializeFavorites = categories => {
   return fullFavorites;
 };
 export const serializeAdvertDatails = (advert, lang, category) => {
+  let upload = [];
   let uploads = [];
   let initUploads = [];
   let hasRemovedItems = false;
 
   advert[`${category}_full_upload`].forEach(item => {
-    if (item.sort_order === 1003 || item.sort_order === 1002) {
-      initUploads = [];
+    if (item.sort_order === 1002) {
       uploads = [];
+      initUploads = [];
       uploads.push(item.uploads);
     } else if (item.sort_order === 1001) {
       if (!hasRemovedItems) {
@@ -150,7 +151,7 @@ export const serializeAdvertDatails = (advert, lang, category) => {
     employment: advert[`employment_${lang}`] || null,
     workType: advert[`for_work_type_en`] || null,
     date: convertDate(advert.created_at) || null,
-    address: advert.city || null,
+    address: advert.address || null,
     city: advert.city || null,
     geocode: advert.geocode || null,
     img: advert.upload || null,
@@ -164,42 +165,42 @@ export const serializeAdvertDatails = (advert, lang, category) => {
     category,
   };
 };
-export const serializeEditAdvertDatails = (
-  advert,
-  lang,
-  category,
-  uploadsData
-) => {
-  return {
-    title: advert[`title_${lang}`] || null,
-    description: advert[`description_${lang}`] || null,
-    categoryName: advert[`category_${lang}`] || null,
-    subCategoryName: advert[`sub_category_${lang}`] || null,
-    condition: advert[`all_old_new_${lang}`] || null,
-    brand: advert.brand || null,
-    mileage: advert.mileage || null,
-    year: advert.year || null,
-    rooms: advert[`number_rooms_${lang}`] || null,
-    employment: advert[`employment_${lang}`] || null,
-    workType: advert[`for_work_type_en`] || null,
-    date: convertDate(advert.created_at) || null,
-    address: advert.city || null,
-    city: advert.city || null,
-    geocode: advert.geocode || null,
-    img: advert.upload || null,
-    uploads: serializeAdvertsUploadsNull(
-      advert[`${category}_full_upload`],
-      uploadsData
-    ),
-    userId: advert.user || null,
-    advertId: advert.id || null,
-    cost: advert.price || null,
-    square: advert.square || null,
-    isMonth: advert.type_sell || null,
-    currency: advert.currency || null,
-    category,
-  };
-};
+// export const serializeEditAdvertDatails = (
+//   advert,
+//   lang,
+//   category,
+//   uploadsData
+// ) => {
+//   return {
+//     title: advert[`title_${lang}`] || null,
+//     description: advert[`description_${lang}`] || null,
+//     categoryName: advert[`category_${lang}`] || null,
+//     subCategoryName: advert[`sub_category_${lang}`] || null,
+//     condition: advert[`all_old_new_${lang}`] || null,
+//     brand: advert.brand || null,
+//     mileage: advert.mileage || null,
+//     year: advert.year || null,
+//     rooms: advert[`number_rooms_${lang}`] || null,
+//     employment: advert[`employment_${lang}`] || null,
+//     workType: advert[`for_work_type_en`] || null,
+//     date: convertDate(advert.created_at) || null,
+//     address: advert.city || null,
+//     city: advert.city || null,
+//     geocode: advert.geocode || null,
+//     img: advert.upload || null,
+//     uploads: serializeAdvertsUploadsNull(
+//       advert[`${category}_full_upload`],
+//       uploadsData
+//     ),
+//     userId: advert.user || null,
+//     advertId: advert.id || null,
+//     cost: advert.price || null,
+//     square: advert.square || null,
+//     isMonth: advert.type_sell || null,
+//     currency: advert.currency || null,
+//     category,
+//   };
+// };
 export const serializeCategory = (adverts, lang, category) => {
   if (!adverts) return;
   return adverts[lang].map(advert =>
