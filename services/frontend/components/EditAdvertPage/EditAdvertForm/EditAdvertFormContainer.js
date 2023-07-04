@@ -115,7 +115,6 @@ const EditAdvertFormContainer = () => {
         category={category}
         advertData={advertData}
       />
-      <NextButton isLoading={isLoading} />
     </>
   );
 };

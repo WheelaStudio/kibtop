@@ -3,14 +3,18 @@ import Text from "../../../../Elementes/Text/Text";
 import { ColorRing } from "react-loader-spinner";
 import { useLanguage } from "../../../../../locales/hooks/useLanguage";
 import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
 
-const NextButton = ({ isLoading, isDisabled, onClick }) => {
+const NextButton = ({ isDisabled, onClick }) => {
   const { t } = useLanguage();
   const { push } = useRouter();
+
+  const { isLoading } = useSelector(state => state.editAdvert);
 
   const handleStopPublishing = () => {
     push(`/profile`);
   };
+
   return (
     <>
       <div className="next-button-container">
@@ -32,8 +36,9 @@ const NextButton = ({ isLoading, isDisabled, onClick }) => {
         <button
           onClick={onClick}
           disabled={isDisabled}
-          // className={`reg-btn next-btn ${isDisabled ? "disabled" : ""}`}
-          className="reg-btn reg-btn--add reg-btn--grey">
+          className={`reg-btn reg-btn--add ${
+            !isDisabled ? "" : "reg-btn--grey"
+          }`}>
           <Text content="Edit" />
         </button>
 

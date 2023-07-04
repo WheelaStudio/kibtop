@@ -11,7 +11,6 @@ const serializeAdvertUploads = uploads => uploads.map(({ uploads }) => uploads);
 
 const serializeAdvertsUploadsNull = (categoryUploads, AdvertUpload) => {
   const uploads = serializeAdvertUploads(categoryUploads);
-  console.log(uploads, "here");
 
   return !!categoryUploads?.length && !uploads?.some(upload => !upload)
     ? uploads
