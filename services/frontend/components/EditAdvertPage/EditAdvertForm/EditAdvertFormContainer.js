@@ -3,9 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import EditAdvertForm from "../EditAdvertForm/Steps/EditAdvertStep/EditAdvertRouter/EditAdvertForm";
 import { setAdvertDataThunk } from "../../../store/slices/AdvertSlice";
-import { editAdvertThunk } from "../../../store/slices/EditAdvertSlice";
+import {
+  editAdvertThunk,
+  setEditAdvertLoading,
+} from "../../../store/slices/EditAdvertSlice";
 
 const EditAdvertFormContainer = () => {
+  const { isLoading } = useSelector(state => state.editAdvert);
   const dispatch = useDispatch();
   const {
     query: { category, advertId },
@@ -13,9 +17,12 @@ const EditAdvertFormContainer = () => {
     push,
   } = useRouter();
   useEffect(() => {
+    if (isLoading) {
+      dispatch(setEditAdvertLoading(false));
+      push(`/profile`);
+    }
     dispatch(setAdvertDataThunk(advertId, category, locale));
-  }, []);
-
+  }, [isLoading]);
   const {
     title,
     description,
@@ -48,10 +55,6 @@ const EditAdvertFormContainer = () => {
     dispatch(
       editAdvertThunk({ ...data }, category, advertId, locale, uploadId)
     );
-    push(`/profile/`);
-    setTimeout(() => {
-      window.location.reload();
-    }, 2000);
   };
 
   const defaultValues = {

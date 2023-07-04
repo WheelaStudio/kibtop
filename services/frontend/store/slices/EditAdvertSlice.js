@@ -27,6 +27,9 @@ const initialState = {
   square: null,
   isMonth: null,
   currency: null,
+
+  isLoading: false,
+  // isActivated: false,
 };
 
 const editAdvertSlice = createSlice({
@@ -85,15 +88,34 @@ const editAdvertSlice = createSlice({
       state.isMonth = isMonth || null;
       state.currency = currency || null;
     },
+    setEditAdvertLoading(state, { payload }) {
+      state.isLoading = payload;
+    },
   },
 });
 
-export const { setAdvertData, setAdvertEditingActivated } =
-  editAdvertSlice.actions;
+export const { setAdvertData, setEditAdvertLoading } = editAdvertSlice.actions;
 
 export const editAdvertThunk =
   (data, category, advertId, lang, uploadsId) => async dispatch => {
-    await EditAdvertApi.editAdvert(data, category, advertId, lang, uploadsId);
+    await EditAdvertApi.editAdvert(
+      data,
+      category,
+      advertId,
+      lang,
+      uploadsId
+    ).then(res => {
+      const checkActivated = setInterval(async () => {
+        await AdvertApi.getAdvertDatails(advertId, category, lang)
+          .then(res => {
+            clearInterval(checkActivated);
+            dispatch(setEditAdvertLoading(true));
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      }, 3000);
+    });
   };
 
 export const EditAdvertReducer = editAdvertSlice.reducer;
