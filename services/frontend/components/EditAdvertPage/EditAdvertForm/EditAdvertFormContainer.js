@@ -7,6 +7,7 @@ import {
   editAdvertThunk,
   setEditAdvertLoading,
 } from "../../../store/slices/EditAdvertSlice";
+import NextButton from "./Fields/NextButton/NextButton";
 
 const EditAdvertFormContainer = () => {
   const { isLoading } = useSelector(state => state.editAdvert);
@@ -107,12 +108,15 @@ const EditAdvertFormContainer = () => {
   };
 
   return (
-    <EditAdvertForm
-      defaultValues={defaultValues}
-      onEditAdvertSubmit={onEditAdvertSubmit}
-      category={category}
-      advertData={advertData}
-    />
+    <>
+      <EditAdvertForm
+        defaultValues={defaultValues}
+        onEditAdvertSubmit={onEditAdvertSubmit}
+        category={category}
+        advertData={advertData}
+      />
+      <NextButton isLoading={isLoading} />
+    </>
   );
 };
 
