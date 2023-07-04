@@ -45,12 +45,14 @@ const EditAdvertFormContainer = () => {
   if (!title && !description && !userId && !uploads) {
     return <div>Loading...</div>;
   }
-  console.log(uploadId, "bul");
   const onEditAdvertSubmit = data => {
     dispatch(
       editAdvertThunk({ ...data }, category, advertId, locale, uploadId)
     );
     push(`/profile/`);
+    setTimeout(() => {
+      window.location.reload();
+    }, 3000);
   };
 
   const defaultValues = {
