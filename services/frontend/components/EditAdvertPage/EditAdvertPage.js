@@ -4,7 +4,7 @@ import EditAdvertFormContainer from "./EditAdvertForm/EditAdvertFormContainer";
 import SettingsNavForEdit from "../SettingsPage/SettingsNavForEdit";
 import { useLanguage } from "../../locales/hooks/useLanguage";
 
-const EditAdvertPage = () => {
+const EditAdvertPage = ({ advert }) => {
   const { t } = useLanguage();
 
   return (

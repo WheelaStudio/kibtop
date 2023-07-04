@@ -3,15 +3,6 @@ import FormDataCreator from "./tools/FormDataCreator";
 import { serializeAdvertDatails } from "./tools/serializers/AdvertsSerializers";
 import { serializeCreateAdvertData } from "./tools/serializers/CreateAdvertSerializers";
 
-const order = (() => {
-  let number = 1001;
-  return () => {
-    if (number <= 2000) {
-      return number++;
-    }
-  };
-})();
-
 export const EditAdvertApi = {
   async editAdvert(data, category, advertId, lang, uploadsId) {
     let url = `${category}/${advertId}/`;
@@ -22,7 +13,6 @@ export const EditAdvertApi = {
       url = "realty_land/create/";
     }
     const body = serializeCreateAdvertData(data, category, lang);
-    let sortOrder = order();
 
     return await instance
       .put(url, body, {
@@ -30,12 +20,8 @@ export const EditAdvertApi = {
       })
       .then(async res => {
         if (category == "realty_land") category = "realty";
-        const { advertId } = serializeAdvertDatails(
-          res.data,
-          lang,
-          category,
-          sortOrder
-        );
+        const { advertId } = serializeAdvertDatails(res.data, lang, category);
+
         const { photos } = data;
         for (let i = 0; i < photos.length; i++) {
           const photo = photos[i];

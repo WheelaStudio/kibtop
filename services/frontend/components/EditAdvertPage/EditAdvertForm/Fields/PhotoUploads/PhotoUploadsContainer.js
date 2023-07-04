@@ -7,32 +7,31 @@ const PhotoUploadsContainer = ({ uploads: initialUploads }) => {
   const { watch, setValue } = useFormContext();
   const { photos } = watch();
   const [uploads, setUploads] = useState([]);
-  console.log("photos", photos);
-  useEffect(() => {
-    const combinedUploads = [initialUploads, ...photos];
-    setUploads(combinedUploads);
-  }, [initialUploads, photos]);
+  // useEffect(() => {
+  //   const combinedUploads = [initialUploads, ...photos];
+  //   setUploads(combinedUploads);
+  // }, [initialUploads, photos]);
 
-  useEffect(() => {
-    setUploads([]);
+  // useEffect(() => {
+  //   setUploads([]);
 
-    initialUploads?.forEach(url => {
-      fetch(url)
-        .then(response => response.blob())
-        .then(blob => {
-          const file = new File([blob], url);
-          const fileReader = new FileReader();
-          fileReader.onload = e => {
-            const src = e.currentTarget.result;
-            setUploads(uploads => [...uploads, src]);
-          };
-          fileReader.readAsDataURL(file);
-        })
-        .catch(error => {
-          console.error(`Error fetching file from URL: ${url}`, error);
-        });
-    });
-  }, [initialUploads]);
+  //   initialUploads?.forEach(url => {
+  //     fetch(url)
+  //       .then(response => response.blob())
+  //       .then(blob => {
+  //         const file = new File([blob], url);
+  //         const fileReader = new FileReader();
+  //         fileReader.onload = e => {
+  //           const src = e.currentTarget.result;
+  //           setUploads(uploads => [...uploads, src]);
+  //         };
+  //         fileReader.readAsDataURL(file);
+  //       })
+  //       .catch(error => {
+  //         console.error(`Error fetching file from URL: ${url}`, error);
+  //       });
+  //   });
+  // }, [initialUploads]);
 
   useEffect(() => {
     setUploads([]);

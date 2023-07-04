@@ -20,7 +20,6 @@ const EditAdvertFormContainer = () => {
     title,
     description,
     categoryName,
-    subCategoryName,
     condition,
     brand,
     mileage,
@@ -42,7 +41,7 @@ const EditAdvertFormContainer = () => {
     uploadsId,
   } = useSelector(state => state.advert);
   const uploadId = uploadsId;
-  if (!title && !description && !userId && !uploads) {
+  if (!title && !description && !userId) {
     return <div>Loading...</div>;
   }
   const onEditAdvertSubmit = data => {
@@ -52,7 +51,7 @@ const EditAdvertFormContainer = () => {
     push(`/profile/`);
     setTimeout(() => {
       window.location.reload();
-    }, 3000);
+    }, 2000);
   };
 
   const defaultValues = {
