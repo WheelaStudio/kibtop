@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Text from "../../../../Elementes/Text/Text";
 import { ColorRing } from "react-loader-spinner";
 import { useLanguage } from "../../../../../locales/hooks/useLanguage";
@@ -8,13 +8,16 @@ import { useSelector } from "react-redux";
 const NextButton = ({ isDisabled, onClick }) => {
   const { t } = useLanguage();
   const { push } = useRouter();
-
-  const { isLoading } = useSelector(state => state.editAdvert);
+  const [isActivated, setIsActivated] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
 
   const handleStopPublishing = () => {
     push(`/profile`);
   };
 
+  const handleActivate = () => {
+    setIsActivated(true);
+  };
   return (
     <>
       <div className="next-button-container">
@@ -34,7 +37,12 @@ const NextButton = ({ isDisabled, onClick }) => {
           </p>
         )}
         <button
-          onClick={onClick}
+          onClick={() => {
+            if (!isDisabled) {
+              setIsClicked(true);
+              handleActivate();
+            }
+          }}
           disabled={isDisabled}
           className={`reg-btn reg-btn--add ${
             !isDisabled ? "" : "reg-btn--grey"
@@ -42,7 +50,7 @@ const NextButton = ({ isDisabled, onClick }) => {
           <Text content="Edit" />
         </button>
 
-        {isLoading && (
+        {isActivated && (
           <div
             className="loader-overlay"
             style={{
@@ -67,7 +75,7 @@ const NextButton = ({ isDisabled, onClick }) => {
               wrapperClass="blocks-wrapper"
               colors={["#e15b64", "#f47e60", "#f8b26a", "#abbd81", "#849b87"]}
             />
-            {isLoading && (
+            {isActivated && (
               <>
                 <button
                   onClick={handleStopPublishing}

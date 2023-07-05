@@ -1,7 +1,7 @@
 import { createHeaders, instance } from "./Instance";
 import FormDataCreator from "./tools/FormDataCreator";
 import { serializeAdvertDatails } from "./tools/serializers/AdvertsSerializers";
-import { serializeCreateAdvertData } from "./tools/serializers/CreateAdvertSerializers";
+import { serializeEditAdvertData } from "./tools/serializers/EditAdvertSerializers";
 
 export const EditAdvertApi = {
   async editAdvert(data, category, advertId, lang, uploadsId) {
@@ -12,7 +12,8 @@ export const EditAdvertApi = {
     ) {
       url = "realty_land/create/";
     }
-    const body = serializeCreateAdvertData(data, category, lang);
+    const body = serializeEditAdvertData(data, category, lang);
+    console.log(body);
 
     return await instance
       .put(url, body, {

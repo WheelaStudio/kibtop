@@ -7,7 +7,6 @@ import {
   editAdvertThunk,
   setEditAdvertLoading,
 } from "../../../store/slices/EditAdvertSlice";
-import NextButton from "./Fields/NextButton/NextButton";
 
 const EditAdvertFormContainer = () => {
   const { isLoading } = useSelector(state => state.editAdvert);
@@ -24,6 +23,7 @@ const EditAdvertFormContainer = () => {
     }
     dispatch(setAdvertDataThunk(advertId, category, locale));
   }, [isLoading]);
+
   const {
     title,
     description,
