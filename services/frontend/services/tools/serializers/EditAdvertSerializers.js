@@ -3,45 +3,31 @@ import { conditionTrans, roomsTrans } from "./dictionary/RealtyLangDict";
 import { employmentTrans, workTypeTrans } from "./dictionary/WorkLangDict";
 
 export const serializeEditAdvertData = (data, category, lang) => {
-  const editAdvertData = {
-    // [`title`]: data.title,
-    // [`description`]: data.description,
-    // [`category`]: data.categoryName,
-    // [`sub_category`]: subCategoryName,
-    // [`all_old_new`]: data.condition,
-    // brand: data.brand,
-    // mileage: data.mileage,
-    // year: data.year,
-    // [`number_rooms`]: data.rooms,
-    // [`employment`]: data.employment,
-    // [`for_work_type`]: data.workType,
-    // address: data.address,
-    // city: data.city,
-    // geocode: data.geocode,
-    // upload: data.photos[0],
-    // [`${category}_full_upload`]: [],
-    // user: data.userId,
-    // price: data.cost,
-    // currency: data.currency,
-    // square: data.square,
-    // type_sell: data.isMonth,
-    // lang,
-    // recommend: true,
-    // publisher: true,
-    // lifts: data.lifts,
-    // top: data.top,
-    // vip: data.vip,
-    // servicePrice: data.servicePrice,
+  let condition = null;
+  if (lang === "ru") {
+    if (data.condition == "Old") {
+      condition = "Вторичное";
+    } else if (data.condition == "New") {
+      condition == "Новое";
+    }
+  } else {
+    condition = data.condition;
+  }
+  let rooms = null;
+  if (data.rooms == "Studio") {
+    rooms = "Студия";
+  }
 
+  const editAdvertData = {
     [`title_${lang}`]: data.title,
     [`description_${lang}`]: data.description,
     [`category_${lang}`]: data.categoryName,
-    [`sub_category_${lang}`]: data.subCategory,
-    [`all_old_new_${lang}`]: data.condition,
+    // [`sub_category_${lang}`]: data.subCategory,
+    [`all_old_new_${lang}`]: condition,
     brand: data.brand,
     mileage: data.mileage,
     year: data.year,
-    [`number_rooms_${lang}`]: data.rooms,
+    [`number_rooms_${lang}`]: rooms ? rooms : data.rooms,
     [`employment_${lang}`]: data.employment,
     [`for_work_type_${lang}`]: data.workType,
     address: data.address,
@@ -62,7 +48,7 @@ export const serializeEditAdvertData = (data, category, lang) => {
     vip: data.vip,
     servicePrice: data.servicePrice,
   };
-
+  console.log(editAdvertData);
   const formData = new FormData();
 
   for (const key in editAdvertData) {

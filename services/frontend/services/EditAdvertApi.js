@@ -13,10 +13,9 @@ export const EditAdvertApi = {
       url = "realty_land/create/";
     }
     const body = serializeEditAdvertData(data, category, lang);
-    console.log(body);
 
     return await instance
-      .put(url, body, {
+      .patch(url, body, {
         headers: await createHeaders(),
       })
       .then(async res => {

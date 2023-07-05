@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { AdvertApi } from "../../services/AdvertApi";
 import { EditAdvertApi } from "../../services/EditAdvertApi";
-import { useSelector } from "react-redux";
 
 const initialState = {
   title: null,

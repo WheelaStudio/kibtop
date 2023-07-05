@@ -63,7 +63,7 @@ const EditAdvertFormContainer = () => {
     title,
     description,
     categoryName,
-    condition,
+    // condition,
     brand,
     mileage,
     year,
