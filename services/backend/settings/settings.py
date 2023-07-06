@@ -1,6 +1,8 @@
 from datetime import timedelta
 from pathlib import Path
+
 import environ
+from .jazzmin_conf import *
 
 env = environ.Env()
 environ.Env.read_env('.env')
@@ -12,6 +14,7 @@ ALLOWED_HOSTS = ['127.0.0.1', 'api.kibtop.com', '94.250.251.138', 'backend']
 BASE_URL = env("URL")
 
 INSTALLED_APPS = [
+    "jazzmin",
     'channels',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -53,12 +56,13 @@ MIDDLEWARE = [
 
 CSRF_TRUSTED_ORIGINS = [
     'https://api.kibtop.com',
-    'http://94.250.251.138:8000'
+    'http://localhost:8000',
+
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',
+    'http://localhost:8000',
     'https://kibtop.com',
 ]
 
