@@ -54,3 +54,14 @@ class QuestionSchem(models.Model):
 
     def __str__(self):
         return f'{self.question} - {self.pathname}'
+
+
+class Seo(models.Model):
+    title = models.CharField(max_length=50)
+    text = models.TextField()
+
+    class Meta:
+        verbose_name = 'SEO разметка'
+
+    def __str__(self):
+        return f'{self.title}'
