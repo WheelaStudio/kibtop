@@ -9,6 +9,9 @@ import { ProfileApi } from "../../services/ProfileApi";
 import { getServerSideUser } from "../../services/tools/getServerSideUser/getServerSideUser";
 
 const Edit = ({ user }) => {
+  const {
+    query: { advertId },
+  } = useRouter();
   const { t } = useLanguage();
   const title = `Kibtop - ${t("Edit profile")}`;
   return (
@@ -20,6 +23,26 @@ const Edit = ({ user }) => {
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://kibtop.com" />
         <meta property="og:image" content="https://kibtop.com/img/kibtop.png" />
+        <link
+          rel="alternate"
+          hreflang="ru"
+          href="https://kibtop.com/ru/profile/edit/"
+        />
+        <link
+          rel="alternate"
+          hreflang="en"
+          href="https://kibtop.com/profile/edit/"
+        />
+        <link
+          rel="alternate"
+          hreflang="tr"
+          href="https://kibtop.com/tr/profile/edit/"
+        />
+        <link
+          rel="alternate"
+          hreflang="x-default"
+          href="https://kibtop.com/profile/edit/"
+        />
       </Head>
       <EditProfilePage {...{ user }} />
     </>

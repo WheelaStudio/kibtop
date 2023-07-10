@@ -18,52 +18,72 @@ import { AdvertApi } from "../../services/AdvertApi";
 import { GoodsApi } from "../../services/IndexApi";
 import { ProfileApi } from "../../services/ProfileApi";
 
-const Seller = ({newGoods, user}) => {
-    const {t} = useLanguage()
-    const title = `Kibtop - ${t('Seller page')}`
-    return (
-        <>
-            <Head>
-                <title>
-                    {title}
-                </title>
-                <meta property="og:title" content={title} />
-                <meta property="og:description" content={title} />
-                <meta property="og:type" content="website" />
-                <meta property="og:url" content="https://kibtop.com" />
-                <meta property="og:image" content="https://kibtop.com/img/kibtop.png" />
-            </Head>
-            <Header />
-            <HeaderService />
-            <main className="main main--profile">
-                <SellerPage {...{newGoods, user}} />
-            </main>
-            <AddAdvertMobileButton />
-
-        </>
-    );
-}
-
+const Seller = ({ newGoods, user }) => {
+  const advertId = user.userId;
+  const { t } = useLanguage();
+  const title = `Kibtop - ${t("Seller page")}`;
+  return (
+    <>
+      <Head>
+        <title>{title}</title>
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={title} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://kibtop.com" />
+        <meta property="og:image" content="https://kibtop.com/img/kibtop.png" />
+        <link
+          rel="alternate"
+          hreflang="ru"
+          href={`https://kibtop.com/ru/seller/${advertId}/`}
+        />
+        <link
+          rel="alternate"
+          hreflang="en"
+          href={`https://kibtop.com/seller/${advertId}/`}
+        />
+        <link
+          rel="alternate"
+          hreflang="tr"
+          href={`https://kibtop.com/tr/seller/${advertId}/`}
+        />
+        <link
+          rel="alternate"
+          hreflang="x-default"
+          href={`https://kibtop.com/seller/${advertId}/`}
+        />
+      </Head>
+      <Header />
+      <HeaderService />
+      <main className="main main--profile">
+        <SellerPage {...{ newGoods, user }} />
+      </main>
+      <AddAdvertMobileButton />
+    </>
+  );
+};
 
 export async function getServerSideProps(context) {
-    const {locale, params: {userId}} = context
-    
-    const user = await AdvertApi.getAdvertSeller(userId)
+  const {
+    locale,
+    params: { userId },
+  } = context;
 
-    if(!user) {
-        return {
-            redirect: {
-                destination: '/auth/login/',
-                permanent: false,
-              },
-        }
-    }
-    
-    const newGoods = await ProfileApi.getUserAdverts(userId, locale) || null
+  const user = await AdvertApi.getAdvertSeller(userId);
 
+  if (!user) {
     return {
-        props: {newGoods, user}
-    }
+      redirect: {
+        destination: "/auth/login/",
+        permanent: false,
+      },
+    };
+  }
+
+  const newGoods = (await ProfileApi.getUserAdverts(userId, locale)) || null;
+
+  return {
+    props: { newGoods, user },
+  };
 }
 
 export default Seller;

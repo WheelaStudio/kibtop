@@ -7,45 +7,61 @@ import { AuthApi } from "../../services/AuthApi";
 import { ProfileApi } from "../../services/ProfileApi";
 import { getServerSideUser } from "../../services/tools/getServerSideUser/getServerSideUser";
 
-const Profile = ({user, adverts}) => {
-    const {t} = useLanguage()
-    const title = `Kibtop - ${t('Profile')}`
-    return (
-        <>
-            <Head>
-                <title>
-                    {title}
-                </title>
-                <meta property="og:title" content={title} />
-                <meta property="og:description" content={title} />
-                <meta property="og:type" content="website" />
-                <meta property="og:url" content="https://kibtop.com" />
-                <meta property="og:image" content="https://kibtop.com/img/kibtop.png" />
-            </Head>
-            <ProfilePage {...{user, adverts}} />
-            <AddAdvertMobileButton />
+const Profile = ({ user, adverts }) => {
+  const { t } = useLanguage();
+  const title = `Kibtop - ${t("Profile")}`;
+  return (
+    <>
+      <Head>
+        <title>{title}</title>
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={title} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://kibtop.com" />
+        <meta property="og:image" content="https://kibtop.com/img/kibtop.png" />
+        <link
+          rel="alternate"
+          hreflang="ru"
+          href="https://kibtop.com/ru/profile/"
+        />
+        <link
+          rel="alternate"
+          hreflang="en"
+          href="https://kibtop.com/profile/"
+        />
+        <link
+          rel="alternate"
+          hreflang="tr"
+          href="https://kibtop.com/tr/profile/"
+        />
+        <link
+          rel="alternate"
+          hreflang="x-default"
+          href="https://kibtop.com/profile/"
+        />
+      </Head>
+      <ProfilePage {...{ user, adverts }} />
+      <AddAdvertMobileButton />
+    </>
+  );
+};
 
-        </>
-    );
-}
-
-export async function getServerSideProps({req, res, locale}) {
-
-    const user = await getServerSideUser(req.cookies)
-    if(!user) {
-        return {
-            redirect: {
-              destination: '/auth/login/',
-              permanent: false,
-            },
-        }
-    }
-
-    const adverts = await ProfileApi.getUserAdverts(user?.userId, locale)
-
+export async function getServerSideProps({ req, res, locale }) {
+  const user = await getServerSideUser(req.cookies);
+  if (!user) {
     return {
-      props: {user, adverts},
-    }
+      redirect: {
+        destination: "/auth/login/",
+        permanent: false,
+      },
+    };
+  }
+
+  const adverts = await ProfileApi.getUserAdverts(user?.userId, locale);
+
+  return {
+    props: { user, adverts },
+  };
 }
 
 export default Profile;

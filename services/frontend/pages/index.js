@@ -25,9 +25,16 @@ const Index = ({ slides, recommendGoods, newGoods, authData }) => {
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://kibtop.com" />
         <meta property="og:image" content="https://kibtop.com/img/kibtop.png" />
+        <link rel="alternate" hreflang="ru" href="https://kibtop.com/ru/" />
+        <link rel="alternate" hreflang="en" href="https://kibtop.com/" />
+        <link rel="alternate" hreflang="tr" href="https://kibtop.com/tr/" />
+        <link rel="alternate" hreflang="x-default" href="https://kibtop.com/" />
       </Head>
       <Header />
       <HomePage {...{ slides, recommendGoods, newGoods }} />
+      <div className="container">
+        <p>This is the SEO text.</p>
+      </div>
     </>
   );
 };
